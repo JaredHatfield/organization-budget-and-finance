@@ -56,7 +56,26 @@ else if($_GET['page'] == "budget"){
 		}
 	}
 	
+	$smarty->assign("lineitem", getLineItem($parent));
+	$smarty->assign("receipts", getReceiptForLineItem($parent));
+	$smarty->assign("funds", getFundsForLineItem($parent));
+	$smarty->assign("sources",getSourcesForLineItems($parent));
+	$smarty->assign("children", getCompleteLineItemChildren($parent));
 	$smarty->display('budget.tpl');
+}
+else if($_GET['page'] == "editbudget"){
+	/*******************************************************************************************************
+	 * Edit Budget page
+	 ******************************************************************************************************/
+	$parent = 1;
+	if(isset($_GET['line'])){
+		$parent = intval($_GET['line']);
+		if($parent == 0){
+			$parent = 1;
+		}
+	}
+	
+	$smarty->display('editbudget.tpl');
 }
 
 ?>

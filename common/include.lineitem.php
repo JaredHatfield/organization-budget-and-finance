@@ -25,9 +25,49 @@
  * @version 1.0
  */
 
+
+/// Returns a fully supplemented list of lineitems for a specified parent
+function getCompleteLineItemChildren($parent){
+	$items = getLineItemChildren($parent);
+	$sources = getSourcesForLineItems($parent);
+	
+	$receipts = 0;
+	for($j = 0; $j < sizeof($sources); $j++){
+		$sources[$j]['sum'] = 0;
+	}
+	
+	for($i = 0; $i < sizeof($items); $i++){
+		$items[$i]['receipts'] = getReceiptTotalForLineItemAndChildren($items[$i]['id']);
+		$receipts += $items[$i]['receipts'];
+		for($j = 0; $j < sizeof($sources); $j++){
+			$items[$i]['funds'][$j] = getFundsFor($items[$i]['id'], $sources[$j]['id']);
+			$sources[$j]['sum'] += $items[$i]['funds'][$j];
+		}
+		
+		$items[$i]['difference'] = -$items[$i]['receipts'];
+		for($j = 0; $j < sizeof($sources); $j++){
+			$items[$i]['difference'] += $items[$i]['funds'][$j];
+		}
+	}
+	
+	// Add a last row for the total
+	$items[$i]['id'] = -1;
+	$items[$i]['name'] = "Totals";
+	$items[$i]['description'] = "---";
+	$items[$i]['public'] = 1;
+	$items[$i]['receipts'] = $receipts;
+	$items[$i]['difference'] = -$items[$i]['receipts'];
+	for($j = 0; $j < sizeof($sources); $j++){
+		$items[$i]['funds'][$j] = $sources[$j]['sum'];
+		$items[$i]['difference'] += $items[$i]['funds'][$j];
+	}
+	
+	return $items;
+}
+
 /// Returns the lineitem information for the children of the specified lineitem
 function getLineItemChildren($parent){
-	$query = "SELECT `id`, `name`, `description`, `public` FROM lineitem " . intval($parent) . " WHERE `parent` = 1 AND `id` != 1;";
+	$query = "SELECT `id`, `name`, `description`, `public` FROM lineitem l WHERE `parent` = " . intval($parent) . " AND `id` != 1;";
 	$result = mysql_query($query);
 	$val = array();
 	while($row = mysql_fetch_assoc($result)){
@@ -56,7 +96,5 @@ function getLineItem($id){
 	$row = mysql_fetch_assoc($result);
 	return $row;
 }
-
-
 
 ?>

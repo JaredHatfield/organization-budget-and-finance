@@ -27,7 +27,8 @@
 
 /// Returns all of the information for the receipts for a specified lineitem
 function getReceiptForLineItem($lineitem){
-	$query = "SELECT `id`, `name`, `description`, `company`, `amount`, `lineitem`, `rdate` FROM receipt r WHERE `lineitem` = " . intval($lineitem) . ";";
+	$query  = "SELECT r.`id`, r.`lineitem`, r.`name`, r.`description`, c.`id` company_id, c.`name` company_name, r.`amount`, r.`rdate`, r.`public` ";
+	$query .= "FROM receipt r JOIN company c ON r.company = c.id WHERE `lineitem` = " . intval($lineitem) . ";";
 	$result = mysql_query($query);
 	$val = array();
 	while($row = mysql_fetch_assoc($result)){
@@ -60,9 +61,5 @@ function getReceiptTotalForLineItemAndChildren($lineitem){
 	
 	return $total;
 }
-
-
-
-
 
 ?>
