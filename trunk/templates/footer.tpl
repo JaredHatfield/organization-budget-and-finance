@@ -1,8 +1,6 @@
-<?php
-
-/**
+{**
  * Project:     organization-budget-and-finance
- * File:        index.php
+ * File:        footer.tpl
  *
  * organization-budget-and-finance is free software: you can redistribute
  * it and/or modify it under the terms of the GNU General Public License 
@@ -23,32 +21,14 @@
  * @author Jared Hatfield
  * @package organization-budget-and-finance
  * @version 1.0
- */
-
-include_once("./configs/config.php");
-require_once($_CONFIG['smarty']);
-include_once("./common/include.index.php");
-
-
-// Smarty
-$smarty = new Smarty;
-$smarty->compile_check = true;
-//$smarty->debugging = true;
-$smarty->assign("pagename", "");
-
-
-// Process the page
-if(!isset($_GET['page'])){
-	/*******************************************************************************************************
-	 * Main page
-	 ******************************************************************************************************/
-	$smarty->display('index.tpl');
-}
-else if($_GET['page'] == "budget"){
-	/*******************************************************************************************************
-	 * Budget page
-	 ******************************************************************************************************/
-	$smarty->display('index.tpl');
-}
-
-?>
+ *}
+		</td>
+	</tr>
+	<tr>
+		<td style="text-align: center; font-size:10px">
+			Powered By: <a href="http://code.google.com/p/organization-budget-and-finance/">organization-budget-and-finance</a>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

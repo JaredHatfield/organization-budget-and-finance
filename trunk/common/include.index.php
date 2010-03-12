@@ -2,7 +2,7 @@
 
 /**
  * Project:     organization-budget-and-finance
- * File:        index.php
+ * File:        include.index.php
  *
  * organization-budget-and-finance is free software: you can redistribute
  * it and/or modify it under the terms of the GNU General Public License 
@@ -24,31 +24,5 @@
  * @package organization-budget-and-finance
  * @version 1.0
  */
-
-include_once("./configs/config.php");
-require_once($_CONFIG['smarty']);
-include_once("./common/include.index.php");
-
-
-// Smarty
-$smarty = new Smarty;
-$smarty->compile_check = true;
-//$smarty->debugging = true;
-$smarty->assign("pagename", "");
-
-
-// Process the page
-if(!isset($_GET['page'])){
-	/*******************************************************************************************************
-	 * Main page
-	 ******************************************************************************************************/
-	$smarty->display('index.tpl');
-}
-else if($_GET['page'] == "budget"){
-	/*******************************************************************************************************
-	 * Budget page
-	 ******************************************************************************************************/
-	$smarty->display('index.tpl');
-}
 
 ?>
