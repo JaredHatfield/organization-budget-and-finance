@@ -2,7 +2,7 @@
 
 /**
  * Project:     organization-budget-and-finance
- * File:        include.index.php
+ * File:        include.funds.php
  *
  * organization-budget-and-finance is free software: you can redistribute
  * it and/or modify it under the terms of the GNU General Public License 
@@ -24,13 +24,6 @@
  * @package organization-budget-and-finance
  * @version 1.0
  */
-
-include_once("./common/include.lineitem.php");
-include_once("./common/include.receipt.php");
-include_once("./common/include.funds.php");
-
-$conn = mysql_connect($_CONFIG['host'], $_CONFIG['username'] , $_CONFIG['password'] ) or die ('Error connecting to mysql');
-$selected = mysql_select_db($_CONFIG['database'], $conn) or die ('Database unavailable');
 
 
 ?>

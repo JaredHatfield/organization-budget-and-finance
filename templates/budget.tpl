@@ -1,8 +1,6 @@
-<?php
-
-/**
+{**
  * Project:     organization-budget-and-finance
- * File:        include.index.php
+ * File:        index.tpl
  *
  * organization-budget-and-finance is free software: you can redistribute
  * it and/or modify it under the terms of the GNU General Public License 
@@ -23,14 +21,9 @@
  * @author Jared Hatfield
  * @package organization-budget-and-finance
  * @version 1.0
- */
+ *}
+{include file="header.tpl" title="Organization Budget and Finance"}
 
-include_once("./common/include.lineitem.php");
-include_once("./common/include.receipt.php");
-include_once("./common/include.funds.php");
+Budget
 
-$conn = mysql_connect($_CONFIG['host'], $_CONFIG['username'] , $_CONFIG['password'] ) or die ('Error connecting to mysql');
-$selected = mysql_select_db($_CONFIG['database'], $conn) or die ('Database unavailable');
-
-
-?>
+{include file="footer.tpl"}
