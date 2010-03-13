@@ -66,7 +66,7 @@ else if($_GET['page'] == "budget"){
 	$smarty->assign("children", getCompleteLineItemChildren($parent));
 	$smarty->display('budget.tpl');
 }
-else if($_GET['page'] == "editbudget"){
+else if($_GET['page'] == "lineitemEdit"){
 	/*******************************************************************************************************
 	 * Edit Budget page
 	 ******************************************************************************************************/
@@ -79,13 +79,11 @@ else if($_GET['page'] == "editbudget"){
 	}
 	
 	$smarty->assign("lineitem", getLineItem($parent));
-	$smarty->assign("receipts", getReceiptForLineItem($parent));
-	$smarty->assign("funds", getFundsForLineItem($parent));
-	
-	$smarty->assign("status_selections", getStatusSelections());
-	$smarty->assign("company_selections", getCompanySelections());
-	
-	$smarty->display('editbudget.tpl');
+	$smarty->display('lineitemEdit.tpl');
+}
+else{
+	$smarty->assign("message","Error: Page not found.");
+	$smarty->display('error.tpl');
 }
 
 ?>

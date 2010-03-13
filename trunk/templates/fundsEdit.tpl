@@ -1,6 +1,6 @@
 {**
  * Project:     organization-budget-and-finance
- * File:        lineitemEdit.tpl
+ * File:        fundsEdit.tpl
  *
  * organization-budget-and-finance is free software: you can redistribute
  * it and/or modify it under the terms of the GNU General Public License 
@@ -22,25 +22,8 @@
  * @package organization-budget-and-finance
  * @version 1.0
  *}
- {include file="header.tpl" title="Organization Budget and Finance"}
+{include file="header.tpl" title="Organization Budget and Finance"}
 
-<h2>Edit Budget</h2>
-
-<h3>Information</h3>	
-<form action="./index.php?page=process" method="post">
-	<input type="text" name="lineitem_name" value="{$lineitem.name}" /><br />
-	<input type="text" name="lineitem_description" value="{$lineitem.description}" /><br />
-	<span>Private:</span>
-	{if $lineitem.private == 1}
-		<input type="checkbox" name="lineitem_private" value="yes" checked="checked" />
-	{else}
-		<input type="checkbox" name="lineitem_private" value="yes" />
-	{/if}
-	<br />
-	<input type="hidden" name="lineitem_id" value="{$lineitem.id}" />
-	<input type="hidden" name="action" value="lineitemEdit" />
-	<input type="submit" value="Update" />
-</form>
-
+Funds Edit
 
 {include file="footer.tpl"}

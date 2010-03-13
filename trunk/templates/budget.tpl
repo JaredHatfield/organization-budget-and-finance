@@ -30,7 +30,7 @@
 
 <br />
 
-<h2>Budget (<a href="./index.php?page=editbudget&line={$lineitem.id}">Edit</a>)</h2>
+<h2>Budget (<a href="./index.php?page=lineitemEdit&line={$lineitem.id}">Edit</a>)</h2>
 
 {if $lineitem.id > 1}
 	<h3>Information</h3>
@@ -76,7 +76,7 @@
 	</table>
 {/if}
 
-<h3>Line Items (<a href="./index.php?page=addbudget&line={$lineitem.id}">Add</a>)</h3>
+<h3>Line Items (<a href="./index.php?page=lineitemAdd&line={$lineitem.id}">Add</a>)</h3>
 {if $children|@count > 1}
 	<table width="100%">
 		<tr>
