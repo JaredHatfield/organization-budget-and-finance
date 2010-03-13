@@ -1,8 +1,6 @@
-<?php
-
-/**
+{**
  * Project:     organization-budget-and-finance
- * File:        include.index.php
+ * File:        dropdown.tpl
  *
  * organization-budget-and-finance is free software: you can redistribute
  * it and/or modify it under the terms of the GNU General Public License 
@@ -23,15 +21,21 @@
  * @author Jared Hatfield
  * @package organization-budget-and-finance
  * @version 1.0
- */
-
-include_once("./common/include.lineitem.php");
-include_once("./common/include.receipt.php");
-include_once("./common/include.funds.php");
-include_once("./common/include.dropdowns.php");
-
-$conn = mysql_connect($_CONFIG['host'], $_CONFIG['username'] , $_CONFIG['password'] ) or die ('Error connecting to mysql');
-$selected = mysql_select_db($_CONFIG['database'], $conn) or die ('Database unavailable');
-
-
-?>
+ *}
+ 
+{* 
+ * To use the dropdown list three variables need to be set.  They are:
+ * $dd_name - the name of the dropdown list
+ * $dd_selection - an array of the values in the list with the attributes value and name set
+ * $dd_selected - the value in the array that is selected
+ *}
+ 
+<select name="{$dd_name}">
+	{section name=ddloop loop=$dd_selection}
+		{if $dd_selection[ddloop].value == $dd_selected}
+			<option value="{$dd_selection[ddloop].value}" selected="selected">{$dd_selection[ddloop].name}</option>
+		{else}
+			<option value="{$dd_selection[ddloop].value}">{$dd_selection[ddloop].name}</option>
+		{/if}
+	{/section}
+</select>

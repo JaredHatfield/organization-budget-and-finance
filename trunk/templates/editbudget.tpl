@@ -26,11 +26,58 @@
 
 <h2>Edit Budget</h2>
 
-<h3>Information</h3>
+<h3>Information</h3>	
+	<form action="./index.php?page=process" method="post">
+		<input type="text" name="lineitem_name" value="{$lineitem.name}" /><br />
+		<input type="text" name="lineitem_description" value="{$lineitem.description}" /><br />
+		<span>Private:</span>
+		{if $lineitem.private == 1}
+			<input type="checkbox" name="lineitem_private" value="yes" checked="checked" />
+		{else}
+			<input type="checkbox" name="lineitem_private" value="yes" />
+		{/if}
+		<br />
+		<input type="hidden" name="lineitem_id" value="{$lineitem.id}" />
+		<input type="hidden" name="action" value="editbudgetinfo" />
+		<input type="submit" value="Update" />
+	</form>
 
+	
 <h3>Receipts</h3>
+{if $receipts|@count > 0}
+	<table width="100%">
+	{section name=mysec loop=$receipts}
+		<tr bgcolor="{cycle values="#eeeeee,#dddddd"}" valign=top>
+			<td>{$receipts[mysec].id}</td>
+			<td>{$receipts[mysec].name}</td>
+			<td>{$receipts[mysec].description}</td>
+			<td>{include file="dropdown.tpl" dd_selection=$company_selections dd_name="company_id" dd_selected=$receipts[mysec].company_id}</td>
+			<td>{$receipts[mysec].amount}</td>
+			<td>{$receipts[mysec].rdate}</td>
+			<td>{$receipts[mysec].public}</td>
+		</tr>
+	{/section}
+	</table>
+{/if}
 
 <h3>Funds</h3>
+{if $funds|@count > 0}
+	<table width="100%">
+		<tr>
+			<td>Source</td>
+			<td>Allocated Funds</td>
+		</tr>
+	{section name=mysec loop=$funds}
+		<tr bgcolor="{cycle values="#eeeeee,#dddddd"}">
+			<td>{include file="dropdown.tpl" dd_selection=$status_selections dd_name="source" dd_selected=$funds[mysec].source_id}</td>
+			<td>${$funds[mysec].amount}</td>
+		</tr>
+	{/section}
+	</table>
+{/if}
+
+
+
 
 
 {include file="footer.tpl"}

@@ -44,6 +44,9 @@ if(!isset($_GET['page'])){
 	 ******************************************************************************************************/
 	$smarty->display('index.tpl');
 }
+else if($_GET['page'] == "process"){
+	print_r($_POST);
+}
 else if($_GET['page'] == "budget"){
 	/*******************************************************************************************************
 	 * Budget page
@@ -74,6 +77,13 @@ else if($_GET['page'] == "editbudget"){
 			$parent = 1;
 		}
 	}
+	
+	$smarty->assign("lineitem", getLineItem($parent));
+	$smarty->assign("receipts", getReceiptForLineItem($parent));
+	$smarty->assign("funds", getFundsForLineItem($parent));
+	
+	$smarty->assign("status_selections", getStatusSelections());
+	$smarty->assign("company_selections", getCompanySelections());
 	
 	$smarty->display('editbudget.tpl');
 }
