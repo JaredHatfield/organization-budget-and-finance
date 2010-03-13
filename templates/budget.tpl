@@ -24,6 +24,12 @@
  *}
 {include file="header.tpl" title="Organization Budget and Finance"}
 
+{if $lineitem.id > 1}
+	<a href="./index.php?page=budget&line={$lineitem.parent}">Back</a>
+{/if}
+
+<br />
+
 <h2>Budget (<a href="./index.php?page=editbudget&line={$lineitem.id}">Edit</a>)</h2>
 
 {if $lineitem.id > 1}
@@ -45,6 +51,7 @@
 				<span>{$receipts[mysec].description}</span>
 			</td>
 			<td>${$receipts[mysec].amount}</td>
+			<td>{$receipts[mysec].rdate}</td>
 		</tr>
 	{/section}
 	</table>

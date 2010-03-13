@@ -2,7 +2,7 @@
 
 /**
  * Project:     organization-budget-and-finance
- * File:        include.index.php
+ * File:        include.dropdowns.php
  *
  * organization-budget-and-finance is free software: you can redistribute
  * it and/or modify it under the terms of the GNU General Public License 
@@ -25,13 +25,27 @@
  * @version 1.0
  */
 
-include_once("./common/include.lineitem.php");
-include_once("./common/include.receipt.php");
-include_once("./common/include.funds.php");
-include_once("./common/include.dropdowns.php");
 
-$conn = mysql_connect($_CONFIG['host'], $_CONFIG['username'] , $_CONFIG['password'] ) or die ('Error connecting to mysql');
-$selected = mysql_select_db($_CONFIG['database'], $conn) or die ('Database unavailable');
+function getStatusSelections(){
+	$query = "SELECT `id` value, `name` FROM source s ORDER BY `name`";
+	$result = mysql_query($query);
+	$val = array();
+	while($row = mysql_fetch_assoc($result)){
+		$val[] = $row;
+	}
+	
+	return $val;
+}
 
+function getCompanySelections(){
+	$query = "SELECT `id` value, `name` FROM company c ORDER BY `name`";
+	$result = mysql_query($query);
+	$val = array();
+	while($row = mysql_fetch_assoc($result)){
+		$val[] = $row;
+	}
+	
+	return $val;
+}
 
 ?>

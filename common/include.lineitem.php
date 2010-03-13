@@ -91,7 +91,7 @@ function getLineItemChildrenIds($parent){
 
 // Returns the information about a line item
 function getLineItem($id){
-	$query = "SELECT `id`, `name`, `description`, `public` FROM lineitem l WHERE `id` = " . intval($id) . ";";
+	$query = "SELECT `id`, `name`, `description`, `parent`, `public` FROM lineitem l WHERE `id` = " . intval($id) . ";";
 	$result = mysql_query($query);
 	$row = mysql_fetch_assoc($result);
 	return $row;
