@@ -25,15 +25,19 @@
 {include file="header.tpl" title="Organization Budget and Finance"}
 
 {if $lineitem.id > 1}
-	<a href="./index.php?page=budget&line={$lineitem.parent}">Back</a>
+	<a href="./index.php?page=budget&lineid={$lineitem.parent}">Back</a>
 {/if}
 
 <br />
+<a href="./index.php?page=lineitemAdd&lineid={$lineitem.id}">Add a Line Item</a><br />
+<a href="./index.php?page=receiptAdd&lineid={$lineitem.id}">Add a Receipt</a><br />
+<a href="./index.php?page=fundsAdd&lineid={$lineitem.id}">Add a Fund Source</a><br />
 
-<h2>Budget (<a href="./index.php?page=lineitemEdit&line={$lineitem.id}">Edit</a>)</h2>
+<h2>Budget</h2>
 
 {if $lineitem.id > 1}
 	<h3>Information</h3>
+	<a href="./index.php?page=lineitemEdit&lineid={$lineitem.id}">Edit This Line Item</a><br />
 	<span>Name:</span> {$lineitem.name}<br />
 	<span>Description:</span> {$lineitem.description}<br />
 	<br />
@@ -76,7 +80,7 @@
 	</table>
 {/if}
 
-<h3>Line Items (<a href="./index.php?page=lineitemAdd&line={$lineitem.id}">Add</a>)</h3>
+<h3>Line Items</h3>
 {if $children|@count > 1}
 	<table width="100%">
 		<tr>
@@ -92,7 +96,7 @@
 		<tr bgcolor="{cycle values="#eeeeee,#dddddd"}">
 			<td width=200>
 				{if $children[mysec].id > 0}
-					<a href="./index.php?page=budget&line={$children[mysec].id}">{$children[mysec].name}</a>
+					<a href="./index.php?page=budget&lineid={$children[mysec].id}">{$children[mysec].name}</a>
 				{else}
 					{$children[mysec].name}
 				{/if}
