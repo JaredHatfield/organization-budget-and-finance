@@ -26,9 +26,13 @@
 
 <h2>Edit Company</h2>
 
-{include file="pagelink.tpl" page="company" text="Back"}<br />
+{include file="pagelink.tpl" page="company" text="Back"}<br /><br />
 
-{$company.id}<br />
-{$company.name}<br />
+<form action="./index.php?page=process" method="post">
+	<span>Name:</span><input type="text" name="company_name" value="{$company.name}" /><br />
+	<input type="hidden" name="company_id" value="{$company.id}" />
+	<input type="hidden" name="action" value="companyEdit" />
+	<input type="submit" value="Update" />
+</form>
 
 {include file="footer.tpl"}

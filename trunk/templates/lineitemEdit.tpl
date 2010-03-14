@@ -26,18 +26,16 @@
 
 <h2>Edit Line Item</h2>
 
-{include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.id`" text="Back"}
+{include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.id`" text="Back"}<br /><br />
 
-
-<h3>Information</h3>	
 <form action="./index.php?page=process" method="post">
-	<input type="text" name="lineitem_name" value="{$lineitem.name}" /><br />
-	<input type="text" name="lineitem_description" value="{$lineitem.description}" /><br />
-	<span>Private:</span>
-	{if $lineitem.private == 1}
-		<input type="checkbox" name="lineitem_private" value="yes" checked="checked" />
+	<span>Name:</span><input type="text" name="lineitem_name" value="{$lineitem.name}" /><br />
+	<span>Description:</span><input type="text" name="lineitem_description" value="{$lineitem.description}" /><br />
+	<span>Public:</span>
+	{if $lineitem.public == 1}
+		<input type="checkbox" name="lineitem_public" value="yes" checked="checked" />
 	{else}
-		<input type="checkbox" name="lineitem_private" value="yes" />
+		<input type="checkbox" name="lineitem_public" value="yes" />
 	{/if}
 	<br />
 	<input type="hidden" name="lineitem_id" value="{$lineitem.id}" />

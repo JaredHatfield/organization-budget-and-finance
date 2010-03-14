@@ -26,6 +26,25 @@
 
 <h2>Edit Receipt</h2>
 
-{include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.id`" text="Back"}
+{include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.id`" text="Back"}<br /><br />
+
+<form action="./index.php?page=process" method="post">
+	<span>Name:</span><input type="text" name="receipt_name" value="{$receipt.name}" /><br />
+	<span>Description:</span><input type="text" name="receipt_description" value="{$receipt.description}" /><br />
+	<span>Company:</span>{include file="dropdown.tpl" dd_selection=$company_selections dd_name="receipt_company" dd_selected=$receipt.company}<br />
+	<span>Amount:</span><input type="text" name="receipt_amount" value="{$receipt.amount}" /><br />
+	<span>Date:</span><input type="text" name="receipt_rdate" value="{$receipt.rdate}" /><br />
+	<span>Public:</span>
+	{if $receipt.public == 1}
+		<input type="checkbox" name="receipt_public" value="yes" checked="checked" />
+	{else}
+		<input type="checkbox" name="receipt_public" value="yes" />
+	{/if}
+	<br />
+	<input type="hidden" name="receipt_id" value="{$receipt.id}" />
+	<input type="hidden" name="action" value="receiptEdit" />
+	<input type="submit" value="Update" />
+</form>
+
 
 {include file="footer.tpl"}

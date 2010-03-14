@@ -26,10 +26,20 @@
 
 <h2>Edit Source</h2>
 
-{include file="pagelink.tpl" page="source" text="Back"}<br />
+{include file="pagelink.tpl" page="source" text="Back"}<br /><br />
 
-{$source.id}<br />
-{$source.name}<br />
-{$source.public}<br />
+<form action="./index.php?page=process" method="post">
+	<span>Name:</span><input type="text" name="source_name" value="{$source.name}" /><br />
+	<span>Public:</span>
+	{if $source.public == 1}
+		<input type="checkbox" name="source_public" value="yes" checked="checked" />
+	{else}
+		<input type="checkbox" name="source_public" value="yes" />
+	{/if}
+	<br />
+	<input type="hidden" name="source_id" value="{$source.id}" />
+	<input type="hidden" name="action" value="sourceEdit" />
+	<input type="submit" value="Update" />
+</form>
 
 {include file="footer.tpl"}

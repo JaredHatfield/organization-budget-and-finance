@@ -26,7 +26,13 @@
 
 <h2>Add Source</h2>
 
-{include file="pagelink.tpl" page="source" text="Back"}
+{include file="pagelink.tpl" page="source" text="Back"}<br /><br />
 
+<form action="./index.php?page=process" method="post">
+	<span>Name:</span><input type="text" name="source_name" /><br />
+	<span>Public:</span><input type="checkbox" name="source_public" value="yes" checked="checked" /><br />
+	<input type="hidden" name="action" value="sourceAdd" />
+	<input type="submit" value="Add" />
+</form>
 
 {include file="footer.tpl"}
