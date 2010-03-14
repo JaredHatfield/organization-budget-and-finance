@@ -24,7 +24,10 @@
  *}
  {include file="header.tpl" title="Organization Budget and Finance"}
 
-<h2>Edit Budget</h2>
+<h2>Edit Line Item</h2>
+
+{include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.id`" text="Back"}
+
 
 <h3>Information</h3>	
 <form action="./index.php?page=process" method="post">

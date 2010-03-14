@@ -24,6 +24,11 @@
  *}
 {include file="header.tpl" title="Organization Budget and Finance"}
 
-company edit
+<h2>Edit Company</h2>
+
+{include file="pagelink.tpl" page="company" text="Back"}<br />
+
+{$company.id}<br />
+{$company.name}<br />
 
 {include file="footer.tpl"}
