@@ -26,7 +26,7 @@
  */
 
 
-function getStatusSelections(){
+function getSourceSelections(){
 	$query = "SELECT `id` value, `name` FROM source s ORDER BY `name`";
 	$result = mysql_query($query);
 	$val = array();

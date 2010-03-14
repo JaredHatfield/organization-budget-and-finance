@@ -62,4 +62,12 @@ function getReceiptTotalForLineItemAndChildren($lineitem){
 	return $total;
 }
 
+/// Gets the information for a specific receipt
+function getReceipt($id){
+	$query = "SELECT `id`, `name`, `description`, `company`, `amount`, `lineitem`, `rdate`, `public` FROM receipt r WHERE `id` = " . intval($id) . ";";
+	$result = mysql_query($query);
+	$row = mysql_fetch_assoc($result);
+	return $row;
+}
+
 ?>

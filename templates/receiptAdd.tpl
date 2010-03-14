@@ -26,7 +26,17 @@
 
 <h2>Add Receipt</h2>
 
-{include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.id`" text="Back"}
+{include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.id`" text="Back"}<br /><br />
 
+<form action="./index.php?page=process" method="post">
+	<span>Name:</span><input type="text" name="receipt_name" /><br />
+	<span>Description:</span><input type="text" name="receipt_description" /><br />
+	<span>Company</span>{include file="dropdown.tpl" dd_selection=$company_selections dd_name="receipt_company" dd_selected="-1"}<br />
+	<span>Amount:</span><input type="text" name="receipt_amount" /><br />
+	<span>Date:</span><input type="text" name="receipt_rdate" /><br />
+	<span>Public:</span><input type="checkbox" name="receipt_public" value="yes" checked="checked" /><br />
+	<input type="hidden" name="action" value="receiptAdd" />
+	<input type="submit" value="Add" />
+</form>
 
 {include file="footer.tpl"}

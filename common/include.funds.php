@@ -59,4 +59,12 @@ function getSourcesForLineItems($parent){
 	return $val;
 }
 
+/// Get the information for a specific fund
+function getFund($id){
+	$query = "SELECT `id`, `lineitem`, `source`, `amount` FROM funds f WHERE `id` = " . intval($id) . ";";
+	$result = mysql_query($query);
+	$row = mysql_fetch_assoc($result);
+	return $row;
+}
+
 ?>

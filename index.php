@@ -92,14 +92,18 @@ else if($_GET['page'] == "receiptAdd"){
 	 ******************************************************************************************************/
 	$parent = getPageId('lineid');
 	$smarty->assign("lineitem", getLineItem($parent));
+	$smarty->assign("company_selections", getCompanySelections());
 	$smarty->display('receiptAdd.tpl');
 }
 else if($_GET['page'] == "receiptEdit"){
 	/*******************************************************************************************************
 	 * Edit receipt page
 	 ******************************************************************************************************/
-	$parent = getPageId('lineid');
-	$smarty->assign("lineitem", getLineItem($parent));
+	$receiptid = getPageId('receiptid');
+	$receiptinfo = getReceipt($receiptid);
+	$smarty->assign("receipt",$receiptinfo);
+	$smarty->assign("lineitem", getLineItem($receiptinfo['lineitem']));
+	$smarty->assign("company_selections", getCompanySelections());
 	$smarty->display('receiptEdit.tpl');
 }
 else if($_GET['page'] == "fundsAdd"){
@@ -108,14 +112,18 @@ else if($_GET['page'] == "fundsAdd"){
 	 ******************************************************************************************************/
 	$parent = getPageId('lineid');
 	$smarty->assign("lineitem", getLineItem($parent));
+	$smarty->assign("source_selections", getSourceSelections());
 	$smarty->display('fundsAdd.tpl');
 }
 else if($_GET['page'] == "fundsEdit"){
 	/*******************************************************************************************************
 	 * Edit funds page
 	 ******************************************************************************************************/
-	$parent = getPageId('lineid');
-	$smarty->assign("lineitem", getLineItem($parent));
+	$fundsid = getPageId('fundsid');
+	$fundinfo = getFund($fundsid);
+	$smarty->assign("funds", $fundinfo);
+	$smarty->assign("lineitem", getLineItem($fundinfo['lineitem']));
+	$smarty->assign("source_selections", getSourceSelections());
 	$smarty->display('fundsEdit.tpl');
 }
 else if($_GET['page'] == "company"){
