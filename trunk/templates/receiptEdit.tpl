@@ -24,6 +24,8 @@
  *}
 {include file="header.tpl" title="Organization Budget and Finance"}
 
-receipt edit
+<h2>Edit Receipt</h2>
+
+{include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.id`" text="Back"}
 
 {include file="footer.tpl"}

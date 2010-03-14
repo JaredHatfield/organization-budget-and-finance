@@ -122,6 +122,7 @@ else if($_GET['page'] == "company"){
 	/*******************************************************************************************************
 	 * company page
 	 ******************************************************************************************************/
+	$smarty->assign("companies", getAllCompanies());
 	$smarty->display('company.tpl');
 }
 else if($_GET['page'] == "companyAdd"){
@@ -134,12 +135,15 @@ else if($_GET['page'] == "companyEdit"){
 	/*******************************************************************************************************
 	 * Edit company page
 	 ******************************************************************************************************/
+	$companyid = getPageId('companyid');
+	$smarty->assign("company", getCompanyInformation($companyid));
 	$smarty->display('companyEdit.tpl');
 }
 else if($_GET['page'] == "source"){
 	/*******************************************************************************************************
 	 * source page
 	 ******************************************************************************************************/
+	$smarty->assign("sources", getAllSources());
 	$smarty->display('source.tpl');
 }
 else if($_GET['page'] == "sourceAdd"){
@@ -152,6 +156,8 @@ else if($_GET['page'] == "sourceEdit"){
 	/*******************************************************************************************************
 	 * Edit source page
 	 ******************************************************************************************************/
+	$sourceid = getPageId('sourceid');
+	$smarty->assign("source", getSourceInformation($sourceid));
 	$smarty->display('sourceEdit.tpl');
 }
 else{

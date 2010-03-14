@@ -24,6 +24,8 @@
  *}
 {include file="header.tpl" title="Organization Budget and Finance"}
 
-lineitem add
+<h2>Add Line Item</h2>
+
+{include file="pagelink.tpl" page="budget" parms="lineid=`$lineitemParent.id`" text="Back"}
 
 {include file="footer.tpl"}

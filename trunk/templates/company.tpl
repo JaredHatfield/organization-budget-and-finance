@@ -24,6 +24,21 @@
  *}
 {include file="header.tpl" title="Organization Budget and Finance"}
 
-company
+<h2>Companies</h2>
+
+{include file="pagelink.tpl" page="companyAdd" text="Add a Company"}<br />
+
+<table>
+	<tr>
+		<td></td>
+		<td>Name</td>
+	</tr>
+{section name=mysec loop=$companies}
+	<tr bgcolor="{cycle values="#eeeeee,#dddddd"}" valign=top>
+		<td>{include file="pagelink.tpl" page="companyEdit" parms="companyid=`$companies[mysec].id`" text="Edit"}</td>
+		<td>{$companies[mysec].name}</td>
+	</tr>
+{/section}
+</table>
 
 {include file="footer.tpl"}

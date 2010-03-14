@@ -25,6 +25,24 @@
  * @version 1.0
  */
 
+/// Gets a list of all of the sources
+function getAllSources(){
+	$query = "SELECT `id`, `name`, `public` FROM source s;";
+	$result = mysql_query($query);
+	$val = array();
+	while($row = mysql_fetch_assoc($result)){
+		$val[] = $row;
+	}
+	
+	return $val;
+}
 
+/// Gets the information for a specific source
+function getSourceInformation($id){
+	$query = "SELECT `id`, `name`, `public` FROM source s WHERE `id` = " . intval($id) . ";";
+	$result = mysql_query($query);
+	$row = mysql_fetch_assoc($result);
+	return $row;
+}
 
 ?>

@@ -24,6 +24,9 @@
  *}
 {include file="header.tpl" title="Organization Budget and Finance"}
 
-source add
+<h2>Add Source</h2>
+
+{include file="pagelink.tpl" page="source" text="Back"}
+
 
 {include file="footer.tpl"}

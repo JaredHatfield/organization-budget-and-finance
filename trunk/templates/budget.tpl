@@ -25,19 +25,19 @@
 {include file="header.tpl" title="Organization Budget and Finance"}
 
 {if $lineitem.id > 1}
-	<a href="./index.php?page=budget&lineid={$lineitem.parent}">Back</a>
+	{include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.parent`" text="Back"}
 {/if}
 
 <br />
-<a href="./index.php?page=lineitemAdd&lineid={$lineitem.id}">Add a Line Item</a><br />
-<a href="./index.php?page=receiptAdd&lineid={$lineitem.id}">Add a Receipt</a><br />
-<a href="./index.php?page=fundsAdd&lineid={$lineitem.id}">Add a Fund Source</a><br />
+{include file="pagelink.tpl" page="lineitemAdd" parms="lineid=`$lineitem.id`" text="Add a Line Item"}<br />
+{include file="pagelink.tpl" page="receiptAdd" parms="lineid=`$lineitem.id`" text="Add a Receipt"}<br />
+{include file="pagelink.tpl" page="fundsAdd" parms="lineid=`$lineitem.id`" text="Add Funds"}<br />
 
 <h2>Budget</h2>
 
 {if $lineitem.id > 1}
 	<h3>Information</h3>
-	<a href="./index.php?page=lineitemEdit&lineid={$lineitem.id}">Edit This Line Item</a><br />
+	{include file="pagelink.tpl" page="lineitemEdit" parms="lineid=`$lineitem.id`" text="Edit Line Item"}<br />
 	<span>Name:</span> {$lineitem.name}<br />
 	<span>Description:</span> {$lineitem.description}<br />
 	<br />
@@ -47,8 +47,16 @@
 {if $receipts|@count > 0}
 	<h3>Receipts</h3>
 	<table width="100%">
+		<tr>
+			<td></td>
+			<td>Company</td>
+			<td>Name</td>
+			<td>Amount</td>
+			<td>Date</td>
+		</tr>
 	{section name=mysec loop=$receipts}
 		<tr bgcolor="{cycle values="#eeeeee,#dddddd"}" valign=top>
+			<td>{include file="pagelink.tpl" page="receiptEdit" parms="receiptid=`$receipts[mysec].id`" text="Edit"}</td>
 			<td>{$receipts[mysec].company_name}</td>
 			<td>
 				{$receipts[mysec].name}<br />
@@ -66,12 +74,14 @@
 	<h3>Funds</h3>
 	<table width="100%">
 		<tr>
+			<td></td>
 			<td>Source</td>
 			<td>Available</td>
 			<td>Unallocated</td>
 		</tr>
 	{section name=mysec loop=$funds}
 		<tr bgcolor="{cycle values="#eeeeee,#dddddd"}">
+			<td>{include file="pagelink.tpl" page="fundsEdit" parms="fundsid=`$funds[mysec].id`" text="Edit"}</td>
 			<td>{$funds[mysec].source_name}</td>
 			<td>${$funds[mysec].amount}</td>
 			<td>${$funds[mysec].amount-$funds[mysec].allocated}</td>
@@ -96,7 +106,7 @@
 		<tr bgcolor="{cycle values="#eeeeee,#dddddd"}">
 			<td width=200>
 				{if $children[mysec].id > 0}
-					<a href="./index.php?page=budget&lineid={$children[mysec].id}">{$children[mysec].name}</a>
+					{include file="pagelink.tpl" page="budget" parms="lineid=`$children[mysec].id`" text="`$children[mysec].name`"}
 				{else}
 					{$children[mysec].name}
 				{/if}

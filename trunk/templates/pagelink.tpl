@@ -1,6 +1,6 @@
 {**
  * Project:     organization-budget-and-finance
- * File:        source.tpl
+ * File:        pagelink.tpl
  *
  * organization-budget-and-finance is free software: you can redistribute
  * it and/or modify it under the terms of the GNU General Public License 
@@ -22,25 +22,18 @@
  * @package organization-budget-and-finance
  * @version 1.0
  *}
-{include file="header.tpl" title="Organization Budget and Finance"}
-
-<h2>Sources</h2>
-
-{include file="pagelink.tpl" page="sourceAdd" text="Add a Source"}<br />
-
-<table>
-	<tr>
-		<td></td>
-		<td>Name</td>
-		<td>Public</td>
-	</tr>
-{section name=mysec loop=$sources}
-	<tr bgcolor="{cycle values="#eeeeee,#dddddd"}" valign=top>
-		<td>{include file="pagelink.tpl" page="sourceEdit" parms="sourceid=`$sources[mysec].id`" text="Edit"}</td>
-		<td>{$sources[mysec].name}</td>
-		<td>{$sources[mysec].public}</td>
-	</tr>
-{/section}
-</table>
-
-{include file="footer.tpl"}
+{strip}
+{if $page == "budget"}
+	{if isset($parms)}
+		<a href="./index.php?page=budget&{$parms}">{$text}</a>
+	{else}
+		<a href="./index.php?page=budget">{$text}</a>
+	{/if}
+{else}
+	{if isset($parms)}
+		<a href="./index.php?page={$page}&{$parms}">{$text}</a>
+	{else}
+		<a href="./index.php?page={$page}">{$text}</a>
+	{/if}
+{/if}
+{/strip}

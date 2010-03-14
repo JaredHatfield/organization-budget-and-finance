@@ -25,6 +25,24 @@
  * @version 1.0
  */
 
+/// Gets a list of all of the companies
+function getAllCompanies(){
+	$query = "SELECT `id`, `name` FROM company c;";
+	$result = mysql_query($query);
+	$val = array();
+	while($row = mysql_fetch_assoc($result)){
+		$val[] = $row;
+	}
+	
+	return $val;
+}
 
+/// Gets the information for a specific company
+function getCompanyInformation($id){
+	$query = "SELECT `id`, `name` FROM company c WHERE `id` = " . intval($id) . ";";
+	$result = mysql_query($query);
+	$row = mysql_fetch_assoc($result);
+	return $row;
+}
 
 ?>
