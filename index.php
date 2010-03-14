@@ -51,12 +51,16 @@ else if($_GET['page'] == "budget"){
 	/*******************************************************************************************************
 	 * Budget page
 	 ******************************************************************************************************/
-	$parent = 1;
-	if(isset($_GET['line'])){
-		$parent = intval($_GET['line']);
-		if($parent == 0){
-			$parent = 1;
-		}
+	$parent = getPageId('lineid');
+	if($parent == -1 && isset($_GET['lineid'])){
+		// An invalid page was found, so we want to redirect to the main page
+		$smarty->assign("url","./index.php?page=budget");
+		$smarty->display('redirect.tpl');
+		exit();
+	}
+	else if($parent == -1){
+		// Display the main page
+		$parent = 1;
 	}
 	
 	$smarty->assign("lineitem", getLineItem($parent));
@@ -66,20 +70,89 @@ else if($_GET['page'] == "budget"){
 	$smarty->assign("children", getCompleteLineItemChildren($parent));
 	$smarty->display('budget.tpl');
 }
+else if($_GET['page'] == "lineitemAdd"){
+	/*******************************************************************************************************
+	 * Add lineitem page
+	 ******************************************************************************************************/
+	$parent = getPageId('lineid');
+	$smarty->assign("lineitemParent", getLineItem($parent));
+	$smarty->display('lineitemAdd.tpl');
+}
 else if($_GET['page'] == "lineitemEdit"){
 	/*******************************************************************************************************
-	 * Edit Budget page
+	 * Edit lineitem page
 	 ******************************************************************************************************/
-	$parent = 1;
-	if(isset($_GET['line'])){
-		$parent = intval($_GET['line']);
-		if($parent == 0){
-			$parent = 1;
-		}
-	}
-	
+	$parent = getPageId('lineid');
 	$smarty->assign("lineitem", getLineItem($parent));
 	$smarty->display('lineitemEdit.tpl');
+}
+else if($_GET['page'] == "receiptAdd"){
+	/*******************************************************************************************************
+	 * Add receipt page
+	 ******************************************************************************************************/
+	$parent = getPageId('lineid');
+	$smarty->assign("lineitem", getLineItem($parent));
+	$smarty->display('receiptAdd.tpl');
+}
+else if($_GET['page'] == "receiptEdit"){
+	/*******************************************************************************************************
+	 * Edit receipt page
+	 ******************************************************************************************************/
+	$parent = getPageId('lineid');
+	$smarty->assign("lineitem", getLineItem($parent));
+	$smarty->display('receiptEdit.tpl');
+}
+else if($_GET['page'] == "fundsAdd"){
+	/*******************************************************************************************************
+	 * Add funds page
+	 ******************************************************************************************************/
+	$parent = getPageId('lineid');
+	$smarty->assign("lineitem", getLineItem($parent));
+	$smarty->display('fundsAdd.tpl');
+}
+else if($_GET['page'] == "fundsEdit"){
+	/*******************************************************************************************************
+	 * Edit funds page
+	 ******************************************************************************************************/
+	$parent = getPageId('lineid');
+	$smarty->assign("lineitem", getLineItem($parent));
+	$smarty->display('fundsEdit.tpl');
+}
+else if($_GET['page'] == "company"){
+	/*******************************************************************************************************
+	 * company page
+	 ******************************************************************************************************/
+	$smarty->display('company.tpl');
+}
+else if($_GET['page'] == "companyAdd"){
+	/*******************************************************************************************************
+	 * Add company page
+	 ******************************************************************************************************/
+	$smarty->display('companyAdd.tpl');
+}
+else if($_GET['page'] == "companyEdit"){
+	/*******************************************************************************************************
+	 * Edit company page
+	 ******************************************************************************************************/
+	$smarty->display('companyEdit.tpl');
+}
+else if($_GET['page'] == "source"){
+	/*******************************************************************************************************
+	 * source page
+	 ******************************************************************************************************/
+	$smarty->display('source.tpl');
+}
+else if($_GET['page'] == "sourceAdd"){
+	/*******************************************************************************************************
+	 * Add source page
+	 ******************************************************************************************************/
+	$smarty->display('sourceAdd.tpl');
+}
+else if($_GET['page'] == "sourceEdit"){
+	/*******************************************************************************************************
+	 * Edit source page
+	 ******************************************************************************************************/
+	$smarty->display('sourceEdit.tpl');
 }
 else{
 	$smarty->assign("message","Error: Page not found.");

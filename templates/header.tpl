@@ -31,7 +31,7 @@
 <table class="maintable" align="center">
 	<tr class="header">
 		<td>
-			<h1>Organization Budget and Finance</h1>
+			<h1><a href="./index.php">Organization Budget and Finance</a></h1>
 		</td>
 	</tr>
 	<tr>

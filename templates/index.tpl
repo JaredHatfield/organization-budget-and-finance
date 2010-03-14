@@ -24,6 +24,11 @@
  *}
 {include file="header.tpl" title="Organization Budget and Finance"}
 
-Home
+<h2>Home</h2>
+<a href="./index.php?page=budget">Budget</a><br />
+
+<a href="./index.php?page=company">Companies</a><br />
+
+<a href="./index.php?page=source">Sources</a><br />
 
 {include file="footer.tpl"}
