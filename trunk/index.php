@@ -25,6 +25,7 @@
  * @version 1.0
  */
 
+session_start();
 include_once("./configs/config.php");
 require_once($_CONFIG['smarty']);
 include_once("./common/include.index.php");
@@ -88,6 +89,7 @@ else if($_GET['page'] == "lineitemEdit"){
 	 * Edit lineitem page
 	 ******************************************************************************************************/
 	$lineitemid = getPageId('lineid');
+	$smarty->assign("id", $lineitemid);
 	$smarty->assign("lineitem", getLineItem($lineitemid));
 	$smarty->assign("lineitemCount", getLineItemUseCount($lineitemid));
 	$smarty->display('lineitemEdit.tpl');
@@ -107,6 +109,7 @@ else if($_GET['page'] == "receiptEdit"){
 	 ******************************************************************************************************/
 	$receiptid = getPageId('receiptid');
 	$receiptinfo = getReceipt($receiptid);
+	$smarty->assign("id", $receiptid);
 	$smarty->assign("receipt",$receiptinfo);
 	$smarty->assign("lineitem", getLineItem($receiptinfo['lineitem']));
 	$smarty->assign("company_selections", getCompanySelections());
@@ -127,6 +130,7 @@ else if($_GET['page'] == "fundsEdit"){
 	 ******************************************************************************************************/
 	$fundsid = getPageId('fundsid');
 	$fundinfo = getFund($fundsid);
+	$smarty->assign("id", $fundsid);
 	$smarty->assign("funds", $fundinfo);
 	$smarty->assign("lineitem", getLineItem($fundinfo['lineitem']));
 	$smarty->assign("source_selections", getSourceSelections());
@@ -150,6 +154,7 @@ else if($_GET['page'] == "companyEdit"){
 	 * Edit company page
 	 ******************************************************************************************************/
 	$companyid = getPageId('companyid');
+	$smarty->assign("id", $companyid);
 	$smarty->assign("company", getCompanyInformation($companyid));
 	$smarty->assign("companyCount", getCompanyUseCount($companyid));
 	$smarty->display('companyEdit.tpl');
@@ -172,9 +177,14 @@ else if($_GET['page'] == "sourceEdit"){
 	 * Edit source page
 	 ******************************************************************************************************/
 	$sourceid = getPageId('sourceid');
+	$smarty->assign("id", $sourceid);
 	$smarty->assign("source", getSourceInformation($sourceid));
 	$smarty->assign("sourceCount", getSourceUseCount($sourceid));
 	$smarty->display('sourceEdit.tpl');
+}
+else if($_GET['page'] == "error"){
+	$smarty->assign("message", "You have reached this page because an error occured.");
+	$smarty->display('error.tpl');
 }
 else{
 	$smarty->assign("message","Error: Page not found.");

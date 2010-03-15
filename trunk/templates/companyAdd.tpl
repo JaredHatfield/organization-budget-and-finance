@@ -30,6 +30,7 @@
 
 <form action="./index.php?page=process" method="post">
 	<span>Name:</span><input type="text" name="company_name" /><br />
+	<input type="hidden" name="key" value="{php}echo secureform_add('companyAdd', 60){/php}" />
 	<input type="hidden" name="action" value="companyAdd" />
 	<input type="submit" value="Add" />
 </form>

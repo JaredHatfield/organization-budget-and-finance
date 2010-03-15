@@ -31,6 +31,7 @@
 {if $sourceCount == 0}
 	<form action="./index.php?page=process" method="post">
 		<input type="hidden" name="source_id" value="{$source.id}" />
+		<input type="hidden" name="key" value="{php}echo secureform_add_pk('sourceDelete', 60, $this->get_template_vars('id')){/php}" />
 		<input type="hidden" name="action" value="sourceDelete" />
 		<input type="submit" value="Delete" />
 	</form>
@@ -46,6 +47,7 @@
 	{/if}
 	<br />
 	<input type="hidden" name="source_id" value="{$source.id}" />
+	<input type="hidden" name="key" value="{php}echo secureform_add_pk('sourceEdit', 60, $this->get_template_vars('id')){/php}" />
 	<input type="hidden" name="action" value="sourceEdit" />
 	<input type="submit" value="Update" />
 </form>
