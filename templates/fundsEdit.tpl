@@ -29,6 +29,12 @@
 {include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.id`" text="Back"}<br /><br />
 
 <form action="./index.php?page=process" method="post">
+	<input type="hidden" name="funds_id" value="{$funds.id}" />
+	<input type="hidden" name="action" value="fundsDelete" />
+	<input type="submit" value="Delete" />
+</form>
+
+<form action="./index.php?page=process" method="post">
 	<span>Source:</span>{include file="dropdown.tpl" dd_selection=$source_selections dd_name="funds_source" dd_selected=`$funds.source`}<br />
 	<span>Amount:</span><input type="text" name="funds_amount" value="{$funds.amount}" /><br />
 	<input type="hidden" name="funds_id" value="{$funds.id}" />

@@ -45,6 +45,13 @@ function getCompanyInformation($id){
 	return $row;
 }
 
+function getCompanyUseCount($id){
+	$query = "SELECT COUNT(*) number FROM receipt WHERE `company` = " .  intval($id). ";";
+	$result = mysql_query($query);
+	$row = mysql_fetch_assoc($result);
+	return $row['number'];
+}
+
 /*******************************************************************************************************
  * Insert/Update Queries
  ******************************************************************************************************/
@@ -58,6 +65,12 @@ function insertCompany($name){
 
 function updateCompany($id, $name){
 	$query = "UPDATE company SET `name` = '" . $name . "' WHERE `id` = " . intval($id) . " LIMIT 1;";
+	$result = mysql_query($query);
+}
+
+
+function deleteCompany($id){
+	$query = "DELETE FROM company WHERE `id` = " . intval($id) . " LIMIT 1;";
 	$result = mysql_query($query);
 }
 

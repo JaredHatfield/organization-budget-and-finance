@@ -48,7 +48,6 @@ else if($_GET['page'] == "process"){
 	/*******************************************************************************************************
 	 * Process a submitted form
 	 ******************************************************************************************************/
-	print_r($_POST);
 	$url = process($smarty);
 	$smarty->assign("url", $url);
 	$smarty->display('redirect.tpl');
@@ -88,8 +87,9 @@ else if($_GET['page'] == "lineitemEdit"){
 	/*******************************************************************************************************
 	 * Edit lineitem page
 	 ******************************************************************************************************/
-	$parent = getPageId('lineid');
-	$smarty->assign("lineitem", getLineItem($parent));
+	$lineitemid = getPageId('lineid');
+	$smarty->assign("lineitem", getLineItem($lineitemid));
+	$smarty->assign("lineitemCount", getLineItemUseCount($lineitemid));
 	$smarty->display('lineitemEdit.tpl');
 }
 else if($_GET['page'] == "receiptAdd"){
@@ -151,6 +151,7 @@ else if($_GET['page'] == "companyEdit"){
 	 ******************************************************************************************************/
 	$companyid = getPageId('companyid');
 	$smarty->assign("company", getCompanyInformation($companyid));
+	$smarty->assign("companyCount", getCompanyUseCount($companyid));
 	$smarty->display('companyEdit.tpl');
 }
 else if($_GET['page'] == "source"){
@@ -172,6 +173,7 @@ else if($_GET['page'] == "sourceEdit"){
 	 ******************************************************************************************************/
 	$sourceid = getPageId('sourceid');
 	$smarty->assign("source", getSourceInformation($sourceid));
+	$smarty->assign("sourceCount", getSourceUseCount($sourceid));
 	$smarty->display('sourceEdit.tpl');
 }
 else{

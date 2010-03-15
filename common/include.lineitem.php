@@ -97,6 +97,23 @@ function getLineItem($id){
 	return $row;
 }
 
+function getLineItemUseCount($id){
+	$total = 0;
+	$query = "SELECT COUNT(*) number FROM funds f WHERE `lineitem` = " . intval($id) . ";";
+	$result = mysql_query($query);
+	$row = mysql_fetch_assoc($result);
+	$total += $row['number'];
+	$query = "SELECT COUNT(*) number FROM receipt r WHERE `lineitem` = " . intval($id) . ";";
+	$result = mysql_query($query);
+	$row = mysql_fetch_assoc($result);
+	$total += $row['number'];
+	$query = "SELECT COUNT(*) number FROM lineitem l WHERE `parent` = " . intval($id) . ";";
+	$result = mysql_query($query);
+	$row = mysql_fetch_assoc($result);
+	$total += $row['number'];
+	return $total;
+}
+
 /*******************************************************************************************************
  * Insert/Update Queries
  ******************************************************************************************************/
@@ -113,5 +130,10 @@ function updateLineitem($id, $name, $description, $public){
 	$result = mysql_query($query);
 }
 
+
+function deleteLineitem($id){
+	$query = "DELETE FROM lineitem WHERE `id` = " . intval($id) . " LIMIT 1;";
+	$result = mysql_query($query);
+}
 
 ?>

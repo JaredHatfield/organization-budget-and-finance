@@ -29,6 +29,12 @@
 {include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.id`" text="Back"}<br /><br />
 
 <form action="./index.php?page=process" method="post">
+	<input type="hidden" name="receipt_id" value="{$receipt.id}" />
+	<input type="hidden" name="action" value="receiptDelete" />
+	<input type="submit" value="Delete" />
+</form>
+
+<form action="./index.php?page=process" method="post">
 	<span>Name:</span><input type="text" name="receipt_name" value="{$receipt.name}" /><br />
 	<span>Description:</span><input type="text" name="receipt_description" value="{$receipt.description}" /><br />
 	<span>Company:</span>{include file="dropdown.tpl" dd_selection=$company_selections dd_name="receipt_company" dd_selected=$receipt.company}<br />

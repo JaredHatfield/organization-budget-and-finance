@@ -28,6 +28,14 @@
 
 {include file="pagelink.tpl" page="source" text="Back"}<br /><br />
 
+{if $sourceCount == 0}
+	<form action="./index.php?page=process" method="post">
+		<input type="hidden" name="source_id" value="{$source.id}" />
+		<input type="hidden" name="action" value="sourceDelete" />
+		<input type="submit" value="Delete" />
+	</form>
+{/if}
+
 <form action="./index.php?page=process" method="post">
 	<span>Name:</span><input type="text" name="source_name" value="{$source.name}" /><br />
 	<span>Public:</span>

@@ -28,6 +28,15 @@
 
 {include file="pagelink.tpl" page="company" text="Back"}<br /><br />
 
+{if $companyCount == 0}
+	<form action="./index.php?page=process" method="post">
+		<input type="hidden" name="company_id" value="{$company.id}" />
+		<input type="hidden" name="action" value="companyDelete" />
+		<input type="submit" value="Delete" />
+	</form>
+{/if}
+
+
 <form action="./index.php?page=process" method="post">
 	<span>Name:</span><input type="text" name="company_name" value="{$company.name}" /><br />
 	<input type="hidden" name="company_id" value="{$company.id}" />
