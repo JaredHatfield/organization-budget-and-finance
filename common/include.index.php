@@ -32,6 +32,7 @@ include_once("./common/include.company.php");
 include_once("./common/include.source.php");
 include_once("./common/include.dropdowns.php");
 include_once("./common/include.process.php");
+include_once("./common/include.form.protect.php");
 
 $conn = mysql_connect($_CONFIG['host'], $_CONFIG['username'] , $_CONFIG['password'] ) or die ('Error connecting to mysql');
 $selected = mysql_select_db($_CONFIG['database'], $conn) or die ('Database unavailable');

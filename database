@@ -35,6 +35,22 @@ CREATE TABLE `company` (
 
 
 --
+-- Definition of table `form`
+--
+
+DROP TABLE IF EXISTS `form`;
+CREATE TABLE `form` (
+  `key` varchar(50) NOT NULL,
+  `expires` datetime NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `session` varchar(50) NOT NULL,
+  `pk` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`key`),
+  KEY `Index_form_key` (`key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+--
 -- Definition of table `funds`
 --
 

@@ -31,6 +31,7 @@
 <form action="./index.php?page=process" method="post">
 	<span>Name:</span><input type="text" name="source_name" /><br />
 	<span>Public:</span><input type="checkbox" name="source_public" value="yes" checked="checked" /><br />
+	<input type="hidden" name="key" value="{php}echo secureform_add('sourceAdd', 60){/php}" />
 	<input type="hidden" name="action" value="sourceAdd" />
 	<input type="submit" value="Add" />
 </form>

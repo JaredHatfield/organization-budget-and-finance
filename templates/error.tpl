@@ -24,6 +24,7 @@
  *}
 {include file="header.tpl" title="Organization Budget and Finance"}
 
+<h1>Error!</h1>
 <h2>{$message}</h2>
 
 {include file="footer.tpl"}

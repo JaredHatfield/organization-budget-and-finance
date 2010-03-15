@@ -27,16 +27,25 @@
 
 
 function process(){
-	if(!isset($_POST['action'])){
-		return "./index.php";
+	
+	if(!isset($_POST['action']) || !isset($_POST['key'])){
+		return "./index.php?page=error";
 	}
-	else if($_POST['action'] == "lineitemEdit"){
+	
+	$form_key = mysql_real_escape_string($_POST['key']);
+	$form_action = mysql_real_escape_string($_POST['action']);
+	
+	if($_POST['action'] == "lineitemEdit"){
 		$id = mysql_real_escape_string($_POST['lineitem_id']);
 		$name = mysql_real_escape_string($_POST['lineitem_name']);
 		$description = mysql_real_escape_string($_POST['lineitem_description']);
 		$public  = 0;
 		if(isset($_POST['lineitem_public'])){
 			$public = 1;
+		}
+		
+		if(!secureform_test($form_key, "lineitemEdit", $id)){
+			return "./index.php?page=error";
 		}
 		
 		updateLineitem($id, $name, $description, $public);
@@ -51,12 +60,21 @@ function process(){
 			$public = 1;
 		}
 		
+		if(!secureform_test($form_key, "lineitemAdd")){
+			return "./index.php?page=error";
+		}
+		
 		insertLineitem($name, $description, $parent, $public);
 		return "./index.php?page=budget&lineid=" . $parent;
 	}
 	else if($_POST['action'] == "lineitemDelete"){
 		$id = mysql_real_escape_string($_POST['lineitem_id']);
 		$lineitem = getLineItem($id);
+		
+		if(!secureform_test($form_key, "lineitemDelete", $id)){
+			return "./index.php?page=error";
+		}
+		
 		deleteLineitem($id);
 		return "./index.php?page=budget&lineid=" . $lineitem['parent'];
 	}
@@ -70,6 +88,10 @@ function process(){
 		$public  = 0;
 		if(isset($_POST['receipt_public'])){
 			$public = 1;
+		}
+		
+		if(!secureform_test($form_key, "receiptEdit", $id)){
+			return "./index.php?page=error";
 		}
 		
 		updateReceipt($id, $name, $description, $company, $amount, $rdate, $public);
@@ -88,11 +110,20 @@ function process(){
 			$public = 1;
 		}
 		
+		if(!secureform_test($form_key, "receiptAdd")){
+			return "./index.php?page=error";
+		}
+		
 		insertReceipt($name, $description, $company, $amount, $lineitem, $rdate, $public);
 		return "./index.php?page=budget&lineid=" . $lineitem;
 	}
 	else if($_POST['action'] == "receiptDelete"){
 		$id = mysql_real_escape_string($_POST['receipt_id']);
+		
+		if(!secureform_test($form_key, "receiptDelete", $id)){
+			return "./index.php?page=error";
+		}
+		
 		$receipt = getReceipt($id);
 		deleteReceipt($id);
 		return "./index.php?page=budget&lineid=" . $receipt['lineitem'];
@@ -101,6 +132,11 @@ function process(){
 		$id = mysql_real_escape_string($_POST['funds_id']);
 		$source = mysql_real_escape_string($_POST['funds_source']);
 		$amount = mysql_real_escape_string($_POST['funds_amount']);
+		
+		if(!secureform_test($form_key, "fundsEdit", $id)){
+			return "./index.php?page=error";
+		}
+		
 		updateFunds($id, $source, $amount);
 		$fund = getFund($id);
 		return "./index.php?page=budget&lineid=" . $fund['lineitem'];
@@ -109,11 +145,21 @@ function process(){
 		$source = mysql_real_escape_string($_POST['funds_source']);
 		$amount = mysql_real_escape_string($_POST['funds_amount']);
 		$lineitem = mysql_real_escape_string($_POST['funds_lineitem']);
+		
+		if(!secureform_test($form_key, "fundsAdd")){
+			return "./index.php?page=error";
+		}
+		
 		insertFunds($lineitem, $source, $amount);
 		return "./index.php?page=budget&lineid=" . $lineitem;
 	}
 	else if($_POST['action'] == "fundsDelete"){
 		$id = mysql_real_escape_string($_POST['funds_id']);
+		
+		if(!secureform_test($form_key, "fundsDelete", $id)){
+			return "./index.php?page=error";
+		}
+		
 		$fund = getFund($id);
 		deleteFunds($id);
 		return "./index.php?page=budget&lineid=" . $fund['lineitem'];
@@ -121,16 +167,28 @@ function process(){
 	else if($_POST['action'] == "companyEdit"){
 		$id = mysql_real_escape_string($_POST['company_id']);
 		$name = mysql_real_escape_string($_POST['company_name']);
+		if(!secureform_test($form_key, "companyEdit", $id)){
+			return "./index.php?page=error";
+		}
+		
 		updateCompany($id, $name);
 		return "./index.php?page=company";
 	}
 	else if($_POST['action'] == "companyAdd"){
 		$name = mysql_real_escape_string($_POST['company_name']);
+		if(!secureform_test($form_key, "companyAdd")){
+			return "./index.php?page=error";
+		}
+		
 		insertCompany($name);
 		return "./index.php?page=company";
 	}
 	else if($_POST['action'] == "companyDelete"){
 		$id = mysql_real_escape_string($_POST['company_id']);
+		if(!secureform_test($form_key, "companyDelete", $id)){
+			return "./index.php?page=error";
+		}
+		
 		deleteCompany($id);
 		return "./index.php?page=company";
 	}
@@ -140,6 +198,10 @@ function process(){
 		$public  = 0;
 		if(isset($_POST['source_public'])){
 			$public = 1;
+		}
+		
+		if(!secureform_test($form_key, "sourceEdit", $id)){
+			return "./index.php?page=error";
 		}
 		
 		updateSource($id, $name, $public);
@@ -152,11 +214,19 @@ function process(){
 			$public = 1;
 		}
 		
+		if(!secureform_test($form_key, "sourceAdd")){
+			return "./index.php?page=error";
+		}
+		
 		insertSource($name, $public);
 		return "./index.php?page=source";
 	}
 	else if($_POST['action'] == "sourceDelete"){
 		$id = mysql_real_escape_string($_POST['source_id']);
+		if(!secureform_test($form_key, "sourceDelete", $id)){
+			return "./index.php?page=error";
+		}
+		
 		deleteSource($id);
 		return "./index.php?page=source";
 	}
@@ -167,4 +237,5 @@ function process(){
 		return "./index.php";
 	}
 }
+
 ?>

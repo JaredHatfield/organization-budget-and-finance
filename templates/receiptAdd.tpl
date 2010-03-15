@@ -36,6 +36,7 @@
 	<span>Date:</span><input type="text" name="receipt_rdate" /><br />
 	<span>Public:</span><input type="checkbox" name="receipt_public" value="yes" checked="checked" /><br />
 	<input type="hidden" name="receipt_lineitem" value="{$lineitem.id}" />
+	<input type="hidden" name="key" value="{php}echo secureform_add('receiptAdd', 60){/php}" />
 	<input type="hidden" name="action" value="receiptAdd" />
 	<input type="submit" value="Add" />
 </form>
