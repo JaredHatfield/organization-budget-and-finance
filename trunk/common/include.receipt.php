@@ -70,4 +70,22 @@ function getReceipt($id){
 	return $row;
 }
 
+/*******************************************************************************************************
+ * Insert/Update Queries
+ ******************************************************************************************************/
+
+
+function insertReceipt($name, $description, $company, $amount, $lineitem, $rdate, $public){
+	$query  = "INSERT INTO receipt (`name`, `description`, `company`, `amount`, `lineitem`, `rdate`, `public`) ";
+	$query .= "VALUES('" . $name . "', '" . $description . "', " . intval($company) . ", " . $amount . ", " . intval($lineitem) . ", '" . $rdate . "', " . $public . ");";
+	$result = mysql_query($query);
+}
+
+
+function updateReceipt($id, $name, $description, $company, $amount, $rdate, $public){
+	$query = "UPDATE receipt SET `name` = '" . $name . "', `description` = '" . $description . "', `company` = " . intval($company) . ", `amount` = " . $amount . ", `rdate` = '" . $rdate . "', `public` = " . intval($public) . " WHERE `id` = " . intval($id) . " LIMIT 1;";
+	$result = mysql_query($query);
+}
+
+
 ?>

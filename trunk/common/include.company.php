@@ -45,4 +45,20 @@ function getCompanyInformation($id){
 	return $row;
 }
 
+/*******************************************************************************************************
+ * Insert/Update Queries
+ ******************************************************************************************************/
+
+
+function insertCompany($name){
+	$query = "INSERT INTO company (`name`) VALUES('" . $name . "');";
+	$result = mysql_query($query);
+}
+
+
+function updateCompany($id, $name){
+	$query = "UPDATE company SET `name` = '" . $name . "' WHERE `id` = " . intval($id) . " LIMIT 1;";
+	$result = mysql_query($query);
+}
+
 ?>

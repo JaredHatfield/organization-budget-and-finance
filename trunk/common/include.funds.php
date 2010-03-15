@@ -67,4 +67,20 @@ function getFund($id){
 	return $row;
 }
 
+/*******************************************************************************************************
+ * Insert/Update Queries
+ ******************************************************************************************************/
+
+
+function insertFunds($lineitem, $source, $amount){
+	$query = "INSERT INTO funds (`lineitem`, `source`, `amount`) VALUES(" . intval($lineitem) . ", " . intval($source) . ", " . $amount . ");";
+	$result = mysql_query($query);
+}
+
+
+function updateFunds($id, $source, $amount){
+	$query = "UPDATE funds SET `source` = " . intval($source) . ", `amount` = " . $amount . " WHERE `id` = " . intval($id) . ";";
+	$result = mysql_query($query);
+}
+
 ?>
