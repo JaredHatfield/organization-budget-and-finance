@@ -54,6 +54,12 @@ function process(){
 		insertLineitem($name, $description, $parent, $public);
 		return "./index.php?page=budget&lineid=" . $parent;
 	}
+	else if($_POST['action'] == "lineitemDelete"){
+		$id = mysql_real_escape_string($_POST['lineitem_id']);
+		$lineitem = getLineItem($id);
+		deleteLineitem($id);
+		return "./index.php?page=budget&lineid=" . $lineitem['parent'];
+	}
 	else if($_POST['action'] == "receiptEdit"){
 		$id = mysql_real_escape_string($_POST['receipt_id']);
 		$name = mysql_real_escape_string($_POST['receipt_name']);
@@ -85,13 +91,19 @@ function process(){
 		insertReceipt($name, $description, $company, $amount, $lineitem, $rdate, $public);
 		return "./index.php?page=budget&lineid=" . $lineitem;
 	}
+	else if($_POST['action'] == "receiptDelete"){
+		$id = mysql_real_escape_string($_POST['receipt_id']);
+		$receipt = getReceipt($id);
+		deleteReceipt($id);
+		return "./index.php?page=budget&lineid=" . $receipt['lineitem'];
+	}
 	else if($_POST['action'] == "fundsEdit"){
 		$id = mysql_real_escape_string($_POST['funds_id']);
 		$source = mysql_real_escape_string($_POST['funds_source']);
 		$amount = mysql_real_escape_string($_POST['funds_amount']);
 		updateFunds($id, $source, $amount);
-		$lineiteminfo = getFund($id);
-		return "./index.php?page=budget&lineid=" . $lineiteminfo['lineitem'];
+		$fund = getFund($id);
+		return "./index.php?page=budget&lineid=" . $fund['lineitem'];
 	}
 	else if($_POST['action'] == "fundsAdd"){
 		$source = mysql_real_escape_string($_POST['funds_source']);
@@ -99,6 +111,12 @@ function process(){
 		$lineitem = mysql_real_escape_string($_POST['funds_lineitem']);
 		insertFunds($lineitem, $source, $amount);
 		return "./index.php?page=budget&lineid=" . $lineitem;
+	}
+	else if($_POST['action'] == "fundsDelete"){
+		$id = mysql_real_escape_string($_POST['funds_id']);
+		$fund = getFund($id);
+		deleteFunds($id);
+		return "./index.php?page=budget&lineid=" . $fund['lineitem'];
 	}
 	else if($_POST['action'] == "companyEdit"){
 		$id = mysql_real_escape_string($_POST['company_id']);
@@ -109,6 +127,11 @@ function process(){
 	else if($_POST['action'] == "companyAdd"){
 		$name = mysql_real_escape_string($_POST['company_name']);
 		insertCompany($name);
+		return "./index.php?page=company";
+	}
+	else if($_POST['action'] == "companyDelete"){
+		$id = mysql_real_escape_string($_POST['company_id']);
+		deleteCompany($id);
 		return "./index.php?page=company";
 	}
 	else if($_POST['action'] == "sourceEdit"){
@@ -132,7 +155,15 @@ function process(){
 		insertSource($name, $public);
 		return "./index.php?page=source";
 	}
+	else if($_POST['action'] == "sourceDelete"){
+		$id = mysql_real_escape_string($_POST['source_id']);
+		deleteSource($id);
+		return "./index.php?page=source";
+	}
 	else{
+		echo "<h1>Process not implemented</h1>"; // DEBUG
+		print_r($_POST); // DEBUG
+		exit(); // DEBUG
 		return "./index.php";
 	}
 }

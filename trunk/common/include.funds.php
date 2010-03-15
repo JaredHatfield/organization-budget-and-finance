@@ -83,4 +83,10 @@ function updateFunds($id, $source, $amount){
 	$result = mysql_query($query);
 }
 
+
+function deleteFunds($id){
+	$query = "DELETE FROM funds WHERE `id` = " . intval($id) . " LIMIT 1;";
+	$result = mysql_query($query);
+}
+
 ?>

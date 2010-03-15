@@ -45,6 +45,13 @@ function getSourceInformation($id){
 	return $row;
 }
 
+function getSourceUseCount($id){
+	$query = "SELECT COUNT(*) number FROM funds WHERE `source` = " . intval($id) . ";";
+	$result = mysql_query($query);
+	$row = mysql_fetch_assoc($result);
+	return $row['number'];
+}
+
 /*******************************************************************************************************
  * Insert/Update Queries
  ******************************************************************************************************/
@@ -58,6 +65,12 @@ function insertSource($name, $public){
 
 function updateSource($id, $name, $public){
 	$query = "UPDATE source SET `name` = '" . $name . "', `public` = " . intval($public) . " WHERE `id` = " . intval($id) . " LIMIT 1;";
+	$result = mysql_query($query);
+}
+
+
+function deleteSource($id){
+	$query = "DELETE FROM source WHERE `id` = " . intval($id) . " LIMIT 1;";
 	$result = mysql_query($query);
 }
 

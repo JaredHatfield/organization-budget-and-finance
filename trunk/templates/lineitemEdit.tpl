@@ -28,6 +28,14 @@
 
 {include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.id`" text="Back"}<br /><br />
 
+{if $lineitemCount == 0}
+	<form action="./index.php?page=process" method="post">
+		<input type="hidden" name="lineitem_id" value="{$lineitem.id}" />
+		<input type="hidden" name="action" value="lineitemDelete" />
+		<input type="submit" value="Delete" />
+	</form>
+{/if}
+
 <form action="./index.php?page=process" method="post">
 	<span>Name:</span><input type="text" name="lineitem_name" value="{$lineitem.name}" /><br />
 	<span>Description:</span><input type="text" name="lineitem_description" value="{$lineitem.description}" /><br />

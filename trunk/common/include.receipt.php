@@ -88,4 +88,9 @@ function updateReceipt($id, $name, $description, $company, $amount, $rdate, $pub
 }
 
 
+function deleteReceipt($id){
+	$query = "DELETE FROM receipt WHERE `id` = " . intval($id) . " LIMIT 1;";
+	$result = mysql_query($query);
+}
+
 ?>
