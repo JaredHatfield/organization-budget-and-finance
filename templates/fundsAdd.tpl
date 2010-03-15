@@ -31,6 +31,7 @@
 <form action="./index.php?page=process" method="post">
 	<span>Source:</span>{include file="dropdown.tpl" dd_selection=$source_selections dd_name="funds_source" dd_selected="-1"}<br />
 	<span>Amount:</span><input type="text" name="funds_amount" /><br />
+	<input type="hidden" name="funds_lineitem" value="{$lineitem.id}" />
 	<input type="hidden" name="action" value="fundsAdd" />
 	<input type="submit" value="Update" />
 </form>

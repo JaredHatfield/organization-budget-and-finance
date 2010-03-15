@@ -97,4 +97,21 @@ function getLineItem($id){
 	return $row;
 }
 
+/*******************************************************************************************************
+ * Insert/Update Queries
+ ******************************************************************************************************/
+
+
+function insertLineitem($name, $description, $parent, $public){
+	$query = "INSERT INTO lineitem (`name`, `description`, `parent`, `public`) VALUES('" . $name . "', '" . $description . "', " . intval($parent) . ", " . intval($public) . ");";
+	$result = mysql_query($query);
+}
+
+
+function updateLineitem($id, $name, $description, $public){
+	$query = "UPDATE lineitem SET `name` = '" . $name . "', `description` = '" . $description . "', `public` = " . intval($public) . " WHERE `id` = " . intval($id) . " LIMIT 1;";
+	$result = mysql_query($query);
+}
+
+
 ?>

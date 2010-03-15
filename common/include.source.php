@@ -45,4 +45,20 @@ function getSourceInformation($id){
 	return $row;
 }
 
+/*******************************************************************************************************
+ * Insert/Update Queries
+ ******************************************************************************************************/
+
+
+function insertSource($name, $public){
+	$query = "INSERT INTO source (`name`, `public`) VALUES('" . $name . "', " . intval($public) . ");";
+	$result = mysql_query($query);
+}
+
+
+function updateSource($id, $name, $public){
+	$query = "UPDATE source SET `name` = '" . $name . "', `public` = " . intval($public) . " WHERE `id` = " . intval($id) . " LIMIT 1;";
+	$result = mysql_query($query);
+}
+
 ?>
