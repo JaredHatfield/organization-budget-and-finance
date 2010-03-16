@@ -121,7 +121,7 @@ else if($_GET['page'] == "fundsAdd"){
 	 ******************************************************************************************************/
 	$parent = getPageId('lineid');
 	$smarty->assign("lineitem", getLineItem($parent));
-	$smarty->assign("source_selections", getSourceSelections());
+	$smarty->assign("source_selections", getSourceSelections($parent, 0));
 	$smarty->display('fundsAdd.tpl');
 }
 else if($_GET['page'] == "fundsEdit"){
@@ -133,7 +133,7 @@ else if($_GET['page'] == "fundsEdit"){
 	$smarty->assign("id", $fundsid);
 	$smarty->assign("funds", $fundinfo);
 	$smarty->assign("lineitem", getLineItem($fundinfo['lineitem']));
-	$smarty->assign("source_selections", getSourceSelections());
+	$smarty->assign("source_selections", getSourceSelections($fundinfo['lineitem'], $fundsid));
 	$smarty->display('fundsEdit.tpl');
 }
 else if($_GET['page'] == "company"){
