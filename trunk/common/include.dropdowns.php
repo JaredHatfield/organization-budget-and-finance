@@ -25,9 +25,10 @@
  * @version 1.0
  */
 
-
-function getSourceSelections(){
-	$query = "SELECT `id` value, `name` FROM source s ORDER BY `name`";
+/// Gets the list of valid choices for a source given a specific lineitem but still allows for the specific fundid
+function getSourceSelections($lineitemid, $fundid){
+	$query  = "SELECT `id` value, `name` FROM source s WHERE `id` NOT IN (SELECT `source` FROM funds f ";
+	$query .= "WHERE `lineitem` = " . intval($lineitemid) . " AND id != " . intval($fundid) . ") ORDER BY `name`;";
 	$result = mysql_query($query);
 	$val = array();
 	while($row = mysql_fetch_assoc($result)){
@@ -37,6 +38,7 @@ function getSourceSelections(){
 	return $val;
 }
 
+/// Gets the list of valid choices for a company
 function getCompanySelections(){
 	$query = "SELECT `id` value, `name` FROM company c ORDER BY `name`";
 	$result = mysql_query($query);
