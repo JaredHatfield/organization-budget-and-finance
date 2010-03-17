@@ -21,6 +21,7 @@
  * @link http://code.google.com/p/organization-budget-and-finance/
  * @copyright 2010 Speed School Student Council
  * @author Jared Hatfield
+ * @author Cristina Heisler
  * @package organization-budget-and-finance
  * @version 1.0
  */
