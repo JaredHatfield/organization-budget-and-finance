@@ -22,17 +22,15 @@
  * @package organization-budget-and-finance
  * @version 1.0
  *}
+{config_load file=images.conf}
 <html>
 <head>
 	<title>{$title} - {$pagename}</title>
 	<link rel="stylesheet" type="text/css" href="./static/style.css" />
 </head>
 <body bgcolor="#ffffff">
-<table class="maintable" align="center">
-	<tr class="header">
-		<td>
-			<h1><a href="./index.php">Organization Budget and Finance</a></h1>
-		</td>
-	</tr>
-	<tr>
-		<td>
+<div id="bodywrapper">
+	<div id="headerwrapper">
+		<h1><a href="./index.php">Organization Budget and Finance</a></h1>
+	</div>
+	<div id="mainwrapper">

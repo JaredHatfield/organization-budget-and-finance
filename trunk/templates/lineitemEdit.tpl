@@ -26,7 +26,7 @@
 
 <h2>Edit Line Item</h2>
 
-{include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.id`" text="Back"}<br /><br />
+{include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.parent`" text=#images_back#}<br /><br />
 
 {if $lineitemCount == 0}
 	<form action="./index.php?page=process" method="post">

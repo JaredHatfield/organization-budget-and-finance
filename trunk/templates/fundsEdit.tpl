@@ -26,7 +26,7 @@
 
 <h2>Edit Funds</h2>
 
-{include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.id`" text="Back"}<br /><br />
+{include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.id`" text=#images_back#}<br /><br />
 
 <form action="./index.php?page=process" method="post">
 	<input type="hidden" name="funds_id" value="{$funds.id}" />

@@ -26,19 +26,17 @@
 
 <h2>Sources</h2>
 
-{include file="pagelink.tpl" page="sourceAdd" text="Add a Source"}<br />
-
 <table>
-	<tr>
-		<td></td>
-		<td>Name</td>
-		<td>Public</td>
+	<tr class="tableheaderrow">
+		<td >{include file="pagelink.tpl" page="sourceAdd" text=#images_add#}<br /></td>
+		<td class="colmedium">Source Name</td>
+		<td class="colsmall">Public</td>
 	</tr>
 {section name=mysec loop=$sources}
 	<tr bgcolor="{cycle values="#eeeeee,#dddddd"}" valign=top>
-		<td>{include file="pagelink.tpl" page="sourceEdit" parms="sourceid=`$sources[mysec].id`" text="Edit"}</td>
-		<td>{$sources[mysec].name}</td>
-		<td>{$sources[mysec].public}</td>
+		<td>{include file="pagelink.tpl" page="sourceEdit" parms="sourceid=`$sources[mysec].id`" text=#images_edit#}</td>
+		<td class="colmedium">{$sources[mysec].name}</td>
+		<td class="colsmall">{$sources[mysec].public}</td>
 	</tr>
 {/section}
 </table>

@@ -26,7 +26,7 @@
 
 <h2>Add Funds</h2>
 
-{include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.id`" text="Back"}<br /><br />
+{include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.id`" text=#images_back#}<br /><br />
 
 {if $source_selections|@count > 0}
 <form action="./index.php?page=process" method="post">

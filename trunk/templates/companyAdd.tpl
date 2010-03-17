@@ -26,7 +26,7 @@
 
 <h2>Add Company</h2>
 
-{include file="pagelink.tpl" page="company" text="Back"}<br /><br />
+{include file="pagelink.tpl" page="company" text=#images_back#}<br /><br />
 
 <form action="./index.php?page=process" method="post">
 	<span>Name:</span><input type="text" name="company_name" /><br />
