@@ -90,7 +90,7 @@ CREATE TABLE `lineitem` (
 
 /*!40000 ALTER TABLE `lineitem` DISABLE KEYS */;
 INSERT INTO `lineitem` (`id`,`name`,`description`,`parent`,`public`) VALUES 
- (1,'Root','Root',1,1),
+ (1,'Root','Root',1,1);
 /*!40000 ALTER TABLE `lineitem` ENABLE KEYS */;
 
 
