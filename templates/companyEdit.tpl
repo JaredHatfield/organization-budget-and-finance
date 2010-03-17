@@ -26,7 +26,7 @@
 
 <h2>Edit Company</h2>
 
-{include file="pagelink.tpl" page="company" text="Back"}<br /><br />
+{include file="pagelink.tpl" page="company" text=#images_back#}<br /><br />
 
 {if $companyCount == 0}
 	<form action="./index.php?page=process" method="post">

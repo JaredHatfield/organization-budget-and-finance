@@ -26,7 +26,7 @@
 
 <h2>Edit Source</h2>
 
-{include file="pagelink.tpl" page="source" text="Back"}<br /><br />
+{include file="pagelink.tpl" page="source" text=#images_back#}<br /><br />
 
 {if $sourceCount == 0}
 	<form action="./index.php?page=process" method="post">

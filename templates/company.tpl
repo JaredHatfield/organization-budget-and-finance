@@ -26,17 +26,15 @@
 
 <h2>Companies</h2>
 
-{include file="pagelink.tpl" page="companyAdd" text="Add a Company"}<br />
-
 <table>
-	<tr>
-		<td></td>
-		<td>Name</td>
+	<tr class="tableheaderrow">
+		<td>{include file="pagelink.tpl" page="companyAdd" text=#images_add#}</td>
+		<td class="colmedium">Company Name</td>
 	</tr>
 {section name=mysec loop=$companies}
 	<tr bgcolor="{cycle values="#eeeeee,#dddddd"}" valign=top>
-		<td>{include file="pagelink.tpl" page="companyEdit" parms="companyid=`$companies[mysec].id`" text="Edit"}</td>
-		<td>{$companies[mysec].name}</td>
+		<td>{include file="pagelink.tpl" page="companyEdit" parms="companyid=`$companies[mysec].id`" text=#images_edit#}</td>
+		<td class="colmedium">{$companies[mysec].name}</td>
 	</tr>
 {/section}
 </table>

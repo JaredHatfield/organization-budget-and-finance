@@ -26,7 +26,7 @@
 
 <h2>Add Receipt</h2>
 
-{include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.id`" text="Back"}<br /><br />
+{include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.id`" text=#images_back#}<br /><br />
 
 <form action="./index.php?page=process" method="post">
 	<span>Name:</span><input type="text" name="receipt_name" /><br />
