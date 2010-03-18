@@ -30,7 +30,11 @@
 
 <table>
 	<tr class="tablename">
+		{if $permissions.publicOnly}
 		<td colspan=5>Receipts</td>
+		{else}
+		<td colspan=6>Receipts</td>
+		{/if}
 	</tr>
 	<tr class="tableheaderrow">
 		<td>
@@ -44,6 +48,9 @@
 		<td class="colmedium">Line Item Name</td>
 		<td class="colsmall">Amount</td>
 		<td class="colsmall">Date</td>
+		{if !$permissions.publicOnly}
+		<td class="colsmall">Public</td>
+		{/if}
 	</tr>
 {section name=mysec loop=$receipts}
 	<tr bgcolor="{cycle values="#eeeeee,#dddddd"}" valign=top>
@@ -61,6 +68,9 @@
 		</td>
 		<td class="colsmall">${$receipts[mysec].amount}</td>
 		<td class="colsmall">{$receipts[mysec].rdate}</td>
+		{if !$permissions.publicOnly}
+		<td class="colsmall">{if $receipts[mysec].public eq 1}Yes{/if}</td>
+		{/if}
 	</tr>
 {/section}
 </table>
@@ -69,7 +79,11 @@
 
 <table>
 	<tr class="tablename">
+		{if $permissions.publicOnly}
 		<td colspan=4>Funds</td>
+		{else}
+		<td colspan=5>Funds</td>
+		{/if}
 	</tr>
 	<tr class="tableheaderrow">
 		<td>
@@ -82,6 +96,9 @@
 		<td class="colmedium">Source</td>
 		<td class="colsmall">Available</td>
 		<td class="colsmall">Unallocated</td>
+		{if !$permissions.publicOnly}
+		<td class="colsmall">Public</td>
+		{/if}
 	</tr>
 {section name=mysec loop=$funds}
 	<tr bgcolor="{cycle values="#eeeeee,#dddddd"}">
@@ -95,6 +112,9 @@
 		<td class="colmedium">{$funds[mysec].source_name}</td>
 		<td class="colsmall">${$funds[mysec].amount}</td>
 		<td class="colsmall">${$funds[mysec].amount-$funds[mysec].allocated}</td>
+		{if !$permissions.publicOnly}
+		<td class="colsmall">{if $funds[mysec].public eq 1}Yes{/if}</td>
+		{/if}
 	</tr>
 {/section}
 </table>
@@ -116,6 +136,9 @@
 		<td class="colsmall">Receipts</td>
 		{foreach from=$sources item=entry key=name}<td class="colsmall">{$entry.name}</td>{/foreach}
 		<td class="colsmall">Surplus</td>
+		{if !$permissions.publicOnly}
+		<td class="colsmall">Public</td>
+		{/if}
 	</tr>
 {section name=mysec loop=$children}
 	<tr bgcolor="{cycle values="#eeeeee,#dddddd"}">
@@ -139,6 +162,9 @@
 		<td class="colsmall">${$entry}</td>
 		{/strip}
 		{/foreach}<td class="colsmall">${$children[mysec].difference}</td>
+		{if !$permissions.publicOnly}
+		<td class="colsmall">{if $children[mysec].public eq 1}Yes{/if}</td>
+		{/if}
 	</tr>
 {/section}
 </table>
