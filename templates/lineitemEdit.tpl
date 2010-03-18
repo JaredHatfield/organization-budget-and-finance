@@ -28,6 +28,9 @@
 
 {include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.parent`" text=#images_back#}<br /><br />
 
+{if $permissions.publicOnly && $lineitem.public == 0}{* PUBLIC ONLY *}
+{else}
+
 {if $lineitemCount == 0 && $permissions.lineitemDelete}
 	<form action="./index.php?page=process" method="post">
 		<input type="hidden" name="lineitem_id" value="{$lineitem.id}" />
@@ -41,13 +44,17 @@
 <form action="./index.php?page=process" method="post">
 	<span>Name:</span><input type="text" name="lineitem_name" value="{$lineitem.name}" /><br />
 	<span>Description:</span><input type="text" name="lineitem_description" value="{$lineitem.description}" /><br />
-	<span>Public:</span>
-	{if $lineitem.public == 1}
-		<input type="checkbox" name="lineitem_public" value="yes" checked="checked" />
+	{if $permissions.publicOnly}
+		<input type="hidden" name="lineitem_public" value="yes" />
 	{else}
-		<input type="checkbox" name="lineitem_public" value="yes" />
+		<span>Public:</span>
+		{if $lineitem.public == 1}
+			<input type="checkbox" name="lineitem_public" value="yes" checked="checked" />
+		{else}
+			<input type="checkbox" name="lineitem_public" value="yes" />
+		{/if}
+		<br />
 	{/if}
-	<br />
 	<input type="hidden" name="lineitem_id" value="{$lineitem.id}" />
 	<input type="hidden" name="key" value="{php}echo secureform_add_pk('lineitemEdit', 60, $this->get_template_vars('id')){/php}" />
 	<input type="hidden" name="action" value="lineitemEdit" />
@@ -55,5 +62,6 @@
 </form>
 {/if}
 
+{/if}
 
 {include file="footer.tpl"}

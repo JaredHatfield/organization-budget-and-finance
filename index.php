@@ -40,7 +40,9 @@ $smarty->assign("pagename", "");
 
 
 // Authentication and permission logic
-$smarty->assign("permissions", getUserPermissions());
+// TODO: Authenticate the user
+$permissions = getUserPermissions();
+$smarty->assign("permissions", $permissions);
 
 // Process the page
 if(!isset($_GET['page'])){
@@ -74,10 +76,10 @@ else if($_GET['page'] == "budget"){
 	}
 	
 	$smarty->assign("lineitem", getLineItem($parent));
-	$smarty->assign("receipts", getReceiptForLineItem($parent));
-	$smarty->assign("funds", getFundsForLineItem($parent));
-	$smarty->assign("sources",getSourcesForLineItems($parent));
-	$smarty->assign("children", getCompleteLineItemChildren($parent));
+	$smarty->assign("receipts", getReceiptForLineItem($parent, $permissions['publicOnly']));
+	$smarty->assign("funds", getFundsForLineItem($parent, $permissions['publicOnly']));
+	$smarty->assign("sources",getSourcesForLineItems($parent, $permissions['publicOnly']));
+	$smarty->assign("children", getCompleteLineItemChildren($parent, $permissions['publicOnly']));
 	$smarty->display('budget.tpl');
 }
 else if($_GET['page'] == "lineitemAdd"){
@@ -125,7 +127,7 @@ else if($_GET['page'] == "fundsAdd"){
 	 ******************************************************************************************************/
 	$parent = getPageId('lineid');
 	$smarty->assign("lineitem", getLineItem($parent));
-	$smarty->assign("source_selections", getSourceSelections($parent, 0));
+	$smarty->assign("source_selections", getSourceSelections($parent, 0, $permissions['publicOnly']));
 	$smarty->display('fundsAdd.tpl');
 }
 else if($_GET['page'] == "fundsEdit"){
@@ -134,10 +136,12 @@ else if($_GET['page'] == "fundsEdit"){
 	 ******************************************************************************************************/
 	$fundsid = getPageId('fundsid');
 	$fundinfo = getFund($fundsid);
+	$sourceinfo = getSourceInformation($fundinfo['source']);
 	$smarty->assign("id", $fundsid);
 	$smarty->assign("funds", $fundinfo);
+	$smarty->assign("source", $sourceinfo);
 	$smarty->assign("lineitem", getLineItem($fundinfo['lineitem']));
-	$smarty->assign("source_selections", getSourceSelections($fundinfo['lineitem'], $fundsid));
+	$smarty->assign("source_selections", getSourceSelections($fundinfo['lineitem'], $fundsid, $permissions['publicOnly']));
 	$smarty->display('fundsEdit.tpl');
 }
 else if($_GET['page'] == "company"){
@@ -167,7 +171,7 @@ else if($_GET['page'] == "source"){
 	/*******************************************************************************************************
 	 * source page
 	 ******************************************************************************************************/
-	$smarty->assign("sources", getAllSources());
+	$smarty->assign("sources", getAllSources($permissions['publicOnly']));
 	$smarty->display('source.tpl');
 }
 else if($_GET['page'] == "sourceAdd"){

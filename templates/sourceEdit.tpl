@@ -28,6 +28,9 @@
 
 {include file="pagelink.tpl" page="source" text=#images_back#}<br /><br />
 
+{if $permissions.publicOnly && $source.public == 0}{* PUBLIC ONLY *}
+{else}
+
 {if $sourceCount == 0 && $permissions.sourceDelete}
 	<form action="./index.php?page=process" method="post">
 		<input type="hidden" name="source_id" value="{$source.id}" />
@@ -40,18 +43,26 @@
 {if $permissions.sourceEdit}
 <form action="./index.php?page=process" method="post">
 	<span>Name:</span><input type="text" name="source_name" value="{$source.name}" /><br />
-	<span>Public:</span>
-	{if $source.public == 1}
-		<input type="checkbox" name="source_public" value="yes" checked="checked" />
+	{if $permissions.publicOnly}
+		{if $source.public == 1}
+			<input type="hidden" name="source_public" value="yes" />
+		{/if}
 	{else}
-		<input type="checkbox" name="source_public" value="yes" />
+		<span>Public:</span>
+		{if $source.public == 1}
+			<input type="checkbox" name="source_public" value="yes" checked="checked" />
+		{else}
+			<input type="checkbox" name="source_public" value="yes" />
+		{/if}
+		<br />
 	{/if}
-	<br />
 	<input type="hidden" name="source_id" value="{$source.id}" />
 	<input type="hidden" name="key" value="{php}echo secureform_add_pk('sourceEdit', 60, $this->get_template_vars('id')){/php}" />
 	<input type="hidden" name="action" value="sourceEdit" />
 	<input type="submit" value="Update" />
 </form>
 {/if}
+
+{/if}{* PUBLIC ONLY *}
 
 {include file="footer.tpl"}

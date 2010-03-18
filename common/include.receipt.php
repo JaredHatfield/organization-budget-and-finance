@@ -26,9 +26,13 @@
  */
 
 /// Returns all of the information for the receipts for a specified lineitem
-function getReceiptForLineItem($lineitem){
+function getReceiptForLineItem($lineitem, $publicOnly){
 	$query  = "SELECT r.`id`, r.`lineitem`, r.`name`, r.`description`, c.`id` company_id, c.`name` company_name, r.`amount`, r.`rdate`, r.`public` ";
-	$query .= "FROM receipt r JOIN company c ON r.company = c.id WHERE `lineitem` = " . intval($lineitem) . ";";
+	$query .= "FROM receipt r JOIN company c ON r.company = c.id WHERE `lineitem` = " . intval($lineitem) . " ";
+	if($publicOnly){
+		$query .= "AND r.`public` = 1 ";
+	}
+	$query .= ";";
 	$result = mysql_query($query);
 	$val = array();
 	while($row = mysql_fetch_assoc($result)){
@@ -39,9 +43,13 @@ function getReceiptForLineItem($lineitem){
 }
 
 /// Returns the total amount of receipts for a specified lineitem
-function getReceiptTotalForLineItem($lineitem){
+function getReceiptTotalForLineItem($lineitem, $publicOnly){
 	$total = 0;
-	$query = "SELECT `amount` FROM receipt r WHERE `lineitem` = " . intval($lineitem) . ";";
+	$query = "SELECT `amount` FROM receipt r WHERE `lineitem` = " . intval($lineitem) . " ";
+	if($publicOnly){
+		$query .= "AND r.`public` = 1 ";
+	}
+	$query .= ";";
 	$result = mysql_query($query);
 	$val = array();
 	while($row = mysql_fetch_assoc($result)){
@@ -52,11 +60,11 @@ function getReceiptTotalForLineItem($lineitem){
 }
 
 /// Returns the total amount of receipts for a specified lineitems and its children
-function getReceiptTotalForLineItemAndChildren($lineitem){
-	$total = getReceiptTotalForLineItem($lineitem);
-	$children = getLineItemChildrenIds($lineitem);
+function getReceiptTotalForLineItemAndChildren($lineitem, $publicOnly){
+	$total = getReceiptTotalForLineItem($lineitem, $publicOnly);
+	$children = getLineItemChildrenIds($lineitem, $publicOnly);
 	for($i = 0; $i < sizeof($children); $i++){
-		$total += getReceiptTotalForLineItemAndChildren($children[$i]);
+		$total += getReceiptTotalForLineItemAndChildren($children[$i], $publicOnly);
 	}
 	
 	return $total;
