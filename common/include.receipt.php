@@ -78,6 +78,17 @@ function getReceipt($id){
 	return $row;
 }
 
+/// Checks to see if the specified receipt is not public.  Recursively checks the lineitem parents.
+function isReceiptPrivate($id){
+	$receipt = getReceipt($id);
+	if($receipt['public'] == 0){
+		return true;
+	}
+	else{
+		return isLineItemPrivate($receipt['lineitem']);
+	}
+}
+
 /*******************************************************************************************************
  * Insert/Update Queries
  ******************************************************************************************************/

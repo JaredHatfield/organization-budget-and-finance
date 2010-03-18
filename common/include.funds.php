@@ -80,6 +80,18 @@ function getFund($id){
 	return $row;
 }
 
+/// Checks to see if the specified fund is not public.  Recursively checks the lineitem parents.
+function isFundPrivate($id){
+	$fund = getFund($id);
+	$source = getSourceInformation($fund['source']);
+	if($source['public'] == 0){
+		return true;
+	}
+	else{
+		return isLineItemPrivate($fund['lineitem']);
+	}
+}
+
 /*******************************************************************************************************
  * Insert/Update Queries
  ******************************************************************************************************/

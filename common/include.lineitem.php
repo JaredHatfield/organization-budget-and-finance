@@ -124,6 +124,20 @@ function getLineItemUseCount($id){
 	return $total;
 }
 
+/// Checks to see if the specified lineitem is not public.  Recursively checks the parents.
+function isLineItemPrivate($id){
+	$line = getLineItem($id);
+	if($line['public'] == 0){
+		return true;
+	}
+	else if($line['parent'] != 1){
+		return isLineItemPrivate($line['parent']);
+	}
+	else{
+		return false;
+	}
+}
+
 /*******************************************************************************************************
  * Insert/Update Queries
  ******************************************************************************************************/
