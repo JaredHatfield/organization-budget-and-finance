@@ -24,8 +24,6 @@
  *}
 {include file="header.tpl" title="Organization Budget and Finance"}
 
-<h2>Sources</h2>
-
 <table>
 	<tr class="tableheaderrow">
 		<td >

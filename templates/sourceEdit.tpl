@@ -24,8 +24,6 @@
  *}
 {include file="header.tpl" title="Organization Budget and Finance"}
 
-<h2>Edit Source</h2>
-
 {include file="pagelink.tpl" page="source" text=#images_back#}<br /><br />
 
 {if $permissions.publicOnly && $source.public == 0}{* PUBLIC ONLY *}

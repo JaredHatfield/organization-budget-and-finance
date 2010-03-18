@@ -34,3 +34,9 @@
 		<h1><a href="./index.php">Organization Budget and Finance</a></h1>
 	</div>
 	<div id="mainwrapper">
+	<h2>
+	{foreach from=$nav item=entry key=name}
+		> {include file="pagelink.tpl" page="`$entry.page`" parms="`$entry.parms`" text="`$entry.text`"}
+	{/foreach}
+	</h2>
+		

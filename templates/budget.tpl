@@ -24,8 +24,6 @@
  *}
 {include file="header.tpl" title="Organization Budget and Finance"}
 
-<h2>Budget</h2>
-
 {if $lineitem.id > 1}
 {include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.parent`" text=#images_back#}
 {$lineitem.name} ({$lineitem.description})<br />

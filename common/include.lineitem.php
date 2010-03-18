@@ -138,6 +138,27 @@ function isLineItemPrivate($id){
 	}
 }
 
+/// Gets an array of the navigation information for a specific lineitem
+function getNavigationForLineItem($lineitemid){
+	$line = getLineItem($lineitemid);
+	$nav = Array();
+	
+	// We don't want to ever list the root
+	if($line['id'] == 1){
+		return $nav;
+	}
+	
+	// Add this to the list
+	$nav[] = Array("page" => "budget", "parms" => "lineid=".$line['id'], "text" => $line['name']);
+	
+	// Add all of the parents
+	if($line['parent'] != 1){
+		$nav = array_merge(getNavigationForLineItem($line['parent']), $nav);
+	}
+	
+	return $nav;
+}
+
 /*******************************************************************************************************
  * Insert/Update Queries
  ******************************************************************************************************/

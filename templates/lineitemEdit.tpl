@@ -24,8 +24,6 @@
  *}
  {include file="header.tpl" title="Organization Budget and Finance"}
 
-<h2>Edit Line Item</h2>
-
 {include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.parent`" text=#images_back#}<br /><br />
 
 {if $permissions.publicOnly && $lineitem.public == 0}{* PUBLIC ONLY *}

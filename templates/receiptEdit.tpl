@@ -24,8 +24,6 @@
  *}
 {include file="header.tpl" title="Organization Budget and Finance"}
 
-<h2>Edit Receipt</h2>
-
 {include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.id`" text=#images_back#}<br /><br />
 
 {if $permissions.publicOnly && $receipt.public == 0}{* PUBLIC ONLY *}
