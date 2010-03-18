@@ -50,11 +50,25 @@ function getSourceInformation($id){
 	return $row;
 }
 
+/// Gets the number of times this source was used
 function getSourceUseCount($id){
 	$query = "SELECT COUNT(*) number FROM funds WHERE `source` = " . intval($id) . ";";
 	$result = mysql_query($query);
 	$row = mysql_fetch_assoc($result);
 	return $row['number'];
+}
+
+/// Determines if the specified number is a valid source id number
+function isSource($id){
+	$query = "SELECT COUNT(*) number FROM source s WHERE `id` = " . intval($id) . ";";
+	$result = mysql_query($query);
+	$row = mysql_fetch_assoc($result);
+	if($row['number'] == "1"){
+		return true;
+	}
+	else{
+		return false;
+	}
 }
 
 /*******************************************************************************************************

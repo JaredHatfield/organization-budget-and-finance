@@ -69,6 +69,7 @@ else if($_GET['page'] == "budget"){
 	 * Budget page
 	 ******************************************************************************************************/
 	$parent = getPageId('lineid');
+	
 	if($parent == -1 && isset($_GET['lineid'])){
 		// An invalid page was found, so we want to redirect to the main page
 		$smarty->assign("url","./index.php?page=budget");
@@ -80,10 +81,9 @@ else if($_GET['page'] == "budget"){
 		$parent = 1;
 	}
 	
-	if($permissions['publicOnly'] && isLineItemPrivate($parent)){
-		$smarty->assign("message", "Permission Denied");
-		$smarty->display('error.tpl');
-		exit();
+	// Make sure the page exists and the user as permission to see it
+	if(!isLineItem($parent) || ($permissions['publicOnly'] && isLineItemPrivate($parent))){
+		pageNotFound();
 	}
 	
 	$smarty->assign("lineitem", getLineItem($parent));
@@ -102,10 +102,9 @@ else if($_GET['page'] == "lineitemAdd"){
 	 ******************************************************************************************************/
 	$parent = getPageId('lineid');
 	
-	if($permissions['publicOnly'] && isLineItemPrivate($parent)){
-		$smarty->assign("message", "Permission Denied");
-		$smarty->display('error.tpl');
-		exit();
+	// Make sure the page exists and the user as permission to see it
+	if(!isLineItem($parent) || ($permissions['publicOnly'] && isLineItemPrivate($parent))){
+		pageNotFound();
 	}
 	
 	$smarty->assign("lineitemParent", getLineItem($parent));
@@ -121,10 +120,9 @@ else if($_GET['page'] == "lineitemEdit"){
 	 ******************************************************************************************************/
 	$lineitemid = getPageId('lineid');
 	
-	if($permissions['publicOnly'] && isLineItemPrivate($lineitemid)){
-		$smarty->assign("message", "Permission Denied");
-		$smarty->display('error.tpl');
-		exit();
+	// Make sure the page exists and the user as permission to see it
+	if(!isLineItem($lineitemid) || ($permissions['publicOnly'] && isLineItemPrivate($lineitemid))){
+		pageNotFound();
 	}
 	
 	$lineiteminfo = getLineItem($lineitemid);
@@ -143,10 +141,9 @@ else if($_GET['page'] == "receiptAdd"){
 	 ******************************************************************************************************/
 	$parent = getPageId('lineid');
 	
-	if($permissions['publicOnly'] && isLineItemPrivate($parent)){
-		$smarty->assign("message", "Permission Denied");
-		$smarty->display('error.tpl');
-		exit();
+	// Make sure the page exists and the user as permission to see it
+	if(!isLineItem($parent) || ($permissions['publicOnly'] && isLineItemPrivate($parent))){
+		pageNotFound();
 	}
 	
 	$smarty->assign("lineitem", getLineItem($parent));
@@ -162,14 +159,13 @@ else if($_GET['page'] == "receiptEdit"){
 	 * Edit receipt page
 	 ******************************************************************************************************/
 	$receiptid = getPageId('receiptid');
-	$receiptinfo = getReceipt($receiptid);
 	
-	if($permissions['publicOnly'] && isReceiptPrivate($receiptid)){
-		$smarty->assign("message", "Permission Denied");
-		$smarty->display('error.tpl');
-		exit();
+	// Make sure the page exists and the user as permission to see it
+	if(!isReceipt($receiptid) || ($permissions['publicOnly'] && isReceiptPrivate($receiptid))){
+		pageNotFound();
 	}
 	
+	$receiptinfo = getReceipt($receiptid);
 	$smarty->assign("id", $receiptid);
 	$smarty->assign("receipt",$receiptinfo);
 	$smarty->assign("lineitem", getLineItem($receiptinfo['lineitem']));
@@ -186,10 +182,9 @@ else if($_GET['page'] == "fundsAdd"){
 	 ******************************************************************************************************/
 	$parent = getPageId('lineid');
 	
-	if($permissions['publicOnly'] && isLineItemPrivate($parent)){
-		$smarty->assign("message", "Permission Denied");
-		$smarty->display('error.tpl');
-		exit();
+	// Make sure the page exists and the user as permission to see it
+	if(!isLineItem($parent) || ($permissions['publicOnly'] && isLineItemPrivate($parent))){
+		pageNotFound();
 	}
 	
 	$smarty->assign("lineitem", getLineItem($parent));
@@ -205,14 +200,13 @@ else if($_GET['page'] == "fundsEdit"){
 	 * Edit funds page
 	 ******************************************************************************************************/
 	$fundsid = getPageId('fundsid');
-	$fundinfo = getFund($fundsid);
 	
-	if($permissions['publicOnly'] && isFundPrivate($fundsid)){
-		$smarty->assign("message", "Permission Denied");
-		$smarty->display('error.tpl');
-		exit();
+	// Make sure the page exists and the user as permission to see it
+	if(!isFund($fundsid) || ($permissions['publicOnly'] && isFundPrivate($fundsid))){
+		pageNotFound();
 	}
 	
+	$fundinfo = getFund($fundsid);
 	$sourceinfo = getSourceInformation($fundinfo['source']);
 	$smarty->assign("id", $fundsid);
 	$smarty->assign("funds", $fundinfo);
@@ -249,6 +243,12 @@ else if($_GET['page'] == "companyEdit"){
 	 * Edit company page
 	 ******************************************************************************************************/
 	$companyid = getPageId('companyid');
+	
+	// Make sure the page exists and the user as permission to see it
+	if(!isCompany($companyid)){
+		pageNotFound();
+	}
+	
 	$companyinfo = getCompanyInformation($companyid);
 	$smarty->assign("id", $companyid);
 	$smarty->assign("company", $companyinfo);
@@ -281,6 +281,12 @@ else if($_GET['page'] == "sourceEdit"){
 	 * Edit source page
 	 ******************************************************************************************************/
 	$sourceid = getPageId('sourceid');
+	
+	// Make sure the page exists and the user as permission to see it
+	if(!isSource($sourceid)){
+		pageNotFound();
+	}
+	
 	$sourceinfo = getSourceInformation($sourceid);
 	$smarty->assign("id", $sourceid);
 	$smarty->assign("source", $sourceinfo);

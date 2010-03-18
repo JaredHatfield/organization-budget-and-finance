@@ -51,4 +51,9 @@ function getPageId($field){
 	return $id;
 }
 
+function pageNotFound(){
+	header("HTTP/1.0 404 Not Found");
+	exit;
+}
+
 ?>

@@ -89,6 +89,19 @@ function isReceiptPrivate($id){
 	}
 }
 
+/// Determines if the specified number is a valid receipt id number
+function isReceipt($id){
+	$query = "SELECT COUNT(*) number FROM receipt r WHERE `id` = " . intval($id) . ";";
+	$result = mysql_query($query);
+	$row = mysql_fetch_assoc($result);
+	if($row['number'] == "1"){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
 /*******************************************************************************************************
  * Insert/Update Queries
  ******************************************************************************************************/
