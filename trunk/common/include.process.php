@@ -48,8 +48,9 @@ function process(){
 			return "./index.php?page=error";
 		}
 		
+		$lineitem = getLineItem($id);
 		updateLineitem($id, $name, $description, $public);
-		return "./index.php?page=budget&lineid=" . $id;
+		return "./index.php?page=budget&lineid=" . $lineitem['parent'];
 	}
 	else if($_POST['action'] == "lineitemAdd"){
 		$parent = mysql_real_escape_string($_POST['lineitem_parent']);
