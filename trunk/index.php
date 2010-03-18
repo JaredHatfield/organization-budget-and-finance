@@ -75,6 +75,12 @@ else if($_GET['page'] == "budget"){
 		$parent = 1;
 	}
 	
+	if($permissions['publicOnly'] && isLineItemPrivate($parent)){
+		$smarty->assign("message", "Permission Denied");
+		$smarty->display('error.tpl');
+		exit();
+	}
+	
 	$smarty->assign("lineitem", getLineItem($parent));
 	$smarty->assign("receipts", getReceiptForLineItem($parent, $permissions['publicOnly']));
 	$smarty->assign("funds", getFundsForLineItem($parent, $permissions['publicOnly']));
@@ -87,6 +93,13 @@ else if($_GET['page'] == "lineitemAdd"){
 	 * Add lineitem page
 	 ******************************************************************************************************/
 	$parent = getPageId('lineid');
+	
+	if($permissions['publicOnly'] && isLineItemPrivate($parent)){
+		$smarty->assign("message", "Permission Denied");
+		$smarty->display('error.tpl');
+		exit();
+	}
+	
 	$smarty->assign("lineitemParent", getLineItem($parent));
 	$smarty->display('lineitemAdd.tpl');
 }
@@ -95,6 +108,13 @@ else if($_GET['page'] == "lineitemEdit"){
 	 * Edit lineitem page
 	 ******************************************************************************************************/
 	$lineitemid = getPageId('lineid');
+	
+	if($permissions['publicOnly'] && isLineItemPrivate($lineitemid)){
+		$smarty->assign("message", "Permission Denied");
+		$smarty->display('error.tpl');
+		exit();
+	}
+	
 	$smarty->assign("id", $lineitemid);
 	$smarty->assign("lineitem", getLineItem($lineitemid));
 	$smarty->assign("lineitemCount", getLineItemUseCount($lineitemid));
@@ -105,6 +125,13 @@ else if($_GET['page'] == "receiptAdd"){
 	 * Add receipt page
 	 ******************************************************************************************************/
 	$parent = getPageId('lineid');
+	
+	if($permissions['publicOnly'] && isLineItemPrivate($parent)){
+		$smarty->assign("message", "Permission Denied");
+		$smarty->display('error.tpl');
+		exit();
+	}
+	
 	$smarty->assign("lineitem", getLineItem($parent));
 	$smarty->assign("company_selections", getCompanySelections());
 	$smarty->display('receiptAdd.tpl');
@@ -115,6 +142,13 @@ else if($_GET['page'] == "receiptEdit"){
 	 ******************************************************************************************************/
 	$receiptid = getPageId('receiptid');
 	$receiptinfo = getReceipt($receiptid);
+	
+	if($permissions['publicOnly'] && isReceiptPrivate($receiptid)){
+		$smarty->assign("message", "Permission Denied");
+		$smarty->display('error.tpl');
+		exit();
+	}
+	
 	$smarty->assign("id", $receiptid);
 	$smarty->assign("receipt",$receiptinfo);
 	$smarty->assign("lineitem", getLineItem($receiptinfo['lineitem']));
@@ -126,6 +160,13 @@ else if($_GET['page'] == "fundsAdd"){
 	 * Add funds page
 	 ******************************************************************************************************/
 	$parent = getPageId('lineid');
+	
+	if($permissions['publicOnly'] && isLineItemPrivate($parent)){
+		$smarty->assign("message", "Permission Denied");
+		$smarty->display('error.tpl');
+		exit();
+	}
+	
 	$smarty->assign("lineitem", getLineItem($parent));
 	$smarty->assign("source_selections", getSourceSelections($parent, 0, $permissions['publicOnly']));
 	$smarty->display('fundsAdd.tpl');
@@ -136,6 +177,13 @@ else if($_GET['page'] == "fundsEdit"){
 	 ******************************************************************************************************/
 	$fundsid = getPageId('fundsid');
 	$fundinfo = getFund($fundsid);
+	
+	if($permissions['publicOnly'] && isFundPrivate($fundsid)){
+		$smarty->assign("message", "Permission Denied");
+		$smarty->display('error.tpl');
+		exit();
+	}
+	
 	$sourceinfo = getSourceInformation($fundinfo['source']);
 	$smarty->assign("id", $fundsid);
 	$smarty->assign("funds", $fundinfo);
