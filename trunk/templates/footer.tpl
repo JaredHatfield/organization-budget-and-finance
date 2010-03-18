@@ -24,9 +24,8 @@
  *}
 	</div>
 	<div id="footerwrapper">
-		<p style="text-align: center; font-size:10px">
-			Powered By: <a href="http://code.google.com/p/organization-budget-and-finance/">organization-budget-and-finance</a>
-		</p>
+		<p>The page was generated with {$database->getQueryCount()} queries.</p>
+		<p>Powered By: <a href="http://code.google.com/p/organization-budget-and-finance/">organization-budget-and-finance</a></p>
 	</div>
 </div>
 </body>

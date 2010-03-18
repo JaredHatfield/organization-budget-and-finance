@@ -27,6 +27,7 @@
 
 /// Gets all of the funding sources for a specific lineitem
 function getFundsForLineItem($lineitem, $publicOnly){
+	global $database;
 	$query  = "SELECT f.`id`, f.`lineitem`, f.`source`, f.`amount`, s.`id` source_id, s.`name` source_name, s.`public`, ";
 	$query .= "IFNULL((SELECT sum(f2.amount) allocated FROM lineitem l2 JOIN funds f2 ON l2.id = f2.lineitem WHERE l2.`parent` = f.`lineitem` AND f2.source = f.source),0) allocated ";
 	$query .= "FROM funds f JOIN source s ON f.source = s.id WHERE f.`lineitem` = " . intval($lineitem) . " ";
@@ -34,7 +35,7 @@ function getFundsForLineItem($lineitem, $publicOnly){
 		$query .= "AND s.`public` = 1 ";
 	}
 	$query .= ";";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 	$val = array();
 	while($row = mysql_fetch_assoc($result)){
 		$val[] = $row;
@@ -44,26 +45,28 @@ function getFundsForLineItem($lineitem, $publicOnly){
 }
 
 function getFundsFor($lineitem, $source, $publicOnly){
+	global $database;
 	$query = "SELECT IFNULL(SUM(`amount`),0) amount FROM funds f JOIN source s ON f.source = s.id WHERE `lineitem` = " . intval($lineitem) . " ";
 	$query .= "AND f.`source` = " . intval($source) . " ";
 	if($publicOnly){
 		$query .= "AND s.`public` = 1 ";
 	}
 	$query .= ";";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 	$row = mysql_fetch_assoc($result);
 	return $row['amount'];
 }
 
 /// Gets all of the sources that are used by lineitems under a parent
 function getSourcesForLineItems($parent, $publicOnly){
+	global $database;
 	$query = "SELECT DISTINCT(f.source) id, s.name FROM lineitem l JOIN funds f ON l.id = f.lineitem ";
 	$query .= "JOIN source s ON f.source = s.id WHERE `parent` = " . intval($parent) . " ";
 	if($publicOnly){
 		$query .= "AND s.`public` = 1 ";
 	}
 	$query .= ";";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 	$val = array();
 	while($row = mysql_fetch_assoc($result)){
 		$val[] = $row;
@@ -74,14 +77,16 @@ function getSourcesForLineItems($parent, $publicOnly){
 
 /// Get the information for a specific fund
 function getFund($id){
+	global $database;
 	$query = "SELECT `id`, `lineitem`, `source`, `amount` FROM funds f WHERE `id` = " . intval($id) . ";";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 	$row = mysql_fetch_assoc($result);
 	return $row;
 }
 
 /// Checks to see if the specified fund is not public.  Recursively checks the lineitem parents.
 function isFundPrivate($id){
+	global $database;
 	$fund = getFund($id);
 	$source = getSourceInformation($fund['source']);
 	if($source['public'] == 0){
@@ -94,8 +99,9 @@ function isFundPrivate($id){
 
 /// Determines if the specified number is a valid funds id number
 function isFund($id){
+	global $database;
 	$query = "SELECT COUNT(*) number FROM funds f WHERE `id` = " . intval($id) . ";";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 	$row = mysql_fetch_assoc($result);
 	if($row['number'] == "1"){
 		return true;
@@ -111,20 +117,23 @@ function isFund($id){
 
 
 function insertFunds($lineitem, $source, $amount){
+	global $database;
 	$query = "INSERT INTO funds (`lineitem`, `source`, `amount`) VALUES(" . intval($lineitem) . ", " . intval($source) . ", " . $amount . ");";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 }
 
 
 function updateFunds($id, $source, $amount){
+	global $database;
 	$query = "UPDATE funds SET `source` = " . intval($source) . ", `amount` = " . $amount . " WHERE `id` = " . intval($id) . ";";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 }
 
 
 function deleteFunds($id){
+	global $database;
 	$query = "DELETE FROM funds WHERE `id` = " . intval($id) . " LIMIT 1;";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 }
 
 ?>

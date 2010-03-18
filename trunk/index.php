@@ -49,6 +49,9 @@ $smarty->assign("permissions", $permissions);
 $nav[] = Array("page" => "home", "parms" => "", "text" => "Home");
 $smarty->assign_by_ref("nav",$nav);
 
+// Query information
+$smarty->assign_by_ref("database", $database);
+
 // Process the page
 if(!isset($_GET['page']) || $_GET['page'] == "home"){
 	/*******************************************************************************************************
