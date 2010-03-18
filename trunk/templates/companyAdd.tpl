@@ -24,8 +24,6 @@
  *}
 {include file="header.tpl" title="Organization Budget and Finance"}
 
-<h2>Add Company</h2>
-
 {include file="pagelink.tpl" page="company" text=#images_back#}<br />
 
 {if $permissions.companyAdd}

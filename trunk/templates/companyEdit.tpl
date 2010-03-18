@@ -24,11 +24,7 @@
  *}
 {include file="header.tpl" title="Organization Budget and Finance"}
 
-<h2>Edit Company</h2>
-
 {include file="pagelink.tpl" page="company" text=#images_back#}<br /><br />
-
-
 
 {if $companyCount == 0 && $permissions.companyDelete}
 	<form action="./index.php?page=process" method="post">
