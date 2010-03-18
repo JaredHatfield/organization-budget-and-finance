@@ -28,7 +28,7 @@
 
 {include file="pagelink.tpl" page="source" text=#images_back#}<br /><br />
 
-{if $sourceCount == 0}
+{if $sourceCount == 0 && $permissions.sourceDelete}
 	<form action="./index.php?page=process" method="post">
 		<input type="hidden" name="source_id" value="{$source.id}" />
 		<input type="hidden" name="key" value="{php}echo secureform_add_pk('sourceDelete', 60, $this->get_template_vars('id')){/php}" />
@@ -37,6 +37,7 @@
 	</form>
 {/if}
 
+{if $permissions.sourceEdit}
 <form action="./index.php?page=process" method="post">
 	<span>Name:</span><input type="text" name="source_name" value="{$source.name}" /><br />
 	<span>Public:</span>
@@ -51,5 +52,6 @@
 	<input type="hidden" name="action" value="sourceEdit" />
 	<input type="submit" value="Update" />
 </form>
+{/if}
 
 {include file="footer.tpl"}

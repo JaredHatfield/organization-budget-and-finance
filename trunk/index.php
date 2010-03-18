@@ -39,6 +39,9 @@ $smarty->compile_check = true;
 $smarty->assign("pagename", "");
 
 
+// Authentication and permission logic
+$smarty->assign("permissions", getUserPermissions());
+
 // Process the page
 if(!isset($_GET['page'])){
 	/*******************************************************************************************************

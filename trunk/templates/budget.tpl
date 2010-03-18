@@ -35,7 +35,13 @@
 		<td colspan=5>Receipts</td>
 	</tr>
 	<tr class="tableheaderrow">
-		<td>{include file="pagelink.tpl" page="receiptAdd" parms="lineid=`$lineitem.id`" text=#images_add#}</td>
+		<td>
+			{if $permissions.receiptAdd}
+				{include file="pagelink.tpl" page="receiptAdd" parms="lineid=`$lineitem.id`" text=#images_add#}
+			{else}
+				{#images_blank#}
+			{/if}
+		</td>
 		<td class="colmedium">Company Name</td>
 		<td class="colmedium">Line Item Name</td>
 		<td class="colsmall">Amount</td>
@@ -43,7 +49,13 @@
 	</tr>
 {section name=mysec loop=$receipts}
 	<tr bgcolor="{cycle values="#eeeeee,#dddddd"}" valign=top>
-		<td>{include file="pagelink.tpl" page="receiptEdit" parms="receiptid=`$receipts[mysec].id`" text=#images_edit#}</td>
+		<td>
+			{if $permissions.receiptEdit || $permissions.receiptDelete}
+				{include file="pagelink.tpl" page="receiptEdit" parms="receiptid=`$receipts[mysec].id`" text=#images_edit#}
+			{else}
+				{#images_blank#}
+			{/if}
+		</td>
 		<td class="colmedium">{$receipts[mysec].company_name}</td>
 		<td class="colmedium">
 			{$receipts[mysec].name}<br />
@@ -62,14 +74,26 @@
 		<td colspan=4>Funds</td>
 	</tr>
 	<tr class="tableheaderrow">
-		<td>{include file="pagelink.tpl" page="fundsAdd" parms="lineid=`$lineitem.id`" text=#images_add#}</td>
+		<td>
+			{if $permissions.fundsAdd}
+				{include file="pagelink.tpl" page="fundsAdd" parms="lineid=`$lineitem.id`" text=#images_add#}
+			{else}
+				{#images_blank#}
+			{/if}
+		</td>
 		<td class="colmedium">Source</td>
 		<td class="colsmall">Available</td>
 		<td class="colsmall">Unallocated</td>
 	</tr>
 {section name=mysec loop=$funds}
 	<tr bgcolor="{cycle values="#eeeeee,#dddddd"}">
-		<td>{include file="pagelink.tpl" page="fundsEdit" parms="fundsid=`$funds[mysec].id`" text=#images_edit#}</td>
+		<td>
+			{if $permissions.fundsEdit || $permissions.fundsDelete}
+				{include file="pagelink.tpl" page="fundsEdit" parms="fundsid=`$funds[mysec].id`" text=#images_edit#}
+			{else}
+				{#images_blank#}
+			{/if}
+		</td>
 		<td class="colmedium">{$funds[mysec].source_name}</td>
 		<td class="colsmall">${$funds[mysec].amount}</td>
 		<td class="colsmall">${$funds[mysec].amount-$funds[mysec].allocated}</td>
@@ -82,19 +106,26 @@
 <h3>Line Items</h3>
 <table>
 	<tr class="tableheaderrow">
-		<td>{include file="pagelink.tpl" page="lineitemAdd" parms="lineid=`$lineitem.id`" text=#images_add#}</td>
+		<td>
+			{if $permissions.lineitemAdd}
+				{include file="pagelink.tpl" page="lineitemAdd" parms="lineid=`$lineitem.id`" text=#images_add#}
+			{else}
+				{#images_blank#}
+			{/if}
+		</td>
 		<td class="colmedium">Item</td>
 		<td class="colmedium">Description</td>
 		<td class="colsmall">Receipts</td>
 		{foreach from=$sources item=entry key=name}<td class="colsmall">{$entry.name}</td>{/foreach}
 		<td class="colsmall">Surplus</td>
 	</tr>
-
 {section name=mysec loop=$children}
 	<tr bgcolor="{cycle values="#eeeeee,#dddddd"}">
 		<td>{strip}
-			{if $children[mysec].id > 0}
+			{if $children[mysec].id > 0 && ($permissions.lineitemEdit || $permissions.lineitemDelete)}
 				{include file="pagelink.tpl" page="lineitemEdit" parms="lineid=`$children[mysec].id`" text=#images_edit#}
+			{else}
+				{#images_blank#}
 			{/if}
 		{/strip}</td>
 		<td class="colmedium">{strip}

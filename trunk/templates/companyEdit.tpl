@@ -28,7 +28,9 @@
 
 {include file="pagelink.tpl" page="company" text=#images_back#}<br /><br />
 
-{if $companyCount == 0}
+
+
+{if $companyCount == 0 && $permissions.companyDelete}
 	<form action="./index.php?page=process" method="post">
 		<input type="hidden" name="company_id" value="{$company.id}" />
 		<input type="hidden" name="key" value="{php}echo secureform_add_pk('companyDelete', 60, $this->get_template_vars('id')){/php}" />
@@ -37,7 +39,7 @@
 	</form>
 {/if}
 
-
+{if $permissions.companyEdit}
 <form action="./index.php?page=process" method="post">
 	<span>Name:</span><input type="text" name="company_name" value="{$company.name}" /><br />
 	<input type="hidden" name="key" value="{php}echo secureform_add_pk('companyEdit', 60, $this->get_template_vars('id')){/php}" />
@@ -45,5 +47,6 @@
 	<input type="hidden" name="action" value="companyEdit" />
 	<input type="submit" value="Update" />
 </form>
+{/if}
 
 {include file="footer.tpl"}

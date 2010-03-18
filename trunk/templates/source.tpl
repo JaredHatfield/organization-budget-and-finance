@@ -28,13 +28,24 @@
 
 <table>
 	<tr class="tableheaderrow">
-		<td >{include file="pagelink.tpl" page="sourceAdd" text=#images_add#}<br /></td>
+		<td >
+			{if $permissions.sourceAdd}
+				{include file="pagelink.tpl" page="sourceAdd" text=#images_add#}
+			{else}
+				{#images_blank#}
+			{/if}
+		</td>
 		<td class="colmedium">Source Name</td>
 		<td class="colsmall">Public</td>
 	</tr>
 {section name=mysec loop=$sources}
 	<tr bgcolor="{cycle values="#eeeeee,#dddddd"}" valign=top>
-		<td>{include file="pagelink.tpl" page="sourceEdit" parms="sourceid=`$sources[mysec].id`" text=#images_edit#}</td>
+		<td>
+			{if $permissions.sourceEdit || $permissions.sourceDelete}
+				{include file="pagelink.tpl" page="sourceEdit" parms="sourceid=`$sources[mysec].id`" text=#images_edit#}</td>
+			{else}
+				{#images_blank#}
+			{/if}
 		<td class="colmedium">{$sources[mysec].name}</td>
 		<td class="colsmall">{$sources[mysec].public}</td>
 	</tr>
