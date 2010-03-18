@@ -45,11 +45,25 @@ function getCompanyInformation($id){
 	return $row;
 }
 
+/// Gets the number of times a company was listed as used by a receipt
 function getCompanyUseCount($id){
 	$query = "SELECT COUNT(*) number FROM receipt WHERE `company` = " .  intval($id). ";";
 	$result = mysql_query($query);
 	$row = mysql_fetch_assoc($result);
 	return $row['number'];
+}
+
+/// Determines if the specified number is a valid company id number
+function isCompany($id){
+	$query = "SELECT COUNT(*) number FROM company c WHERE `id` = " . intval($id) . ";";
+	$result = mysql_query($query);
+	$row = mysql_fetch_assoc($result);
+	if($row['number'] == "1"){
+		return true;
+	}
+	else{
+		return false;
+	}
 }
 
 /*******************************************************************************************************

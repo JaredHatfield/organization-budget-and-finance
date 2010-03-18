@@ -92,6 +92,19 @@ function isFundPrivate($id){
 	}
 }
 
+/// Determines if the specified number is a valid funds id number
+function isFund($id){
+	$query = "SELECT COUNT(*) number FROM funds f WHERE `id` = " . intval($id) . ";";
+	$result = mysql_query($query);
+	$row = mysql_fetch_assoc($result);
+	if($row['number'] == "1"){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
 /*******************************************************************************************************
  * Insert/Update Queries
  ******************************************************************************************************/

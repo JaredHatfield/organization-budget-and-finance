@@ -138,6 +138,19 @@ function isLineItemPrivate($id){
 	}
 }
 
+/// Determines if the specified number is a valid lineitem id number
+function isLineItem($id){
+	$query = "SELECT COUNT(*) number FROM lineitem l WHERE `id` = " . intval($id) . ";";
+	$result = mysql_query($query);
+	$row = mysql_fetch_assoc($result);
+	if($row['number'] == "1"){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
 /// Gets an array of the navigation information for a specific lineitem
 function getNavigationForLineItem($lineitemid){
 	$line = getLineItem($lineitemid);
