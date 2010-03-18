@@ -34,7 +34,9 @@
 			{/if}
 		</td>
 		<td class="colmedium">Source Name</td>
+		{if !$permissions.publicOnly}
 		<td class="colsmall">Public</td>
+		{/if}
 	</tr>
 {section name=mysec loop=$sources}
 	<tr bgcolor="{cycle values="#eeeeee,#dddddd"}" valign=top>
@@ -45,7 +47,9 @@
 				{#images_blank#}
 			{/if}
 		<td class="colmedium">{$sources[mysec].name}</td>
-		<td class="colsmall">{$sources[mysec].public}</td>
+		{if !$permissions.publicOnly}
+		<td class="colsmall">{if $sources[mysec].public eq 1}Yes{/if}</td>
+		{/if}
 	</tr>
 {/section}
 </table>
