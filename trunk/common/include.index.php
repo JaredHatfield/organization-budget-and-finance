@@ -56,4 +56,9 @@ function pageNotFound(){
 	exit;
 }
 
+function pageForbidden(){
+	header("HTTP/1.0 403 Forbidden");
+	exit;
+}
+
 ?>

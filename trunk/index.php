@@ -82,8 +82,11 @@ else if($_GET['page'] == "budget"){
 	}
 	
 	// Make sure the page exists and the user as permission to see it
-	if(!isLineItem($parent) || ($permissions['publicOnly'] && isLineItemPrivate($parent))){
+	if(!isLineItem($parent)){
 		pageNotFound();
+	}
+	else if($permissions['publicOnly'] && isLineItemPrivate($parent)){
+		pageForbidden();
 	}
 	
 	$smarty->assign("lineitem", getLineItem($parent));
@@ -103,8 +106,11 @@ else if($_GET['page'] == "lineitemAdd"){
 	$parent = getPageId('lineid');
 	
 	// Make sure the page exists and the user as permission to see it
-	if(!isLineItem($parent) || ($permissions['publicOnly'] && isLineItemPrivate($parent))){
+	if(!isLineItem($parent)){
 		pageNotFound();
+	}
+	else if($permissions['publicOnly'] && isLineItemPrivate($parent)){
+		pageForbidden();
 	}
 	
 	$smarty->assign("lineitemParent", getLineItem($parent));
@@ -121,8 +127,11 @@ else if($_GET['page'] == "lineitemEdit"){
 	$lineitemid = getPageId('lineid');
 	
 	// Make sure the page exists and the user as permission to see it
-	if(!isLineItem($lineitemid) || ($permissions['publicOnly'] && isLineItemPrivate($lineitemid))){
+	if(!isLineItem($lineitemid)){
 		pageNotFound();
+	}
+	else if($permissions['publicOnly'] && isLineItemPrivate($lineitemid)){
+		pageForbidden();
 	}
 	
 	$lineiteminfo = getLineItem($lineitemid);
@@ -146,8 +155,11 @@ else if($_GET['page'] == "receiptAdd"){
 	$parent = getPageId('lineid');
 	
 	// Make sure the page exists and the user as permission to see it
-	if(!isLineItem($parent) || ($permissions['publicOnly'] && isLineItemPrivate($parent))){
+	if(!isLineItem($parent)){
 		pageNotFound();
+	}
+	else if($permissions['publicOnly'] && isLineItemPrivate($parent)){
+		pageForbidden();
 	}
 	
 	$smarty->assign("lineitem", getLineItem($parent));
@@ -165,8 +177,11 @@ else if($_GET['page'] == "receiptEdit"){
 	$receiptid = getPageId('receiptid');
 	
 	// Make sure the page exists and the user as permission to see it
-	if(!isReceipt($receiptid) || ($permissions['publicOnly'] && isReceiptPrivate($receiptid))){
+	if(!isReceipt($receiptid)){
 		pageNotFound();
+	}
+	else if($permissions['publicOnly'] && isReceiptPrivate($receiptid)){
+		pageForbidden();
 	}
 	
 	$receiptinfo = getReceipt($receiptid);
@@ -191,8 +206,11 @@ else if($_GET['page'] == "fundsAdd"){
 	$parent = getPageId('lineid');
 	
 	// Make sure the page exists and the user as permission to see it
-	if(!isLineItem($parent) || ($permissions['publicOnly'] && isLineItemPrivate($parent))){
+	if(!isLineItem($parent)){
 		pageNotFound();
+	}
+	else if($permissions['publicOnly'] && isLineItemPrivate($parent)){
+		pageForbidden();
 	}
 	
 	$smarty->assign("lineitem", getLineItem($parent));
@@ -210,8 +228,11 @@ else if($_GET['page'] == "fundsEdit"){
 	$fundsid = getPageId('fundsid');
 	
 	// Make sure the page exists and the user as permission to see it
-	if(!isFund($fundsid) || ($permissions['publicOnly'] && isFundPrivate($fundsid))){
+	if(!isFund($fundsid)){
 		pageNotFound();
+	}
+	else if($permissions['publicOnly'] && isFundPrivate($fundsid)){
+		pageForbidden();
 	}
 	
 	$fundinfo = getFund($fundsid);
