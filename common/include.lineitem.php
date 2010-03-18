@@ -68,12 +68,13 @@ function getCompleteLineItemChildren($parent, $publicOnly){
 
 /// Returns the lineitem information for the children of the specified lineitem
 function getLineItemChildren($parent, $publicOnly){
+	global $database;
 	$query = "SELECT `id`, `name`, `description`, `public` FROM lineitem l WHERE `parent` = " . intval($parent) . " ";
 	if($publicOnly){
 		$query .= "AND l.`public` = 1 ";
 	}
 	$query .= "AND `id` != 1;";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 	$val = array();
 	while($row = mysql_fetch_assoc($result)){
 		$val[] = $row;
@@ -84,12 +85,13 @@ function getLineItemChildren($parent, $publicOnly){
 
 /// Returns the ids for the children of the specified parent
 function getLineItemChildrenIds($parent, $publicOnly){
+	global $database;
 	$query = "SELECT `id` FROM lineitem l WHERE `parent` = " . intval($parent) . " ";
 	if($publicOnly){
 		$query .= "AND l.`public` = 1 ";
 	}
 	$query .= "AND `id` != 1;";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 	$val = array();
 	while($row = mysql_fetch_assoc($result)){
 		$val[] = $row['id'];
@@ -100,25 +102,27 @@ function getLineItemChildrenIds($parent, $publicOnly){
 
 /// Returns the information about a line item
 function getLineItem($id){
+	global $database;
 	$query = "SELECT `id`, `name`, `description`, `parent`, `public` FROM lineitem l WHERE `id` = " . intval($id) . ";";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 	$row = mysql_fetch_assoc($result);
 	return $row;
 }
 
 /// Returns the number of items that depend on the specified lineitem
 function getLineItemUseCount($id){
+	global $database;
 	$total = 0;
 	$query = "SELECT COUNT(*) number FROM funds f WHERE `lineitem` = " . intval($id) . ";";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 	$row = mysql_fetch_assoc($result);
 	$total += $row['number'];
 	$query = "SELECT COUNT(*) number FROM receipt r WHERE `lineitem` = " . intval($id) . ";";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 	$row = mysql_fetch_assoc($result);
 	$total += $row['number'];
 	$query = "SELECT COUNT(*) number FROM lineitem l WHERE `parent` = " . intval($id) . ";";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 	$row = mysql_fetch_assoc($result);
 	$total += $row['number'];
 	return $total;
@@ -140,8 +144,9 @@ function isLineItemPrivate($id){
 
 /// Determines if the specified number is a valid lineitem id number
 function isLineItem($id){
+	global $database;
 	$query = "SELECT COUNT(*) number FROM lineitem l WHERE `id` = " . intval($id) . ";";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 	$row = mysql_fetch_assoc($result);
 	if($row['number'] == "1"){
 		return true;
@@ -182,20 +187,23 @@ function getNavigationForLineItem($lineitemid){
 
 
 function insertLineitem($name, $description, $parent, $public){
+	global $database;
 	$query = "INSERT INTO lineitem (`name`, `description`, `parent`, `public`) VALUES('" . $name . "', '" . $description . "', " . intval($parent) . ", " . intval($public) . ");";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 }
 
 
 function updateLineitem($id, $name, $description, $public){
+	global $database;
 	$query = "UPDATE lineitem SET `name` = '" . $name . "', `description` = '" . $description . "', `public` = " . intval($public) . " WHERE `id` = " . intval($id) . " LIMIT 1;";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 }
 
 
 function deleteLineitem($id){
+	global $database;
 	$query = "DELETE FROM lineitem WHERE `id` = " . intval($id) . " LIMIT 1;";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 }
 
 ?>

@@ -27,8 +27,9 @@
 
 /// Gets a list of all of the companies
 function getAllCompanies(){
+	global $database;
 	$query = "SELECT `id`, `name` FROM company c;";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 	$val = array();
 	while($row = mysql_fetch_assoc($result)){
 		$val[] = $row;
@@ -39,24 +40,27 @@ function getAllCompanies(){
 
 /// Gets the information for a specific company
 function getCompanyInformation($id){
+	global $database;
 	$query = "SELECT `id`, `name` FROM company c WHERE `id` = " . intval($id) . ";";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 	$row = mysql_fetch_assoc($result);
 	return $row;
 }
 
 /// Gets the number of times a company was listed as used by a receipt
 function getCompanyUseCount($id){
+	global $database;
 	$query = "SELECT COUNT(*) number FROM receipt WHERE `company` = " .  intval($id). ";";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 	$row = mysql_fetch_assoc($result);
 	return $row['number'];
 }
 
 /// Determines if the specified number is a valid company id number
 function isCompany($id){
+	global $database;
 	$query = "SELECT COUNT(*) number FROM company c WHERE `id` = " . intval($id) . ";";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 	$row = mysql_fetch_assoc($result);
 	if($row['number'] == "1"){
 		return true;
@@ -72,20 +76,23 @@ function isCompany($id){
 
 
 function insertCompany($name){
+	global $database;
 	$query = "INSERT INTO company (`name`) VALUES('" . $name . "');";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 }
 
 
 function updateCompany($id, $name){
+	global $database;
 	$query = "UPDATE company SET `name` = '" . $name . "' WHERE `id` = " . intval($id) . " LIMIT 1;";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 }
 
 
 function deleteCompany($id){
+	global $database;
 	$query = "DELETE FROM company WHERE `id` = " . intval($id) . " LIMIT 1;";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 }
 
 ?>

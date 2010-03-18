@@ -27,13 +27,14 @@
 
 /// Gets a list of all of the sources
 function getAllSources($publicOnly){
+	global $database;
 	if($publicOnly){
 		$query = "SELECT `id`, `name`, `public` FROM source s WHERE `public` = 1;";
 	}
 	else{
 		$query = "SELECT `id`, `name`, `public` FROM source s;";
 	}	
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 	$val = array();
 	while($row = mysql_fetch_assoc($result)){
 		$val[] = $row;
@@ -44,24 +45,27 @@ function getAllSources($publicOnly){
 
 /// Gets the information for a specific source
 function getSourceInformation($id){
+	global $database;
 	$query = "SELECT `id`, `name`, `public` FROM source s WHERE `id` = " . intval($id) . ";";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 	$row = mysql_fetch_assoc($result);
 	return $row;
 }
 
 /// Gets the number of times this source was used
 function getSourceUseCount($id){
+	global $database;
 	$query = "SELECT COUNT(*) number FROM funds WHERE `source` = " . intval($id) . ";";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 	$row = mysql_fetch_assoc($result);
 	return $row['number'];
 }
 
 /// Determines if the specified number is a valid source id number
 function isSource($id){
+	global $database;
 	$query = "SELECT COUNT(*) number FROM source s WHERE `id` = " . intval($id) . ";";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 	$row = mysql_fetch_assoc($result);
 	if($row['number'] == "1"){
 		return true;
@@ -77,20 +81,23 @@ function isSource($id){
 
 
 function insertSource($name, $public){
+	global $database;
 	$query = "INSERT INTO source (`name`, `public`) VALUES('" . $name . "', " . intval($public) . ");";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 }
 
 
 function updateSource($id, $name, $public){
+	global $database;
 	$query = "UPDATE source SET `name` = '" . $name . "', `public` = " . intval($public) . " WHERE `id` = " . intval($id) . " LIMIT 1;";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 }
 
 
 function deleteSource($id){
+	global $database;
 	$query = "DELETE FROM source WHERE `id` = " . intval($id) . " LIMIT 1;";
-	$result = mysql_query($query);
+	$result = $database->exec($query);
 }
 
 ?>
