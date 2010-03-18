@@ -28,6 +28,7 @@
 
 {include file="pagelink.tpl" page="budget" parms="lineid=`$lineitemParent.id`" text=#images_back#}<br /><br />
 
+{if $permissions.lineitemAdd}
 <form action="./index.php?page=process" method="post">
 	<span>Name:</span><input type="text" name="lineitem_name" /><br />
 	<span>Description:</span><input type="text" name="lineitem_description" /><br />
@@ -37,5 +38,6 @@
 	<input type="hidden" name="action" value="lineitemAdd" />
 	<input type="submit" value="Add" />
 </form>
+{/if}
 
 {include file="footer.tpl"}

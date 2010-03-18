@@ -1,6 +1,8 @@
-{**
+<?php
+
+/**
  * Project:     organization-budget-and-finance
- * File:        fundsAdd.tpl
+ * File:        include.permissions.php
  *
  * organization-budget-and-finance is free software: you can redistribute
  * it and/or modify it under the terms of the GNU General Public License 
@@ -21,26 +23,29 @@
  * @author Jared Hatfield
  * @package organization-budget-and-finance
  * @version 1.0
- *}
-{include file="header.tpl" title="Organization Budget and Finance"}
+ */
 
-<h2>Add Funds</h2>
+/// Gets the permission values for the specified user
+function getUserPermissions(){
+	// TODO: this should vary these values based on the user's permission
+	$permissions['companyAdd'] = true;
+	$permissions['companyEdit'] = true;
+	$permissions['companyDelete'] = true;
+	$permissions['fundsAdd'] = true;
+	$permissions['fundsEdit'] = true;
+	$permissions['fundsDelete'] = true;
+	$permissions['lineitemAdd'] = true;
+	$permissions['lineitemEdit'] = true;
+	$permissions['lineitemDelete'] = true;
+	$permissions['receiptAdd'] = true;
+	$permissions['receiptEdit'] = true;
+	$permissions['receiptDelete'] = true;
+	$permissions['sourceAdd'] = true;
+	$permissions['sourceEdit'] = true;
+	$permissions['sourceDelete'] = true;
+	return $permissions;
+}
 
-{include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.id`" text=#images_back#}<br /><br />
 
-{if $permissions.fundsAdd}
-{if $source_selections|@count > 0}
-<form action="./index.php?page=process" method="post">
-	<span>Source:</span>{include file="dropdown.tpl" dd_selection=$source_selections dd_name="funds_source" dd_selected="-1"}<br />
-	<span>Amount:</span><input type="text" name="funds_amount" /><br />
-	<input type="hidden" name="funds_lineitem" value="{$lineitem.id}" />
-	<input type="hidden" name="key" value="{php}echo secureform_add('fundsAdd', 60){/php}" />
-	<input type="hidden" name="action" value="fundsAdd" />
-	<input type="submit" value="Update" />
-</form>
-{else}
-<h3>There are no unused fund sources.</h3>
-{/if}
-{/if}
 
-{include file="footer.tpl"}
+?>

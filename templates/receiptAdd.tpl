@@ -28,6 +28,7 @@
 
 {include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.id`" text=#images_back#}<br /><br />
 
+{if $permissions.receiptAdd}
 <form action="./index.php?page=process" method="post">
 	<span>Name:</span><input type="text" name="receipt_name" /><br />
 	<span>Description:</span><input type="text" name="receipt_description" /><br />
@@ -40,5 +41,6 @@
 	<input type="hidden" name="action" value="receiptAdd" />
 	<input type="submit" value="Add" />
 </form>
+{/if}
 
 {include file="footer.tpl"}

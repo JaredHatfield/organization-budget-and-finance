@@ -28,12 +28,24 @@
 
 <table>
 	<tr class="tableheaderrow">
-		<td>{include file="pagelink.tpl" page="companyAdd" text=#images_add#}</td>
+		<td>
+			{if $permissions.companyAdd}
+				{include file="pagelink.tpl" page="companyAdd" text=#images_add#}
+			{else}
+				{#images_blank#}
+			{/if}
+		</td>
 		<td class="colmedium">Company Name</td>
 	</tr>
 {section name=mysec loop=$companies}
 	<tr bgcolor="{cycle values="#eeeeee,#dddddd"}" valign=top>
-		<td>{include file="pagelink.tpl" page="companyEdit" parms="companyid=`$companies[mysec].id`" text=#images_edit#}</td>
+		<td>
+			{if $permissions.companyEdit || $permissions.companyDelete}
+				{include file="pagelink.tpl" page="companyEdit" parms="companyid=`$companies[mysec].id`" text=#images_edit#}
+			{else}
+				{#images_blank#}
+			{/if}
+		</td>
 		<td class="colmedium">{$companies[mysec].name}</td>
 	</tr>
 {/section}

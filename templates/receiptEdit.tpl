@@ -28,13 +28,16 @@
 
 {include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.id`" text=#images_back#}<br /><br />
 
+{if $permissions.receiptDelete}
 <form action="./index.php?page=process" method="post">
 	<input type="hidden" name="receipt_id" value="{$receipt.id}" />
 	<input type="hidden" name="key" value="{php}echo secureform_add_pk('receiptDelete', 60, $this->get_template_vars('id')){/php}" />
 	<input type="hidden" name="action" value="receiptDelete" />
 	<input type="submit" value="Delete" />
 </form>
+{/if}
 
+{if $permissions.receiptEdit}
 <form action="./index.php?page=process" method="post">
 	<span>Name:</span><input type="text" name="receipt_name" value="{$receipt.name}" /><br />
 	<span>Description:</span><input type="text" name="receipt_description" value="{$receipt.description}" /><br />
@@ -53,6 +56,7 @@
 	<input type="hidden" name="action" value="receiptEdit" />
 	<input type="submit" value="Update" />
 </form>
+{/if}
 
 
 {include file="footer.tpl"}

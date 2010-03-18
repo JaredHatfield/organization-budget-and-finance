@@ -28,7 +28,7 @@
 
 {include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.parent`" text=#images_back#}<br /><br />
 
-{if $lineitemCount == 0}
+{if $lineitemCount == 0 && $permissions.lineitemDelete}
 	<form action="./index.php?page=process" method="post">
 		<input type="hidden" name="lineitem_id" value="{$lineitem.id}" />
 		<input type="hidden" name="key" value="{php}echo secureform_add_pk('lineitemDelete', 60, $this->get_template_vars('id')){/php}" />
@@ -37,6 +37,7 @@
 	</form>
 {/if}
 
+{if $permissions.lineitemEdit}
 <form action="./index.php?page=process" method="post">
 	<span>Name:</span><input type="text" name="lineitem_name" value="{$lineitem.name}" /><br />
 	<span>Description:</span><input type="text" name="lineitem_description" value="{$lineitem.description}" /><br />
@@ -52,6 +53,7 @@
 	<input type="hidden" name="action" value="lineitemEdit" />
 	<input type="submit" value="Update" />
 </form>
+{/if}
 
 
 {include file="footer.tpl"}
