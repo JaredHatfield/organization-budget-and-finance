@@ -47,13 +47,13 @@ $smarty->assign("permissions", $permissions);
 
 // Navigation higherarchy
 $nav[] = Array("page" => "home", "parms" => "", "text" => "Home");
+$smarty->assign_by_ref("nav",$nav);
 
 // Process the page
 if(!isset($_GET['page']) || $_GET['page'] == "home"){
 	/*******************************************************************************************************
 	 * Main page
 	 ******************************************************************************************************/
-	$smarty->assign("nav", $nav);
 	$smarty->display('index.tpl');
 }
 else if($_GET['page'] == "process"){
@@ -96,7 +96,6 @@ else if($_GET['page'] == "budget"){
 	$smarty->assign("children", getCompleteLineItemChildren($parent, $permissions['publicOnly']));
 	$nav[] = Array("page" => "budget", "parms" => "", "text" => "Budget");
 	$nav = array_merge($nav, getNavigationForLineItem($parent));
-	$smarty->assign("nav", $nav);
 	$smarty->display('budget.tpl');
 }
 else if($_GET['page'] == "lineitemAdd"){
@@ -117,7 +116,6 @@ else if($_GET['page'] == "lineitemAdd"){
 	$nav[] = Array("page" => "budget", "parms" => "", "text" => "Budget");
 	$nav = array_merge($nav, getNavigationForLineItem($parent));
 	$nav[] = Array("page" => "lineitemAdd", "parms" => "lineid=".$parent, "text" => "Add Line Item");
-	$smarty->assign("nav", $nav);
 	$smarty->display('lineitemAdd.tpl');
 }
 else if($_GET['page'] == "lineitemEdit"){
@@ -145,7 +143,6 @@ else if($_GET['page'] == "lineitemEdit"){
 		$name .= "*";
 	}
 	$nav[] = Array("page" => "lineitemEdit", "parms" => "lineid=".$lineitemid, "text" => $name);
-	$smarty->assign("nav", $nav);
 	$smarty->display('lineitemEdit.tpl');
 }
 else if($_GET['page'] == "receiptAdd"){
@@ -167,7 +164,6 @@ else if($_GET['page'] == "receiptAdd"){
 	$nav[] = Array("page" => "budget", "parms" => "", "text" => "Budget");
 	$nav = array_merge($nav, getNavigationForLineItem($parent));
 	$nav[] = Array("page" => "receiptAdd", "parms" => "lineid=".$parent, "text" => "Add Receipt");
-	$smarty->assign("nav", $nav);
 	$smarty->display('receiptAdd.tpl');
 }
 else if($_GET['page'] == "receiptEdit"){
@@ -196,7 +192,6 @@ else if($_GET['page'] == "receiptEdit"){
 		$name .= "*";
 	}
 	$nav[] = Array("page" => "receiptEdit", "parms" => "receiptid=".$receiptid, "text" => $name);
-	$smarty->assign("nav", $nav);
 	$smarty->display('receiptEdit.tpl');
 }
 else if($_GET['page'] == "fundsAdd"){
@@ -218,7 +213,6 @@ else if($_GET['page'] == "fundsAdd"){
 	$nav[] = Array("page" => "budget", "parms" => "", "text" => "Budget");
 	$nav = array_merge($nav, getNavigationForLineItem($parent));
 	$nav[] = Array("page" => "fundsAdd", "parms" => "lineid=".$parent, "text" => "Add Funds");
-	$smarty->assign("nav", $nav);
 	$smarty->display('fundsAdd.tpl');
 }
 else if($_GET['page'] == "fundsEdit"){
@@ -249,8 +243,6 @@ else if($_GET['page'] == "fundsEdit"){
 		$name .= "*";
 	}
 	$nav[] = Array("page" => "fundsEdit", "parms" => "fundsid=".$fundsid, "text" => $name);
-	
-	$smarty->assign("nav", $nav);
 	$smarty->display('fundsEdit.tpl');
 }
 else if($_GET['page'] == "company"){
@@ -259,7 +251,6 @@ else if($_GET['page'] == "company"){
 	 ******************************************************************************************************/
 	$smarty->assign("companies", getAllCompanies());
 	$nav[] = Array("page" => "company", "parms" => "", "text" => "Companies");
-	$smarty->assign("nav", $nav);
 	$smarty->display('company.tpl');
 }
 else if($_GET['page'] == "companyAdd"){
@@ -268,7 +259,6 @@ else if($_GET['page'] == "companyAdd"){
 	 ******************************************************************************************************/
 	$nav[] = Array("page" => "company", "parms" => "", "text" => "Companies");
 	$nav[] = Array("page" => "companyAdd", "parms" => "", "text" => "Add Company");
-	$smarty->assign("nav", $nav);
 	$smarty->display('companyAdd.tpl');
 }
 else if($_GET['page'] == "companyEdit"){
@@ -288,7 +278,6 @@ else if($_GET['page'] == "companyEdit"){
 	$smarty->assign("companyCount", getCompanyUseCount($companyid));
 	$nav[] = Array("page" => "company", "parms" => "", "text" => "Companies");
 	$nav[] = Array("page" => "companyEdit", "parms" => "companyid=".$companyid, "text" => "Edit Company (".$companyinfo['name'].")");
-	$smarty->assign("nav", $nav);
 	$smarty->display('companyEdit.tpl');
 }
 else if($_GET['page'] == "source"){
@@ -297,7 +286,6 @@ else if($_GET['page'] == "source"){
 	 ******************************************************************************************************/
 	$smarty->assign("sources", getAllSources($permissions['publicOnly']));
 	$nav[] = Array("page" => "source", "parms" => "", "text" => "Sources");
-	$smarty->assign("nav", $nav);
 	$smarty->display('source.tpl');
 }
 else if($_GET['page'] == "sourceAdd"){
@@ -306,7 +294,6 @@ else if($_GET['page'] == "sourceAdd"){
 	 ******************************************************************************************************/
 	$nav[] = Array("page" => "source", "parms" => "", "text" => "Sources");
 	$nav[] = Array("page" => "sourceAdd", "parms" => "", "text" => "Add Source");
-	$smarty->assign("nav", $nav);
 	$smarty->display('sourceAdd.tpl');
 }
 else if($_GET['page'] == "sourceEdit"){
@@ -326,7 +313,6 @@ else if($_GET['page'] == "sourceEdit"){
 	$smarty->assign("sourceCount", getSourceUseCount($sourceid));
 	$nav[] = Array("page" => "source", "parms" => "", "text" => "Sources");
 	$nav[] = Array("page" => "sourceEdit", "parms" => ("sourceid=".$sourceid), "text" => "Edit Source (".$sourceinfo['name'].")");
-	$smarty->assign("nav", $nav);
 	$smarty->display('sourceEdit.tpl');
 }
 else if($_GET['page'] == "error"){
