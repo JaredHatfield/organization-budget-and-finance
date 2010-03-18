@@ -46,19 +46,14 @@ function getReceiptForLineItem($lineitem, $publicOnly){
 /// Returns the total amount of receipts for a specified lineitem
 function getReceiptTotalForLineItem($lineitem, $publicOnly){
 	global $database;
-	$total = 0;
-	$query = "SELECT `amount` FROM receipt r WHERE `lineitem` = " . intval($lineitem) . " ";
+	$query = "SELECT IFNULL(SUM(`amount`),0) total FROM receipt r WHERE `lineitem` = " . intval($lineitem) . " ";
 	if($publicOnly){
 		$query .= "AND r.`public` = 1 ";
 	}
 	$query .= ";";
 	$result = $database->exec($query);
-	$val = array();
-	while($row = mysql_fetch_assoc($result)){
-		$total += $row['amount'];
-	}
-	
-	return $total;
+	$row = mysql_fetch_assoc($result);
+	return $row['total'];
 }
 
 /// Returns the total amount of receipts for a specified lineitems and its children
