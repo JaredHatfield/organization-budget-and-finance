@@ -131,7 +131,11 @@ else if($_GET['page'] == "lineitemEdit"){
 	$smarty->assign("lineitemCount", getLineItemUseCount($lineitemid));
 	$nav[] = Array("page" => "budget", "parms" => "", "text" => "Budget");
 	$nav = array_merge($nav, getNavigationForLineItem($lineiteminfo['parent']));
-	$nav[] = Array("page" => "lineitemEdit", "parms" => "lineid=".$lineitemid, "text" => "Edit Line Item (".$lineiteminfo['name'].")");
+	$name = "Edit Line Item (".$lineiteminfo['name'].")";
+	if($lineiteminfo['public'] == 0){
+		$name .= "*";
+	}
+	$nav[] = Array("page" => "lineitemEdit", "parms" => "lineid=".$lineitemid, "text" => $name);
 	$smarty->assign("nav", $nav);
 	$smarty->display('lineitemEdit.tpl');
 }
@@ -172,7 +176,11 @@ else if($_GET['page'] == "receiptEdit"){
 	$smarty->assign("company_selections", getCompanySelections());
 	$nav[] = Array("page" => "budget", "parms" => "", "text" => "Budget");
 	$nav = array_merge($nav, getNavigationForLineItem($receiptinfo['lineitem']));
-	$nav[] = Array("page" => "receiptEdit", "parms" => "receiptid=".$receiptid, "text" => "Edit Receipt (" . $receiptinfo['name'] . ")");
+	$name = "Edit Receipt (" . $receiptinfo['name'] . ")";
+	if($receiptinfo['public'] == 0){
+		$name .= "*";
+	}
+	$nav[] = Array("page" => "receiptEdit", "parms" => "receiptid=".$receiptid, "text" => $name);
 	$smarty->assign("nav", $nav);
 	$smarty->display('receiptEdit.tpl');
 }
@@ -215,7 +223,11 @@ else if($_GET['page'] == "fundsEdit"){
 	$smarty->assign("source_selections", getSourceSelections($fundinfo['lineitem'], $fundsid, $permissions['publicOnly']));
 	$nav[] = Array("page" => "budget", "parms" => "", "text" => "Budget");
 	$nav = array_merge($nav, getNavigationForLineItem($fundinfo['lineitem']));
-	$nav[] = Array("page" => "fundsEdit", "parms" => "fundsid=".$fundsid, "text" => "Edit Funds (".$sourceinfo['name'].")");
+	$name = "Edit Funds (".$sourceinfo['name'].")";
+	if($sourceinfo['public'] == 0){
+		$name .= "*";
+	}
+	$nav[] = Array("page" => "fundsEdit", "parms" => "fundsid=".$fundsid, "text" => $name);
 	
 	$smarty->assign("nav", $nav);
 	$smarty->display('fundsEdit.tpl');
