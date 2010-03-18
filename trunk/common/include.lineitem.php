@@ -162,7 +162,11 @@ function getNavigationForLineItem($lineitemid){
 	}
 	
 	// Add this to the list
-	$nav[] = Array("page" => "budget", "parms" => "lineid=".$line['id'], "text" => $line['name']);
+	$name = $line['name'];
+	if($line['public'] == 0){
+		$name .= "*"; // Add a * if the item is private
+	}
+	$nav[] = Array("page" => "budget", "parms" => "lineid=".$line['id'], "text" => $name);
 	
 	// Add all of the parents
 	if($line['parent'] != 1){
