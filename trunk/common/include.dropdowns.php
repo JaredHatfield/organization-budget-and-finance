@@ -26,9 +26,13 @@
  */
 
 /// Gets the list of valid choices for a source given a specific lineitem but still allows for the specific fundid
-function getSourceSelections($lineitemid, $fundid){
+function getSourceSelections($lineitemid, $fundid, $publicOnly){
 	$query  = "SELECT `id` value, `name` FROM source s WHERE `id` NOT IN (SELECT `source` FROM funds f ";
-	$query .= "WHERE `lineitem` = " . intval($lineitemid) . " AND id != " . intval($fundid) . ") ORDER BY `name`;";
+	$query .= "WHERE `lineitem` = " . intval($lineitemid) . " AND id != " . intval($fundid) . ") ";
+	if($publicOnly){
+		$query .= " AND `public` = 1 ";
+	}
+	$query .= "ORDER BY `name`;";
 	$result = mysql_query($query);
 	$val = array();
 	while($row = mysql_fetch_assoc($result)){

@@ -26,8 +26,13 @@
  */
 
 /// Gets a list of all of the sources
-function getAllSources(){
-	$query = "SELECT `id`, `name`, `public` FROM source s;";
+function getAllSources($publicOnly){
+	if($publicOnly){
+		$query = "SELECT `id`, `name`, `public` FROM source s WHERE `public` = 1;";
+	}
+	else{
+		$query = "SELECT `id`, `name`, `public` FROM source s;";
+	}	
 	$result = mysql_query($query);
 	$val = array();
 	while($row = mysql_fetch_assoc($result)){

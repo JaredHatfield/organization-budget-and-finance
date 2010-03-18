@@ -27,9 +27,10 @@
 
 
 /// Returns a fully supplemented list of lineitems for a specified parent
-function getCompleteLineItemChildren($parent){
-	$items = getLineItemChildren($parent);
-	$sources = getSourcesForLineItems($parent);
+function getCompleteLineItemChildren($parent, $publicOnly){
+	
+	$items = getLineItemChildren($parent, $publicOnly);
+	$sources = getSourcesForLineItems($parent, $publicOnly);
 	
 	$receipts = 0;
 	for($j = 0; $j < sizeof($sources); $j++){
@@ -37,10 +38,10 @@ function getCompleteLineItemChildren($parent){
 	}
 	
 	for($i = 0; $i < sizeof($items); $i++){
-		$items[$i]['receipts'] = getReceiptTotalForLineItemAndChildren($items[$i]['id']);
+		$items[$i]['receipts'] = getReceiptTotalForLineItemAndChildren($items[$i]['id'], $publicOnly);
 		$receipts += $items[$i]['receipts'];
 		for($j = 0; $j < sizeof($sources); $j++){
-			$items[$i]['funds'][$j] = getFundsFor($items[$i]['id'], $sources[$j]['id']);
+			$items[$i]['funds'][$j] = getFundsFor($items[$i]['id'], $sources[$j]['id'], $publicOnly);
 			$sources[$j]['sum'] += $items[$i]['funds'][$j];
 		}
 		
@@ -66,8 +67,12 @@ function getCompleteLineItemChildren($parent){
 }
 
 /// Returns the lineitem information for the children of the specified lineitem
-function getLineItemChildren($parent){
-	$query = "SELECT `id`, `name`, `description`, `public` FROM lineitem l WHERE `parent` = " . intval($parent) . " AND `id` != 1;";
+function getLineItemChildren($parent, $publicOnly){
+	$query = "SELECT `id`, `name`, `description`, `public` FROM lineitem l WHERE `parent` = " . intval($parent) . " ";
+	if($publicOnly){
+		$query .= "AND l.`public` = 1 ";
+	}
+	$query .= "AND `id` != 1;";
 	$result = mysql_query($query);
 	$val = array();
 	while($row = mysql_fetch_assoc($result)){
@@ -78,8 +83,12 @@ function getLineItemChildren($parent){
 }
 
 /// Returns the ids for the children of the specified parent
-function getLineItemChildrenIds($parent){
-	$query = "SELECT `id` FROM lineitem l WHERE `parent` = " . intval($parent) . " AND `id` != 1;";
+function getLineItemChildrenIds($parent, $publicOnly){
+	$query = "SELECT `id` FROM lineitem l WHERE `parent` = " . intval($parent) . " ";
+	if($publicOnly){
+		$query .= "AND l.`public` = 1 ";
+	}
+	$query .= "AND `id` != 1;";
 	$result = mysql_query($query);
 	$val = array();
 	while($row = mysql_fetch_assoc($result)){
@@ -89,7 +98,7 @@ function getLineItemChildrenIds($parent){
 	return $val;
 }
 
-// Returns the information about a line item
+/// Returns the information about a line item
 function getLineItem($id){
 	$query = "SELECT `id`, `name`, `description`, `parent`, `public` FROM lineitem l WHERE `id` = " . intval($id) . ";";
 	$result = mysql_query($query);
@@ -97,6 +106,7 @@ function getLineItem($id){
 	return $row;
 }
 
+/// Returns the number of items that depend on the specified lineitem
 function getLineItemUseCount($id){
 	$total = 0;
 	$query = "SELECT COUNT(*) number FROM funds f WHERE `lineitem` = " . intval($id) . ";";

@@ -26,10 +26,14 @@
  */
 
 /// Gets all of the funding sources for a specific lineitem
-function getFundsForLineItem($lineitem){
+function getFundsForLineItem($lineitem, $publicOnly){
 	$query  = "SELECT f.`id`, f.`lineitem`, f.`source`, f.`amount`, s.`id` source_id, s.`name` source_name, s.`public`, ";
 	$query .= "IFNULL((SELECT sum(f2.amount) allocated FROM lineitem l2 JOIN funds f2 ON l2.id = f2.lineitem WHERE l2.`parent` = f.`lineitem` AND f2.source = f.source),0) allocated ";
-	$query .= "FROM funds f JOIN source s ON f.source = s.id WHERE f.`lineitem` = " . intval($lineitem) . ";";
+	$query .= "FROM funds f JOIN source s ON f.source = s.id WHERE f.`lineitem` = " . intval($lineitem) . " ";
+	if($publicOnly){
+		$query .= "AND s.`public` = 1 ";
+	}
+	$query .= ";";
 	$result = mysql_query($query);
 	$val = array();
 	while($row = mysql_fetch_assoc($result)){
@@ -39,17 +43,26 @@ function getFundsForLineItem($lineitem){
 	return $val;
 }
 
-function getFundsFor($lineitem, $source){
-	$query = "SELECT IFNULL(SUM(`amount`),0) amount FROM funds f WHERE `lineitem` = " . intval($lineitem) . " AND `source` = " . intval($source) . ";";
+function getFundsFor($lineitem, $source, $publicOnly){
+	$query = "SELECT IFNULL(SUM(`amount`),0) amount FROM funds f JOIN source s ON f.source = s.id WHERE `lineitem` = " . intval($lineitem) . " ";
+	$query .= "AND f.`source` = " . intval($source) . " ";
+	if($publicOnly){
+		$query .= "AND s.`public` = 1 ";
+	}
+	$query .= ";";
 	$result = mysql_query($query);
 	$row = mysql_fetch_assoc($result);
 	return $row['amount'];
 }
 
 /// Gets all of the sources that are used by lineitems under a parent
-function getSourcesForLineItems($parent){
+function getSourcesForLineItems($parent, $publicOnly){
 	$query = "SELECT DISTINCT(f.source) id, s.name FROM lineitem l JOIN funds f ON l.id = f.lineitem ";
-	$query .= "JOIN source s ON f.source = s.id WHERE `parent` = " . intval($parent) . ";";
+	$query .= "JOIN source s ON f.source = s.id WHERE `parent` = " . intval($parent) . " ";
+	if($publicOnly){
+		$query .= "AND s.`public` = 1 ";
+	}
+	$query .= ";";
 	$result = mysql_query($query);
 	$val = array();
 	while($row = mysql_fetch_assoc($result)){

@@ -28,6 +28,9 @@
 
 {include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.id`" text=#images_back#}<br /><br />
 
+{if $permissions.publicOnly && $receipt.public == 0}{* PUBLIC ONLY *}
+{else}
+
 {if $permissions.receiptDelete}
 <form action="./index.php?page=process" method="post">
 	<input type="hidden" name="receipt_id" value="{$receipt.id}" />
@@ -44,18 +47,24 @@
 	<span>Company:</span>{include file="dropdown.tpl" dd_selection=$company_selections dd_name="receipt_company" dd_selected=$receipt.company}<br />
 	<span>Amount:</span><input type="text" name="receipt_amount" value="{$receipt.amount}" /><br />
 	<span>Date:</span><input type="text" name="receipt_rdate" value="{$receipt.rdate}" /><br />
-	<span>Public:</span>
-	{if $receipt.public == 1}
-		<input type="checkbox" name="receipt_public" value="yes" checked="checked" />
+	{if $permissions.publicOnly}
+		<input type="hidden" name="receipt_public" value="yes" />
 	{else}
-		<input type="checkbox" name="receipt_public" value="yes" />
+		<span>Public:</span>
+		{if $receipt.public == 1}
+			<input type="checkbox" name="receipt_public" value="yes" checked="checked" />
+		{else}
+			<input type="checkbox" name="receipt_public" value="yes" />
+		{/if}
+		<br />
 	{/if}
-	<br />
 	<input type="hidden" name="receipt_id" value="{$receipt.id}" />
 	<input type="hidden" name="key" value="{php}echo secureform_add_pk('receiptEdit', 60, $this->get_template_vars('id')){/php}" />
 	<input type="hidden" name="action" value="receiptEdit" />
 	<input type="submit" value="Update" />
 </form>
+{/if}
+
 {/if}
 
 

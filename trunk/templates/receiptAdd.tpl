@@ -35,7 +35,11 @@
 	<span>Company</span>{include file="dropdown.tpl" dd_selection=$company_selections dd_name="receipt_company" dd_selected="-1"}<br />
 	<span>Amount:</span><input type="text" name="receipt_amount" /><br />
 	<span>Date:</span><input type="text" name="receipt_rdate" /><br />
+	{if $permissions.publicOnly}
+	<input type="hidden" name="receipt_public" value="yes" />
+	{else}
 	<span>Public:</span><input type="checkbox" name="receipt_public" value="yes" checked="checked" /><br />
+	{/if}
 	<input type="hidden" name="receipt_lineitem" value="{$lineitem.id}" />
 	<input type="hidden" name="key" value="{php}echo secureform_add('receiptAdd', 60){/php}" />
 	<input type="hidden" name="action" value="receiptAdd" />

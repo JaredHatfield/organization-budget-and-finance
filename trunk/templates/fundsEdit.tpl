@@ -28,6 +28,9 @@
 
 {include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.id`" text=#images_back#}<br /><br />
 
+{if $permissions.publicOnly && $source.public == 0}{* PUBLIC ONLY *}
+{else}
+
 {if $permissions.fundsDelete}
 <form action="./index.php?page=process" method="post">
 	<input type="hidden" name="funds_id" value="{$funds.id}" />
@@ -46,6 +49,8 @@
 	<input type="hidden" name="action" value="fundsEdit" />
 	<input type="submit" value="Update" />
 </form>
+{/if}
+
 {/if}
 
 {include file="footer.tpl"}
