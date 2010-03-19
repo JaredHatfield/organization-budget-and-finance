@@ -22,7 +22,7 @@
  * @package organization-budget-and-finance
  * @version 1.0
  *}
-{include file="header.tpl" title="Organization Budget and Finance"}
+{include file="header.tpl" title="Organization Budget and Finance" pagename="Budget"}
 
 {if $lineitem.id > 1}
 {include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.parent`" text=#images_back#}

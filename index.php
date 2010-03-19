@@ -333,13 +333,47 @@ else if($_GET['page'] == "sourceEdit"){
 	$nav[] = Array("page" => "sourceEdit", "parms" => ("sourceid=".$sourceid), "text" => "Edit Source (".$sourceinfo['name'].")");
 	$smarty->display('sourceEdit.tpl');
 }
+else if($_GET['page'] == "register"){
+	/*******************************************************************************************************
+	 * Register page
+	 ******************************************************************************************************/
+	$nav[] = Array("page" => "register", "parms" => "", "text" => "Register");
+	$smarty->display('register.tpl');
+}
+else if($_GET['page'] == "myAccount"){
+	/*******************************************************************************************************
+	 * My Account page
+	 ******************************************************************************************************/
+	$nav[] = Array("page" => "myAccount", "parms" => "", "text" => "My Account");
+	$smarty->display('myAccount.tpl');
+}
+else if($_GET['page'] == "adminConsole"){
+	/*******************************************************************************************************
+	 * Admin Console page
+	 ******************************************************************************************************/
+	$nav[] = Array("page" => "adminConsole", "parms" => "", "text" => "Admin Console");
+	$smarty->display('adminConsole.tpl');
+}
+else if($_GET['page'] == "adminAccount"){
+	/*******************************************************************************************************
+	 * Admin Account page
+	 ******************************************************************************************************/
+	$nav[] = Array("page" => "adminConsole", "parms" => "", "text" => "Admin Console");
+	$nav[] = Array("page" => "adminAccount", "parms" => "", "text" => "Admin Account");
+	$smarty->display('adminAccount.tpl');
+}
 else if($_GET['page'] == "error"){
+	/*******************************************************************************************************
+	 * Error page
+	 ******************************************************************************************************/
 	$smarty->assign("message", "You have reached this page because an error occured.");
 	$smarty->display('error.tpl');
 }
 else{
-	$smarty->assign("message","Error: Page not found.");
-	$smarty->display('error.tpl');
+	/*******************************************************************************************************
+	 * 404 Page Not Found
+	 ******************************************************************************************************/
+	pageNotFound();
 }
 
 ?>

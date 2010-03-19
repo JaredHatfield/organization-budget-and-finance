@@ -22,3 +22,12 @@
  * @package organization-budget-and-finance
  * @version 1.0
  *}
+{include file="pagelink.tpl" page="register" parms="" text="Register New Account"}
+<form action="./index.php?page=process" method="post">
+	<span>Username:</span><input class="insmall" type="text" name="login_username" />
+	<br />
+	<span>Password:</span><input class="insmall" type="text" name="login_password" />
+	<input type="hidden" name="key" value="{php}echo secureform_add('login', 60){/php}" />
+	<input type="hidden" name="action" value="login" />
+	<input type="submit" value="Login" />
+</form>

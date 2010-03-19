@@ -22,3 +22,9 @@
  * @package organization-budget-and-finance
  * @version 1.0
  *}
+{include file="header.tpl" title="Organization Budget and Finance" pagename="Admin Account"}
+
+{include file="pagelink.tpl" page="adminConsole" parms="" text=#images_back#}<br /><br />
+
+
+{include file="footer.tpl"}
