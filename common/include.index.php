@@ -51,6 +51,10 @@ function getPageId($field){
 	return $id;
 }
 
+function smarty_block_dynamic($param, $content, &$smarty) {
+	return $content;
+}
+
 function pageNotFound(){
 	header("HTTP/1.0 404 Not Found");
 	exit;
