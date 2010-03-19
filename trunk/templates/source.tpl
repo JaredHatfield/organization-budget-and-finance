@@ -25,6 +25,9 @@
 {include file="header.tpl" title="Organization Budget and Finance" pagename="Sources"}
 
 <table>
+	<tr class="tablename">
+		<td colspan=3>Sources</td>
+	</tr>
 	<tr class="tableheaderrow">
 		<td >
 			{if $permissions.sourceAdd}

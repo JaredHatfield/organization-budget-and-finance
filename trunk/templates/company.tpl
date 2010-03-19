@@ -25,6 +25,9 @@
 {include file="header.tpl" title="Organization Budget and Finance" pagename="Companies"}
 
 <table>
+	<tr class="tablename">
+		<td colspan=3>Companies</td>
+	</tr>
 	<tr class="tableheaderrow">
 		<td>
 			{if $permissions.companyAdd}

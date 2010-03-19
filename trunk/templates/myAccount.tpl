@@ -26,5 +26,17 @@
 
 {include file="pagelink.tpl" page="home" parms="" text=#images_back#}<br /><br />
 
+<div style="max-width: 500px;">
+	<h2>User: {$user.username}</h2>
+	<h3>Reset Password</h3>
+	<form action="./index.php?page=process" method="post">
+		<span>Password:</span><input type="password" name="user_password" /><br />
+		<span>Confirm Password:</span><input type="password" name="user_password2" /><br />
+		<input type="hidden" name="key" value="{php}echo secureform_add_pk('changePassword', 60, $this->get_template_vars('id')){/php}" />
+		<input type="hidden" name="user_id" value="{$user.id}" />
+		<input type="hidden" name="action" value="changePassword" />
+		<input type="submit" value="Update" />
+	</form>
+</div>
 
 {include file="footer.tpl"}

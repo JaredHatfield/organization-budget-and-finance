@@ -27,7 +27,29 @@
 {include file="pagelink.tpl" page="home" parms="" text=#images_back#}<br /><br />
 
 {if $permissions.admin}
-	
+<table>
+	<tr class="tablename">
+		<td colspan=4>Users</td>
+	</tr>
+	<tr class="tableheaderrow">
+		<td>
+			{#images_blank#}
+		</td>
+		<td class="colmedium">User</td>
+		<td class="colmedium">Group</td>
+		<td class="colsmall">Active</td>
+	</tr>
+{section name=mysec loop=$users}
+	<tr bgcolor="{cycle values="#eeeeee,#dddddd"}" valign=top>
+		<td>
+			{include file="pagelink.tpl" page="adminAccount" parms="userid=`$users[mysec].id`" text=#images_edit#}
+		</td>
+		<td class="colmedium">{$users[mysec].username}</td>
+		<td class="colmedium">{$users[mysec].group}</td>
+		<td class="colsmall">{if $users[mysec].active eq 1}Yes{/if}</td>
+	</tr>
+{/section}
+</table>
 {/if}
 
 {include file="footer.tpl"}
