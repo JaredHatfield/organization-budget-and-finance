@@ -22,12 +22,26 @@
  * @package organization-budget-and-finance
  * @version 1.0
  *}
-{include file="pagelink.tpl" page="register" parms="" text="Register New Account"}
-<form action="./index.php?page=process" method="post">
-	<span>Username:</span><input class="insmall" type="text" name="login_username" />
-	<br />
-	<span>Password:</span><input class="insmall" type="text" name="login_password" />
-	<input type="hidden" name="key" value="{php}echo secureform_add('login', 60){/php}" />
-	<input type="hidden" name="action" value="login" />
-	<input type="submit" value="Login" />
-</form>
+
+{if $permissions.register}
+	{include file="pagelink.tpl" page="register" parms="" text="Register New Account"}
+{/if}
+
+{if !$isAuthenticated}
+	<form action="./index.php?page=process" method="post">
+		<span>Username:</span><input class="insmall" type="text" name="login_username" />
+		<br />
+		<span>Password:</span><input class="insmall" type="password" name="login_password" />
+		<input type="hidden" name="key" value="{php}echo secureform_add('login', 60){/php}" />
+		<input type="hidden" name="action" value="login" />
+		<input type="submit" value="Login" />
+	</form>
+{else}
+	<div style="text-align:right;">
+	({$userInformation.group}) {include file="pagelink.tpl" page="myAccount" parms="" text="`$userInformation.username`"}<br />
+	{if $permissions.admin}
+		{include file="pagelink.tpl" page="adminConsole" parms="" text="Admin Console"}<br />
+	{/if}
+	{include file="pagelink.tpl" page="logout" parms="" text="Logout"}
+	</div>
+{/if}

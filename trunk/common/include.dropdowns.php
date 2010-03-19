@@ -25,6 +25,17 @@
  * @version 1.0
  */
 
+/// Gets the list of valid groups a user can belong to
+function getGroups(){
+	$group[] = Array("value" => "Anonymous", "name" => "Anonymous"); // Not logged in
+	$group[] = Array("value" => "Authenticated", "name" => "Authenticated"); // Logged in but same as Anonymous
+	$group[] = Array("value" => "Registered", "name" => "Registered"); // Can see private items
+	$group[] = Array("value" => "Contributor", "name" => "Contributor"); // Can add/edit receipts
+	$group[] = Array("value" => "Manager", "name" => "Manager"); // Can add/edit/delete anything
+	$group[] = Array("value" => "Administrator", "name" => "Administrator"); // Can do anything
+	return true;
+}
+
 /// Gets the list of valid choices for a source given a specific lineitem but still allows for the specific fundid
 function getSourceSelections($lineitemid, $fundid, $publicOnly){
 	global $database;

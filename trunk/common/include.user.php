@@ -25,5 +25,36 @@
  * @version 1.0
  */
 
+/// Authenticate a user and return their user id; zero if authentication fails
+function authenticateUser($username, $password){
+	global $database;
+	$query = "SELECT IFNULL(MIN(`id`),0) id FROM users WHERE `username` = '" . $username . "' AND `password` = sha1('" . $password . "') LIMIT 1;";
+	$result = $database->exec($query);
+	$row = mysql_fetch_assoc($result);
+	return $row['id'];
+}
+
+/// Get the information about a user
+function getUser($id){
+	global $database;
+	$query = "SELECT `id`, `username`, `group`, `active` FROM users u WHERE `id` = " . intval($id) . ";";
+	$result = $database->exec($query);
+	$row = mysql_fetch_assoc($result);
+	return $row;
+}
+
+/// Determines if the specified number is a valid user id number
+function isUser($id){
+	global $database;
+	$query = "SELECT COUNT(*) number FROM users u WHERE `id` = " . intval($id) . ";";
+	$result = $database->exec($query);
+	$row = mysql_fetch_assoc($result);
+	if($row['number'] == "1"){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
 
 ?>

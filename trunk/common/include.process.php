@@ -231,12 +231,35 @@ function process(){
 		deleteSource($id);
 		return "./index.php?page=source";
 	}
+	else if($_POST['action'] == "login"){
+		$username = mysql_real_escape_string($_POST['login_username']);
+		$password = mysql_real_escape_string($_POST['login_password']);
+		
+		if(!secureform_test($form_key, "login")){
+			return "./index.php?page=error";
+		}
+		
+		$_SESSION['budget_authentication'] = authenticateUser($username, $password);
+		secureform_logout();
+		
+		if($_SESSION['budget_authentication'] == 0){
+			return "./index.php?page=error";
+		}
+		else{
+			return "./index.php";
+		}
+	}
+	else if($_POST['action'] == "register"){
+	
+	}
 	else{
 		echo "<h1>Process not implemented</h1>"; // DEBUG
 		print_r($_POST); // DEBUG
 		exit(); // DEBUG
 		return "./index.php";
 	}
+	
+	return "./index.php?page=error";
 }
 
 ?>
