@@ -37,6 +37,7 @@ $smarty = new Smarty;
 $smarty->compile_check = true;
 //$smarty->debugging = true;
 $smarty->assign("pagename", "");
+$smarty->register_block('dynamic', 'smarty_block_dynamic', false);
 
 
 // Authentication and permission logic
@@ -92,14 +93,28 @@ else if($_GET['page'] == "budget"){
 		pageForbidden();
 	}
 	
-	$smarty->assign("lineitem", getLineItem($parent));
-	$smarty->assign("receipts", getReceiptForLineItem($parent, $permissions['publicOnly']));
-	$smarty->assign("funds", getFundsForLineItem($parent, $permissions['publicOnly']));
-	$smarty->assign("sources",getSourcesForLineItems($parent, $permissions['publicOnly']));
-	$smarty->assign("children", getCompleteLineItemChildren($parent, $permissions['publicOnly']));
+	if($permissions['cacheBudget']){
+		$smarty->caching = 1;
+		$smarty->cache_lifetime = (60 * 60 * 24); // Keep the page for a day
+	}
+	else{
+		$smarty->clear_cache('budget.tpl', $parent);
+	}
+	
+	if(!$smarty->is_cached('budget.tpl', $parent)) {
+		$smarty->assign("lineitem", getLineItem($parent));
+		$smarty->assign("receipts", getReceiptForLineItem($parent, $permissions['publicOnly']));
+		$smarty->assign("funds", getFundsForLineItem($parent, $permissions['publicOnly']));
+		$smarty->assign("sources",getSourcesForLineItems($parent, $permissions['publicOnly']));
+		$smarty->assign("children", getCompleteLineItemChildren($parent, $permissions['publicOnly']));
+	}
+	else{
+		$smarty->assign("pagecache",true);
+	}
+	
 	$nav[] = Array("page" => "budget", "parms" => "", "text" => "Budget");
 	$nav = array_merge($nav, getNavigationForLineItem($parent));
-	$smarty->display('budget.tpl');
+	$smarty->display('budget.tpl', $parent);
 }
 else if($_GET['page'] == "lineitemAdd"){
 	/*******************************************************************************************************

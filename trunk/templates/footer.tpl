@@ -24,7 +24,12 @@
  *}
 	</div>
 	<div id="footerwrapper">
-		<p>The page was generated with {$database->getQueryCount()} queries.</p>
+		{dynamic}
+			<p>The page was generated with {$database->getQueryCount()} queries.</p>
+			{if isset($pagecache)}
+				<p>The contents of this page have been cached to improve performance.</p>
+			{/if}
+		{/dynamic}
 		<p>Powered By: <a href="http://code.google.com/p/organization-budget-and-finance/">organization-budget-and-finance</a></p>
 	</div>
 </div>
