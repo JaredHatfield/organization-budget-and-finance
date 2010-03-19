@@ -28,7 +28,7 @@
 /// Gets the permission values for the specified user
 function getUserPermissions(){
 	// TODO: this should vary these values based on the user's permission
-	$permissions['cacheBudget'] = true;
+	$permissions['cacheBudget'] = false;
 	$permissions['publicOnly'] = false;
 	$permissions['companyAdd'] = true;
 	$permissions['companyEdit'] = true;
