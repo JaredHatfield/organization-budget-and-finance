@@ -51,6 +51,8 @@ $smarty->assign_by_ref("nav",$nav);
 $permissions = Array();
 if(!isset($_SESSION['budget_authentication'])){
 	$_SESSION['budget_authentication'] = 0; // Set user to anonymous
+	$permissions = getUserPermissions("Anonymous");
+	$smarty->assign("isAuthenticated", false);
 }
 else if(isUser($_SESSION['budget_authentication'])){
 	$userInformation = getUser($_SESSION['budget_authentication']);
@@ -380,6 +382,8 @@ else if($_GET['page'] == "adminConsole"){
 	 * Admin Console page
 	 ******************************************************************************************************/
 	
+	// TODO: Implement me!
+	
 	if(!$permissions['admin']){
 		pageForbidden();
 	}
@@ -391,6 +395,9 @@ else if($_GET['page'] == "adminAccount"){
 	/*******************************************************************************************************
 	 * Admin Account page
 	 ******************************************************************************************************/
+	
+	// TODO: Implement me!
+	
 	if(!$permissions['admin']){
 		pageForbidden();
 	}
