@@ -130,6 +130,30 @@ CREATE TABLE `source` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 
+--
+-- Definition of table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(45) NOT NULL,
+  `password` char(40) NOT NULL,
+  `group` varchar(45) NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `Index_username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `users`
+--
+
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` (`id`,`username`,`password`,`group`,`active`) VALUES 
+ (1,'admin','d033e22ae348aeb5660fc2140aec35850c4da997','Administrator',1);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+
 
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
