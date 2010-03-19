@@ -374,6 +374,8 @@ else if($_GET['page'] == "myAccount"){
 		pageForbidden();
 	}
 	
+	$smarty->assign("user", getUser($_SESSION['budget_authentication']));
+	$smarty->assign("id", $_SESSION['budget_authentication']);
 	$nav[] = Array("page" => "myAccount", "parms" => "", "text" => "My Account");
 	$smarty->display('myAccount.tpl');
 }
@@ -381,12 +383,11 @@ else if($_GET['page'] == "adminConsole"){
 	/*******************************************************************************************************
 	 * Admin Console page
 	 ******************************************************************************************************/
-	
-	// TODO: Implement me!
-	
 	if(!$permissions['admin']){
 		pageForbidden();
 	}
+	
+	$smarty->assign("users", getAllUsers());
 	
 	$nav[] = Array("page" => "adminConsole", "parms" => "", "text" => "Admin Console");
 	$smarty->display('adminConsole.tpl');
@@ -395,13 +396,20 @@ else if($_GET['page'] == "adminAccount"){
 	/*******************************************************************************************************
 	 * Admin Account page
 	 ******************************************************************************************************/
+	$userid = getPageId('userid');
 	
-	// TODO: Implement me!
+	// Make sure the page exists and the user as permission to see it
+	if(!isUser($userid)){
+		pageNotFound();
+	}
 	
 	if(!$permissions['admin']){
 		pageForbidden();
 	}
 	
+	$smarty->assign("user", getUser($userid));
+	$smarty->assign("group_selections", getGroups());
+	$smarty->assign("id", $userid);
 	$nav[] = Array("page" => "adminConsole", "parms" => "", "text" => "Admin Console");
 	$nav[] = Array("page" => "adminAccount", "parms" => "", "text" => "Admin Account");
 	$smarty->display('adminAccount.tpl');

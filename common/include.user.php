@@ -57,4 +57,59 @@ function isUser($id){
 	}
 }
 
+/*******************************************************************************************************
+ * Username and Password validators
+ ******************************************************************************************************/
+
+/// Test to see if a username is valid
+function isValidUsername($username){
+	global $database;
+	if(strlen($username) < 5){
+		return false;
+	}
+	else if(strpos($username, " ") != FALSE){
+		return false;
+	}
+	else{
+		$query = "SELECT COUNT(*) number FROM users WHERE `username` = '" . $username . "';";
+		$result = $database->exec($query);
+		$row = mysql_fetch_assoc($result);
+		if($row['number'] == 0){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+}
+
+/// Test to see if a password is valid
+function isValidPassword($password){
+	if(strlen($password) < 5){
+		return false;
+	}
+	else{
+		return true;
+	}
+}
+
+/*******************************************************************************************************
+ * Insert/Update Queries
+ ******************************************************************************************************/
+
+/// Register a new user
+function registerUser($username, $password){
+	global $database;
+	$query = "INSERT INTO users (`username`, `password`, `group`, `active`) VALUES ('" . $username . "', sha1('" . $password . "'), 'Authenticated', 1);";
+	$result = $database->exec($query);
+}
+
+/// Change a user's password
+function changePassword($userid, $password){
+	global $database;
+	$query = "UPDATE users SET `password` = sha1('" . $password . "') WHERE `id` = " . intval($userid) . " LIMIT 1;";
+	$result = $database->exec($query);
+}
+ 
+ 
 ?>

@@ -33,7 +33,7 @@ function getGroups(){
 	$group[] = Array("value" => "Contributor", "name" => "Contributor"); // Can add/edit receipts
 	$group[] = Array("value" => "Manager", "name" => "Manager"); // Can add/edit/delete anything
 	$group[] = Array("value" => "Administrator", "name" => "Administrator"); // Can do anything
-	return true;
+	return $group;
 }
 
 /// Gets the list of valid choices for a source given a specific lineitem but still allows for the specific fundid

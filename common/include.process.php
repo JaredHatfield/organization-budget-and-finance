@@ -44,7 +44,7 @@ function process(){
 			$public = 1;
 		}
 		
-		if(!secureform_test($form_key, "lineitemEdit", $id)){
+		if(!secureform_test_pk($form_key, "lineitemEdit", $id)){
 			return "./index.php?page=error";
 		}
 		
@@ -72,7 +72,7 @@ function process(){
 		$id = mysql_real_escape_string($_POST['lineitem_id']);
 		$lineitem = getLineItem($id);
 		
-		if(!secureform_test($form_key, "lineitemDelete", $id)){
+		if(!secureform_test_pk($form_key, "lineitemDelete", $id)){
 			return "./index.php?page=error";
 		}
 		
@@ -91,7 +91,7 @@ function process(){
 			$public = 1;
 		}
 		
-		if(!secureform_test($form_key, "receiptEdit", $id)){
+		if(!secureform_test_pk($form_key, "receiptEdit", $id)){
 			return "./index.php?page=error";
 		}
 		
@@ -121,7 +121,7 @@ function process(){
 	else if($_POST['action'] == "receiptDelete"){
 		$id = mysql_real_escape_string($_POST['receipt_id']);
 		
-		if(!secureform_test($form_key, "receiptDelete", $id)){
+		if(!secureform_test_pk($form_key, "receiptDelete", $id)){
 			return "./index.php?page=error";
 		}
 		
@@ -134,7 +134,7 @@ function process(){
 		$source = mysql_real_escape_string($_POST['funds_source']);
 		$amount = mysql_real_escape_string($_POST['funds_amount']);
 		
-		if(!secureform_test($form_key, "fundsEdit", $id)){
+		if(!secureform_test_pk($form_key, "fundsEdit", $id)){
 			return "./index.php?page=error";
 		}
 		
@@ -157,7 +157,7 @@ function process(){
 	else if($_POST['action'] == "fundsDelete"){
 		$id = mysql_real_escape_string($_POST['funds_id']);
 		
-		if(!secureform_test($form_key, "fundsDelete", $id)){
+		if(!secureform_test_pk($form_key, "fundsDelete", $id)){
 			return "./index.php?page=error";
 		}
 		
@@ -168,7 +168,7 @@ function process(){
 	else if($_POST['action'] == "companyEdit"){
 		$id = mysql_real_escape_string($_POST['company_id']);
 		$name = mysql_real_escape_string($_POST['company_name']);
-		if(!secureform_test($form_key, "companyEdit", $id)){
+		if(!secureform_test_pk($form_key, "companyEdit", $id)){
 			return "./index.php?page=error";
 		}
 		
@@ -186,7 +186,7 @@ function process(){
 	}
 	else if($_POST['action'] == "companyDelete"){
 		$id = mysql_real_escape_string($_POST['company_id']);
-		if(!secureform_test($form_key, "companyDelete", $id)){
+		if(!secureform_test_pk($form_key, "companyDelete", $id)){
 			return "./index.php?page=error";
 		}
 		
@@ -201,7 +201,7 @@ function process(){
 			$public = 1;
 		}
 		
-		if(!secureform_test($form_key, "sourceEdit", $id)){
+		if(!secureform_test_pk($form_key, "sourceEdit", $id)){
 			return "./index.php?page=error";
 		}
 		
@@ -224,7 +224,7 @@ function process(){
 	}
 	else if($_POST['action'] == "sourceDelete"){
 		$id = mysql_real_escape_string($_POST['source_id']);
-		if(!secureform_test($form_key, "sourceDelete", $id)){
+		if(!secureform_test_pk($form_key, "sourceDelete", $id)){
 			return "./index.php?page=error";
 		}
 		
@@ -250,7 +250,88 @@ function process(){
 		}
 	}
 	else if($_POST['action'] == "register"){
-	
+		$username = mysql_real_escape_string($_POST['register_username']);
+		$password = mysql_real_escape_string($_POST['register_password']);
+		$password2 = mysql_real_escape_string($_POST['register_password2']);
+		
+		if(!secureform_test($form_key, "register")){
+			return "./index.php?page=error";
+		}
+		else if(!isValidUsername($username) || $password != $password2 || !isValidPassword($password)){
+			return "./index.php?page=error";
+		}
+		else{
+			registerUser($username, $password);
+			$_SESSION['budget_authentication'] = authenticateUser($username, $password);
+			secureform_logout();
+			return "./index.php";
+		}
+	}
+	else if($_POST['action'] == "changePassword"){
+		$userid = $_SESSION['budget_authentication'];
+		$password = mysql_real_escape_string($_POST['user_password']);
+		$password2 = mysql_real_escape_string($_POST['user_password2']);
+		
+		if(!secureform_test_pk($form_key, "changePassword", $userid)){
+			return "./index.php?page=error";
+		}
+		else if($password != $password2 || !isValidPassword($password)){
+			return "./index.php?page=error";
+		}
+		else{
+			changePassword($userid, $password);
+			return "./index.php";
+		}
+	}
+	else if($_POST['action'] == "resetPassword"){
+		$userid = mysql_real_escape_string($_POST['user_id']);
+		$password = mysql_real_escape_string($_POST['user_password']);
+		$password2 = mysql_real_escape_string($_POST['user_password2']);
+		
+		if(!secureform_test_pk($form_key, "resetPassword", $userid)){
+			return "./index.php?page=error";
+		}
+		else if($password != $password2 || !isValidPassword($password)){
+			return "./index.php?page=error";
+		}
+		else{
+			changePassword($userid, $password);
+			return "./index.php";
+		}
+	}
+	else if($_POST['action'] == "changeGroup"){
+		$userid = mysql_real_escape_string($_POST['user_id']);
+		$group = mysql_real_escape_string($_POST['user_group']);
+		
+		if(!secureform_test_pk($form_key, "changeGroup", $userid)){
+			return "./index.php?page=error";
+		}
+		else{
+			setUserGroup($userid, $group);
+			return "./index.php?page=adminAccount&userid=" . $userid;
+		}
+	}
+	else if($_POST['action'] == "setUserActive"){
+		$userid = mysql_real_escape_string($_POST['user_id']);
+		
+		if(!secureform_test_pk($form_key, "setUserActive", $userid)){
+			return "./index.php?page=error";
+		}
+		else{
+			setUserActive($userid);
+			return "./index.php?page=adminAccount&userid=" . $userid;
+		}
+	}
+	else if($_POST['action'] == "setUserInactive"){
+		$userid = mysql_real_escape_string($_POST['user_id']);
+		
+		if(!secureform_test_pk($form_key, "setUserInactive", $userid)){
+			return "./index.php?page=error";
+		}
+		else{
+			setUserInactive($userid);
+			return "./index.php?page=adminAccount&userid=" . $userid;
+		}
 	}
 	else{
 		echo "<h1>Process not implemented</h1>"; // DEBUG
