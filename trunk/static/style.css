@@ -3,6 +3,9 @@
 }
 
 #headerwrapper{
+	background-color: lightgrey;
+	padding: 15px;
+	min-height: 65px;
 }
 
 #mainwrapper{
@@ -12,6 +15,10 @@
 #footerwrapper{
 	text-align: center;
 	font-size:10px
+}
+
+#loginbox{
+	float: right;
 }
 
 a {
@@ -25,8 +32,15 @@ a:hover{
 
 h1, h2, h3{
 	color: green;
-	background-color: lightgrey;
 	padding: 10px;
+}
+
+h1{
+	display: inline; 
+}
+
+h2{
+	background-color: lightgray;
 }
 
 h3{
@@ -56,5 +70,17 @@ td.colmedium{
 }
 
 td.collarge{
+	width: 300px;
+}
+
+input.insmall{
+	width: 100px;
+}
+
+input.inmedium{
+	width: 200px;
+}
+
+input.inlarge{
 	width: 300px;
 }

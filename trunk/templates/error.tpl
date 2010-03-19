@@ -22,7 +22,7 @@
  * @package organization-budget-and-finance
  * @version 1.0
  *}
-{include file="header.tpl" title="Organization Budget and Finance"}
+{include file="header.tpl" title="Organization Budget and Finance" pagename="Error"}
 
 <h1>Error!</h1>
 <h2>{$message}</h2>

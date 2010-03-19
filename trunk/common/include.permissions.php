@@ -45,6 +45,8 @@ function getUserPermissions(){
 	$permissions['sourceAdd'] = true;
 	$permissions['sourceEdit'] = true;
 	$permissions['sourceDelete'] = true;
+	$permissions['register'] = true;
+	$permissions['admin'] = true;
 	return $permissions;
 }
 

@@ -32,6 +32,9 @@
 <div id="bodywrapper">
 	<div id="headerwrapper">
 		<h1><a href="./index.php">Organization Budget and Finance</a></h1>
+		<div id="loginbox">
+			{include file="login.tpl"}
+		</div>
 	</div>
 	<div id="mainwrapper">
 	<h2>

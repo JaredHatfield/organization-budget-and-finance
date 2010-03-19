@@ -22,7 +22,7 @@
  * @package organization-budget-and-finance
  * @version 1.0
  *}
-{include file="header.tpl" title="Organization Budget and Finance"}
+{include file="header.tpl" title="Organization Budget and Finance" pagename="Home"}
 
 {include file="pagelink.tpl" page="budget" parms="" text="Budget"}<br />
 {include file="pagelink.tpl" page="company" parms="" text="Companies"}<br />
