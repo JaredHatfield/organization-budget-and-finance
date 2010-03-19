@@ -26,5 +26,8 @@
 
 {include file="pagelink.tpl" page="home" parms="" text=#images_back#}<br /><br />
 
+{if $permissions.admin}
+	
+{/if}
 
 {include file="footer.tpl"}

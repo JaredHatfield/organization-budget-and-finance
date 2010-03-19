@@ -26,28 +26,135 @@
  */
 
 /// Gets the permission values for the specified user
-function getUserPermissions(){
-	// TODO: this should vary these values based on the user's permission
-	$permissions['cacheBudget'] = false;
-	$permissions['publicOnly'] = false;
-	$permissions['companyAdd'] = true;
-	$permissions['companyEdit'] = true;
-	$permissions['companyDelete'] = true;
-	$permissions['fundsAdd'] = true;
-	$permissions['fundsEdit'] = true;
-	$permissions['fundsDelete'] = true;
-	$permissions['lineitemAdd'] = true;
-	$permissions['lineitemEdit'] = true;
-	$permissions['lineitemDelete'] = true;
-	$permissions['receiptAdd'] = true;
-	$permissions['receiptEdit'] = true;
-	$permissions['receiptDelete'] = true;
-	$permissions['sourceAdd'] = true;
-	$permissions['sourceEdit'] = true;
-	$permissions['sourceDelete'] = true;
-	$permissions['register'] = true;
-	$permissions['admin'] = true;
-	return $permissions;
+function getUserPermissions($group){
+	switch($group){
+		case "Administrator":
+			$permissions['cacheBudget'] = false;
+			$permissions['publicOnly'] = false;
+			$permissions['companyAdd'] = true;
+			$permissions['companyEdit'] = true;
+			$permissions['companyDelete'] = true;
+			$permissions['fundsAdd'] = true;
+			$permissions['fundsEdit'] = true;
+			$permissions['fundsDelete'] = true;
+			$permissions['lineitemAdd'] = true;
+			$permissions['lineitemEdit'] = true;
+			$permissions['lineitemDelete'] = true;
+			$permissions['receiptAdd'] = true;
+			$permissions['receiptEdit'] = true;
+			$permissions['receiptDelete'] = true;
+			$permissions['sourceAdd'] = true;
+			$permissions['sourceEdit'] = true;
+			$permissions['sourceDelete'] = true;
+			$permissions['register'] = false;
+			$permissions['admin'] = true;
+			return $permissions;
+		case "Manager":
+			$permissions['cacheBudget'] = false;
+			$permissions['publicOnly'] = false;
+			$permissions['companyAdd'] = true;
+			$permissions['companyEdit'] = true;
+			$permissions['companyDelete'] = true;
+			$permissions['fundsAdd'] = true;
+			$permissions['fundsEdit'] = true;
+			$permissions['fundsDelete'] = true;
+			$permissions['lineitemAdd'] = true;
+			$permissions['lineitemEdit'] = true;
+			$permissions['lineitemDelete'] = true;
+			$permissions['receiptAdd'] = true;
+			$permissions['receiptEdit'] = true;
+			$permissions['receiptDelete'] = true;
+			$permissions['sourceAdd'] = true;
+			$permissions['sourceEdit'] = true;
+			$permissions['sourceDelete'] = true;
+			$permissions['register'] = false;
+			$permissions['admin'] = false;
+			return $permissions;
+		case "Contributor":
+			$permissions['cacheBudget'] = false;
+			$permissions['publicOnly'] = false;
+			$permissions['companyAdd'] = false;
+			$permissions['companyEdit'] = false;
+			$permissions['companyDelete'] = false;
+			$permissions['fundsAdd'] = false;
+			$permissions['fundsEdit'] = false;
+			$permissions['fundsDelete'] = false;
+			$permissions['lineitemAdd'] = false;
+			$permissions['lineitemEdit'] = false;
+			$permissions['lineitemDelete'] = false;
+			$permissions['receiptAdd'] = true;
+			$permissions['receiptEdit'] = true;
+			$permissions['receiptDelete'] = false;
+			$permissions['sourceAdd'] = false;
+			$permissions['sourceEdit'] = false;
+			$permissions['sourceDelete'] = false;
+			$permissions['register'] = false;
+			$permissions['admin'] = false;
+			return $permissions;
+		case "Registered":
+			$permissions['cacheBudget'] = false;
+			$permissions['publicOnly'] = false;
+			$permissions['companyAdd'] = false;
+			$permissions['companyEdit'] = false;
+			$permissions['companyDelete'] = false;
+			$permissions['fundsAdd'] = false;
+			$permissions['fundsEdit'] = false;
+			$permissions['fundsDelete'] = false;
+			$permissions['lineitemAdd'] = false;
+			$permissions['lineitemEdit'] = false;
+			$permissions['lineitemDelete'] = false;
+			$permissions['receiptAdd'] = false;
+			$permissions['receiptEdit'] = false;
+			$permissions['receiptDelete'] = false;
+			$permissions['sourceAdd'] = false;
+			$permissions['sourceEdit'] = false;
+			$permissions['sourceDelete'] = false;
+			$permissions['register'] = false;
+			$permissions['admin'] = false;
+			return $permissions;
+		case "Authenticated":
+			$permissions['cacheBudget'] = true;
+			$permissions['publicOnly'] = true;
+			$permissions['companyAdd'] = false;
+			$permissions['companyEdit'] = false;
+			$permissions['companyDelete'] = false;
+			$permissions['fundsAdd'] = false;
+			$permissions['fundsEdit'] = false;
+			$permissions['fundsDelete'] = false;
+			$permissions['lineitemAdd'] = false;
+			$permissions['lineitemEdit'] = false;
+			$permissions['lineitemDelete'] = false;
+			$permissions['receiptAdd'] = false;
+			$permissions['receiptEdit'] = false;
+			$permissions['receiptDelete'] = false;
+			$permissions['sourceAdd'] = false;
+			$permissions['sourceEdit'] = false;
+			$permissions['sourceDelete'] = false;
+			$permissions['register'] = false;
+			$permissions['admin'] = false;
+			return $permissions;
+		default: // Anonymous
+			$permissions['cacheBudget'] = true;
+			$permissions['publicOnly'] = true;
+			$permissions['companyAdd'] = false;
+			$permissions['companyEdit'] = false;
+			$permissions['companyDelete'] = false;
+			$permissions['fundsAdd'] = false;
+			$permissions['fundsEdit'] = false;
+			$permissions['fundsDelete'] = false;
+			$permissions['lineitemAdd'] = false;
+			$permissions['lineitemEdit'] = false;
+			$permissions['lineitemDelete'] = false;
+			$permissions['receiptAdd'] = false;
+			$permissions['receiptEdit'] = false;
+			$permissions['receiptDelete'] = false;
+			$permissions['sourceAdd'] = false;
+			$permissions['sourceEdit'] = false;
+			$permissions['sourceDelete'] = false;
+			$permissions['register'] = true;
+			$permissions['admin'] = false;
+			return $permissions;
+	}
 }
 
 

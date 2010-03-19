@@ -131,4 +131,10 @@ function secureform_purge(){
 	$result = $database->exec($query);
 }
 
+function secureform_logout(){
+	global $database;
+	$query = "DELETE FROM form WHERE `session` = '" . session_id() . "';";
+	$result = $database->exec($query);
+}
+
 ?>

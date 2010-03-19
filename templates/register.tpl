@@ -24,7 +24,18 @@
  *}
 {include file="header.tpl" title="Organization Budget and Finance" pagename="Register"}
 
-{include file="pagelink.tpl" page="home" parms="" text=#images_back#}<br /><br />
+{if $permissions.register}
+<form action="./index.php?page=process" method="post">
+	<span>Username:</span><input class="insmall" type="text" name="login_username" /><br />
+	<span>Password:</span><input class="insmall" type="password" name="login_password" /><br />
+	<span>Confirm Password:</span><input class="insmall" type="password" name="login_password2" /><br />
+	<input type="hidden" name="key" value="{php}echo secureform_add('register', 60){/php}" />
+	<input type="hidden" name="action" value="register" />
+	<input type="submit" value="Register" />
+</form>
+{else}
+<h3>Registration disabled.</h3>
+{/if}
 
 
 {include file="footer.tpl"}

@@ -40,15 +40,38 @@ $smarty->assign("pagename", "");
 $smarty->register_block('dynamic', 'smarty_block_dynamic', false);
 
 
-// Authentication and permission logic
-// TODO: Authenticate the user
-$permissions = getUserPermissions();
-$smarty->assign("permissions", $permissions);
-
 
 // Navigation higherarchy
 $nav[] = Array("page" => "home", "parms" => "", "text" => "Home");
 $smarty->assign_by_ref("nav",$nav);
+
+
+
+// Authentication and permission logic
+$permissions = Array();
+if(!isset($_SESSION['budget_authentication'])){
+	$_SESSION['budget_authentication'] = 0; // Set user to anonymous
+}
+else if(isUser($_SESSION['budget_authentication'])){
+	$userInformation = getUser($_SESSION['budget_authentication']);
+	$smarty->assign("userInformation", $userInformation);
+	$smarty->assign("isAuthenticated", true);
+	$permissions = getUserPermissions($userInformation['group']);
+	
+	if($userInformation['active'] == 0){
+		$_SESSION['budget_authentication'] = 0;
+		$smarty->assign("message", "Your account has been disabled.");
+		$smarty->display('error.tpl');
+		exit();
+	}
+}
+else{
+	$permissions = getUserPermissions("Anonymous");
+	$smarty->assign("isAuthenticated", false);
+}
+$smarty->assign("permissions", $permissions);
+
+
 
 // Query information
 $smarty->assign_by_ref("database", $database);
@@ -337,13 +360,18 @@ else if($_GET['page'] == "register"){
 	/*******************************************************************************************************
 	 * Register page
 	 ******************************************************************************************************/
-	$nav[] = Array("page" => "register", "parms" => "", "text" => "Register");
+	$nav[] = Array("page" => "register", "parms" => "", "text" => "Register New Account");
 	$smarty->display('register.tpl');
 }
 else if($_GET['page'] == "myAccount"){
 	/*******************************************************************************************************
 	 * My Account page
 	 ******************************************************************************************************/
+	
+	if(!isUser($_SESSION['budget_authentication'])){
+		pageForbidden();
+	}
+	
 	$nav[] = Array("page" => "myAccount", "parms" => "", "text" => "My Account");
 	$smarty->display('myAccount.tpl');
 }
@@ -351,6 +379,11 @@ else if($_GET['page'] == "adminConsole"){
 	/*******************************************************************************************************
 	 * Admin Console page
 	 ******************************************************************************************************/
+	
+	if(!$permissions['admin']){
+		pageForbidden();
+	}
+	
 	$nav[] = Array("page" => "adminConsole", "parms" => "", "text" => "Admin Console");
 	$smarty->display('adminConsole.tpl');
 }
@@ -358,9 +391,19 @@ else if($_GET['page'] == "adminAccount"){
 	/*******************************************************************************************************
 	 * Admin Account page
 	 ******************************************************************************************************/
+	if(!$permissions['admin']){
+		pageForbidden();
+	}
+	
 	$nav[] = Array("page" => "adminConsole", "parms" => "", "text" => "Admin Console");
 	$nav[] = Array("page" => "adminAccount", "parms" => "", "text" => "Admin Account");
 	$smarty->display('adminAccount.tpl');
+}
+else if($_GET['page'] == "logout"){
+	$_SESSION['budget_authentication'] = 0;
+	secureform_logout();
+	$smarty->assign("url","./index.php");
+	$smarty->display('redirect.tpl');
 }
 else if($_GET['page'] == "error"){
 	/*******************************************************************************************************
