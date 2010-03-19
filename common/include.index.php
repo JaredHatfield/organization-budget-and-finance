@@ -33,6 +33,8 @@ include_once("./common/include.company.php");
 include_once("./common/include.source.php");
 include_once("./common/include.dropdowns.php");
 include_once("./common/include.process.php");
+include_once("./common/include.user.php");
+include_once("./common/include.admin.php");
 include_once("./common/include.form.protect.php");
 include_once("./common/include.permissions.php");
 
