@@ -25,6 +25,13 @@
  * @version 1.0
  */
 
+/// Gets a list with only the options true and false
+function getBooleanSelections(){
+	$options[] = Array("value" => true, "name" => "Yes");
+	$options[] = Array("value" => false, "name" => "No");
+	return $options;
+}
+
 /// Gets the list of valid groups a user can belong to
 function getGroups(){
 	$group[] = Array("value" => "Anonymous", "name" => "Anonymous"); // Not logged in

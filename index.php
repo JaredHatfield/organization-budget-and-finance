@@ -391,6 +391,7 @@ else if($_GET['page'] == "myAccount"){
 	
 	$smarty->assign("user", getUser($_SESSION['budget_authentication']));
 	$smarty->assign("id", $_SESSION['budget_authentication']);
+	$smarty->assign("booleanOptions", getBooleanSelections());
 	$nav[] = Array("page" => "myAccount", "parms" => "", "text" => "My Account");
 	$smarty->assign("selectedTab","My Account");
 	$smarty->display('myAccount.tpl');

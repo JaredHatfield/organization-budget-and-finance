@@ -30,7 +30,7 @@
  * $dd_selected - the value in the array that is selected
  *}
  
-<select name="{$dd_name}">
+<select name="{$dd_name}" {if isset($disabled)}disabled="disabled" {/if}>
 	{section name=ddloop loop=$dd_selection}
 		{if $dd_selection[ddloop].value == $dd_selected}
 			<option value="{$dd_selection[ddloop].value}" selected="selected">{$dd_selection[ddloop].name}</option>
