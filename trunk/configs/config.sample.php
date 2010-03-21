@@ -36,7 +36,7 @@ $_CONFIG['smarty'] = '../libs/Smarty.class.php';
 
 // Database Settings
 $_CONFIG['host'] = 'localhost';
-$_CONFIG['database'] = 'finance';
+$_CONFIG['database'] = 'budget';
 $_CONFIG['username'] = 'username';
 $_CONFIG['password'] = 'password';
 
