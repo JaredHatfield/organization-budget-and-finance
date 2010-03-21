@@ -27,12 +27,17 @@
 {if $permissions.fundsAdd}
 {if $source_selections|@count > 0}
 <form action="./index.php?page=process" method="post">
-	<span>Source:</span>{include file="dropdown.tpl" dd_selection=$source_selections dd_name="funds_source" dd_selected="-1"}<br />
-	<span>Amount:</span><input type="text" name="funds_amount" /><br />
-	<input type="hidden" name="funds_lineitem" value="{$lineitem.id}" />
-	<input type="hidden" name="key" value="{php}echo secureform_add('fundsAdd', 60){/php}" />
-	<input type="hidden" name="action" value="fundsAdd" />
-	<input type="submit" value="Update" />
+	<fieldset>
+	<legend>Add Funds</legend>
+	<p><label>Source:</label>{include file="dropdown.tpl" dd_selection=$source_selections dd_name="funds_source" dd_selected="-1"}</p>
+	<p><label>Amount:</label><input type="text" name="funds_amount" /></p>
+	<p class="submit">
+		<input type="hidden" name="funds_lineitem" value="{$lineitem.id}" />
+		<input type="hidden" name="key" value="{php}echo secureform_add('fundsAdd', 60){/php}" />
+		<input type="hidden" name="action" value="fundsAdd" />
+		<input type="submit" value="Update" />
+	</p>
+	</fieldset>
 </form>
 {else}
 <h3>There are no unused fund sources.</h3>

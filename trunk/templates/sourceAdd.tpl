@@ -26,15 +26,22 @@
 
 {if $permissions.sourceAdd}
 <form action="./index.php?page=process" method="post">
-	<span>Name:</span><input type="text" name="source_name" /><br />
+	<fieldset>
+	<legend>Add Source</legend>
+	<p><label>Name:</label><input type="text" name="source_name" /></p>
+	<p>
 	{if $permissions.publicOnly}
 	<input type="hidden" name="source_public" value="yes" />
 	{else}
-	<span>Public:</span><input type="checkbox" name="source_public" value="yes" checked="checked" /><br />
+	<label>Public:</label><input type="checkbox" name="source_public" value="yes" checked="checked" /><br />
 	{/if}
-	<input type="hidden" name="key" value="{php}echo secureform_add('sourceAdd', 60){/php}" />
-	<input type="hidden" name="action" value="sourceAdd" />
-	<input type="submit" value="Add" />
+	</p>
+	<p class="submit">
+		<input type="hidden" name="key" value="{php}echo secureform_add('sourceAdd', 60){/php}" />
+		<input type="hidden" name="action" value="sourceAdd" />
+		<input type="submit" value="Add" />
+	</p>
+	</fieldset>
 </form>
 {/if}
 
