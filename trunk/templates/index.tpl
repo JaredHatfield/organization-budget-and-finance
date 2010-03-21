@@ -24,21 +24,6 @@
  *}
 {include file="header.tpl" title="Organization Budget and Finance" pagename="Home"}
 
-{if !$isAuthenticated}
-	<form action="./index.php?page=process" method="post">
-		<fieldset>
-		<legend>Login</legend>
-		<p><label>Username:</label><input class="insmall" type="text" name="login_username" /></p>
-		<p><label>Password:</label><input class="insmall" type="password" name="login_password" /></p>
-		<p class="submit">
-			<input type="hidden" name="key" value="{php}echo secureform_add('login', 60){/php}" />
-			<input type="hidden" name="action" value="login" />
-			<input type="submit" value="Login" />
-		</p>
-		</fieldset>
-	</form>
-{else}
-You have successfully logged in!
-{/if}
+{include file="login.tpl"}
 
 {include file="footer.tpl"}

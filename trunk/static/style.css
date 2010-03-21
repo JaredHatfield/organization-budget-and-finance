@@ -100,10 +100,6 @@ tr.rowTypeA, tr.rowTypeB, a:hover{
 	font-size:10px
 }
 
-#loginbox{
-	float: right;
-}
-
 a {
 	text-decoration:none;
 }
@@ -207,7 +203,6 @@ legend
 
 /* The tab menu at the top of the page used for navigation */
 #tabmenu {
-	color: #000;
 	top: 48px;
 	padding: ;
 	margin: 15px 0px 0px 0px;
@@ -217,9 +212,13 @@ legend
 #tabmenu li {
 	display: inline;
 	overflow: hidden;
-	margin: 15px; 
+	margin: 5px; 
 	border: 0;
 	list-style-type: none;
+}
+
+#tabmenu li a{
+	padding: 10px 10px 1px 10px;
 }
 
 #tabmenu a:hover {
@@ -227,4 +226,11 @@ legend
 	background: #ffffdd;
 }
 
+#selectedtab a{
+	color: #556644;
+	background: #ffffdd;
+}
+
+#selectedtab a:hover {
+}
 
