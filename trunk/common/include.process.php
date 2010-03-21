@@ -27,6 +27,7 @@
 
 
 function process(){
+	global $_CONFIG;
 	
 	if(!isset($_POST['action']) || !isset($_POST['key'])){
 		return "./index.php?page=error";
@@ -254,7 +255,25 @@ function process(){
 		$password = mysql_real_escape_string($_POST['register_password']);
 		$password2 = mysql_real_escape_string($_POST['register_password2']);
 		
-		if(!secureform_test($form_key, "register")){
+		// Determine if the captcha was entered in correctly
+		$recaptcha_fail = true;
+		$recaptcha_error = "";
+		if (isset($_POST["recaptcha_response_field"])) {
+			// The post variables are not escaped here, but since they don't touch the database we should be safe
+			$resp = recaptcha_check_answer($_CONFIG['recaptcha_private'], $_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"], $_POST["recaptcha_response_field"]);
+			if ($resp->is_valid) {
+                $recaptcha_fail = false;
+			} else {
+                // Set the error code so that we can display it
+                $recaptcha_error = $resp->error;
+			}
+		}
+		
+		// Process the response
+		if(isRecaptchaEnabled() && $recaptcha_fail){
+			return "./index.php?page=error";
+		}
+		else if(!secureform_test($form_key, "register")){
 			return "./index.php?page=error";
 		}
 		else if(!isValidUsername($username) || $password != $password2 || !isValidPassword($password)){

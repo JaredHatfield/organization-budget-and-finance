@@ -40,4 +40,8 @@ $_CONFIG['database'] = 'budget';
 $_CONFIG['username'] = 'username';
 $_CONFIG['password'] = 'password';
 
+// reCAPTCHA Settings
+$_CONFIG['recaptcha_public'] = ""; // To enable, fill in public key
+$_CONFIG['recaptcha_private'] = ""; // To enable, fill in private key
+
 ?>
