@@ -33,7 +33,7 @@ function getReceiptForLineItem($lineitem, $publicOnly){
 	if($publicOnly){
 		$query .= "AND r.`public` = 1 ";
 	}
-	$query .= ";";
+	$query .= "ORDER BY r.`rdate`;";
 	$result = $database->exec($query);
 	$val = array();
 	while($row = mysql_fetch_assoc($result)){
