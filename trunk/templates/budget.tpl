@@ -25,8 +25,8 @@
 {include file="header.tpl" title="Organization Budget and Finance" pagename="Budget"}
 
 {if $lineitem.id > 1}
-{include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.parent`" text=#images_back#}
-{$lineitem.name} ({$lineitem.description})<br />
+<h2>{$lineitem.name}</h2>
+<h4>{$lineitem.description}</h4>
 
 <table>
 	<tr class="tablename">
@@ -53,7 +53,7 @@
 		{/if}
 	</tr>
 {section name=mysec loop=$receipts}
-	<tr bgcolor="{cycle values="#eeeeee,#dddddd"}" valign=top>
+	<tr class="{cycle values="rowTypeA,rowTypeB"}" valign=top>
 		<td>
 			{if $permissions.receiptEdit || $permissions.receiptDelete}
 				{include file="pagelink.tpl" page="receiptEdit" parms="receiptid=`$receipts[mysec].id`" text=#images_edit#}
@@ -101,7 +101,7 @@
 		{/if}
 	</tr>
 {section name=mysec loop=$funds}
-	<tr bgcolor="{cycle values="#eeeeee,#dddddd"}">
+	<tr class="{cycle values="rowTypeA,rowTypeB"}">
 		<td>
 			{if $permissions.fundsEdit || $permissions.fundsDelete}
 				{include file="pagelink.tpl" page="fundsEdit" parms="fundsid=`$funds[mysec].id`" text=#images_edit#}
@@ -141,7 +141,7 @@
 		{/if}
 	</tr>
 {section name=mysec loop=$children}
-	<tr bgcolor="{cycle values="#eeeeee,#dddddd"}">
+	<tr class="{cycle values="rowTypeA,rowTypeB"}">
 		<td>{strip}
 			{if $children[mysec].id > 0 && ($permissions.lineitemEdit || $permissions.lineitemDelete)}
 				{include file="pagelink.tpl" page="lineitemEdit" parms="lineid=`$children[mysec].id`" text=#images_edit#}

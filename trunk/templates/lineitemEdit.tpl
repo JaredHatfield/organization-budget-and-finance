@@ -24,19 +24,8 @@
  *}
  {include file="header.tpl" title="Organization Budget and Finance" pagename="Edit Line Item"}
 
-{include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.parent`" text=#images_back#}<br /><br />
-
 {if $permissions.publicOnly && $lineitem.public == 0}{* PUBLIC ONLY *}
 {else}
-
-{if $lineitemCount == 0 && $permissions.lineitemDelete}
-	<form action="./index.php?page=process" method="post">
-		<input type="hidden" name="lineitem_id" value="{$lineitem.id}" />
-		<input type="hidden" name="key" value="{php}echo secureform_add_pk('lineitemDelete', 60, $this->get_template_vars('id')){/php}" />
-		<input type="hidden" name="action" value="lineitemDelete" />
-		<input type="submit" value="Delete" />
-	</form>
-{/if}
 
 {if $permissions.lineitemEdit}
 <form action="./index.php?page=process" method="post">
@@ -58,6 +47,17 @@
 	<input type="hidden" name="action" value="lineitemEdit" />
 	<input type="submit" value="Update" />
 </form>
+{/if}
+
+<br />
+
+{if $lineitemCount == 0 && $permissions.lineitemDelete}
+	<form action="./index.php?page=process" method="post">
+		<input type="hidden" name="lineitem_id" value="{$lineitem.id}" />
+		<input type="hidden" name="key" value="{php}echo secureform_add_pk('lineitemDelete', 60, $this->get_template_vars('id')){/php}" />
+		<input type="hidden" name="action" value="lineitemDelete" />
+		<input type="submit" value="Delete" />
+	</form>
 {/if}
 
 {/if}

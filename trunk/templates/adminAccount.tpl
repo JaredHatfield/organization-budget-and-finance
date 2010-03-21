@@ -24,8 +24,6 @@
  *}
 {include file="header.tpl" title="Organization Budget and Finance" pagename="Admin Account"}
 
-{include file="pagelink.tpl" page="adminConsole" parms="" text=#images_back#}<br /><br />
-
 {if $permissions.admin}
 	<div style="max-width: 500px;">
 	<h2>User: {$user.username}</h2>

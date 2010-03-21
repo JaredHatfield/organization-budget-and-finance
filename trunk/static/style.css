@@ -1,11 +1,83 @@
+
+/* Set all of the colors */
+
+/* The background color of the page */
+body{
+	background-color: #ffffdd;
+}
+
+/* The heading background color */
+#headerwrapper{
+	background-color: #888877;
+}
+
+#headerwrapper a{
+	color: #ffffdd;
+}
+
+#headerwrapper a:hover{
+	color: white;
+}
+
+/* The color of the links */
+a{
+	color: #556644;
+}
+
+/* The color of the links on the table */
+tr.rowTypeA a, tr.rowTypeB a {
+	color: #A80000;
+}
+
+/* The color of the links on the table */
+tr.rowTypeA a:hover, tr.rowTypeB a:hover{
+	color: #FF0000;
+}
+
+/* The table header background */
+tr.tablename, tr.tableheaderrow{
+	background-color: #556644;
+}
+
+/* The heading text color */
+h2, h3, h4 {
+	color: #556644;
+}
+
+/* The table header text */
+tr.tablename, tr.tableheaderrow{
+	color: #ffffcc;
+}
+
+/* Row Type A Background */
+tr.rowTypeA{
+	background-color: #88aa66;
+}
+
+/* Row Type B Background */
+tr.rowTypeB{
+	background-color: #aabb77;
+}
+
+/* The text color */
+tr.rowTypeA, tr.rowTypeB, a:hover{
+	color: black;
+}
+
+
+
+/* Everything else... */
 #bodywrapper{
 	margin: 20px;
 }
 
 #headerwrapper{
-	background-color: lightgrey;
 	padding: 15px;
 	min-height: 65px;
+}
+
+#headerwrapper a{
+	text-decoration:none;
 }
 
 #mainwrapper{
@@ -23,41 +95,23 @@
 
 a {
 	text-decoration:none;
-	color: green; 
 }
 
-a:hover{
-	color: blue;
-}
-
-h1, h2, h3{
-	color: green;
-	padding: 10px;
+a img {
+	border: none;
 }
 
 h1{
 	display: inline; 
 }
 
-h2{
-	background-color: lightgray;
-}
-
-h3{
-	background-color: #EEEEEE;
-}
-
 tr.tablename{
-	background-color: lightgray;
-	color: black;
 	text-align: center;
 	font-weight: bold;
 	font-size: 20;
 }
 
 tr.tableheaderrow{
-	background-color: #888888;
-	color: white;
 	font-weight: bold;
 }
 

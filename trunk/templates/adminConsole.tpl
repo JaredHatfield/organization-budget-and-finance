@@ -24,8 +24,6 @@
  *}
 {include file="header.tpl" title="Organization Budget and Finance" pagename="Admin Console"}
 
-{include file="pagelink.tpl" page="home" parms="" text=#images_back#}<br /><br />
-
 {if $permissions.admin}
 <table>
 	<tr class="tablename">
@@ -40,7 +38,7 @@
 		<td class="colsmall">Active</td>
 	</tr>
 {section name=mysec loop=$users}
-	<tr bgcolor="{cycle values="#eeeeee,#dddddd"}" valign=top>
+	<tr class="{cycle values="rowTypeA,rowTypeB"}" valign=top>
 		<td>
 			{include file="pagelink.tpl" page="adminAccount" parms="userid=`$users[mysec].id`" text=#images_edit#}
 		</td>
