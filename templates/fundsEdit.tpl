@@ -24,19 +24,8 @@
  *}
 {include file="header.tpl" title="Organization Budget and Finance" pagename="Edit Funds"}
 
-{include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.id`" text=#images_back#}<br /><br />
-
 {if $permissions.publicOnly && $source.public == 0}{* PUBLIC ONLY *}
 {else}
-
-{if $permissions.fundsDelete}
-<form action="./index.php?page=process" method="post">
-	<input type="hidden" name="funds_id" value="{$funds.id}" />
-	<input type="hidden" name="key" value="{php}echo secureform_add_pk('fundsDelete', 60, $this->get_template_vars('id')){/php}" />
-	<input type="hidden" name="action" value="fundsDelete" />
-	<input type="submit" value="Delete" />
-</form>
-{/if}
 
 {if $permissions.fundsEdit}
 <form action="./index.php?page=process" method="post">
@@ -46,6 +35,17 @@
 	<input type="hidden" name="key" value="{php}echo secureform_add_pk('fundsEdit', 60, $this->get_template_vars('id')){/php}" />
 	<input type="hidden" name="action" value="fundsEdit" />
 	<input type="submit" value="Update" />
+</form>
+{/if}
+
+<br />
+
+{if $permissions.fundsDelete}
+<form action="./index.php?page=process" method="post">
+	<input type="hidden" name="funds_id" value="{$funds.id}" />
+	<input type="hidden" name="key" value="{php}echo secureform_add_pk('fundsDelete', 60, $this->get_template_vars('id')){/php}" />
+	<input type="hidden" name="action" value="fundsDelete" />
+	<input type="submit" value="Delete" />
 </form>
 {/if}
 

@@ -24,8 +24,6 @@
  *}
 {include file="header.tpl" title="Organization Budget and Finance" pagename="Add Funds"}
 
-{include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.id`" text=#images_back#}<br /><br />
-
 {if $permissions.fundsAdd}
 {if $source_selections|@count > 0}
 <form action="./index.php?page=process" method="post">

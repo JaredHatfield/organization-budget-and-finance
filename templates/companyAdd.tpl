@@ -24,8 +24,6 @@
  *}
 {include file="header.tpl" title="Organization Budget and Finance" pagename="Add Company"}
 
-{include file="pagelink.tpl" page="company" text=#images_back#}<br />
-
 {if $permissions.companyAdd}
 <form action="./index.php?page=process" method="post">
 	<span>Name:</span><input type="text" name="company_name" /><br />

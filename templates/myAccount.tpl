@@ -24,8 +24,6 @@
  *}
 {include file="header.tpl" title="Organization Budget and Finance" pagename="My Account"}
 
-{include file="pagelink.tpl" page="home" parms="" text=#images_back#}<br /><br />
-
 <div style="max-width: 500px;">
 	<h2>User: {$user.username}</h2>
 	<h3>Reset Password</h3>

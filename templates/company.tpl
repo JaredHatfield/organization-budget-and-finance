@@ -39,7 +39,7 @@
 		<td class="colmedium">Company Name</td>
 	</tr>
 {section name=mysec loop=$companies}
-	<tr bgcolor="{cycle values="#eeeeee,#dddddd"}" valign=top>
+	<tr class="{cycle values="rowTypeA,rowTypeB"}" valign=top>
 		<td>
 			{if $permissions.companyEdit || $permissions.companyDelete}
 				{include file="pagelink.tpl" page="companyEdit" parms="companyid=`$companies[mysec].id`" text=#images_edit#}

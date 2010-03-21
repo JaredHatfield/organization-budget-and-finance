@@ -24,8 +24,6 @@
  *}
 {include file="header.tpl" title="Organization Budget and Finance" pagename="Add Line Item"}
 
-{include file="pagelink.tpl" page="budget" parms="lineid=`$lineitemParent.id`" text=#images_back#}<br /><br />
-
 {if $permissions.lineitemAdd}
 <form action="./index.php?page=process" method="post">
 	<span>Name:</span><input type="text" name="lineitem_name" /><br />

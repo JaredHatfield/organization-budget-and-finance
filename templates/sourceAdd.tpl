@@ -24,8 +24,6 @@
  *}
 {include file="header.tpl" title="Organization Budget and Finance" pagename="Add Source"}
 
-{include file="pagelink.tpl" page="source" text=#images_back#}<br /><br />
-
 {if $permissions.sourceAdd}
 <form action="./index.php?page=process" method="post">
 	<span>Name:</span><input type="text" name="source_name" /><br />

@@ -24,19 +24,8 @@
  *}
 {include file="header.tpl" title="Organization Budget and Finance" pagename="Edit Source"}
 
-{include file="pagelink.tpl" page="source" text=#images_back#}<br /><br />
-
 {if $permissions.publicOnly && $source.public == 0}{* PUBLIC ONLY *}
 {else}
-
-{if $sourceCount == 0 && $permissions.sourceDelete}
-	<form action="./index.php?page=process" method="post">
-		<input type="hidden" name="source_id" value="{$source.id}" />
-		<input type="hidden" name="key" value="{php}echo secureform_add_pk('sourceDelete', 60, $this->get_template_vars('id')){/php}" />
-		<input type="hidden" name="action" value="sourceDelete" />
-		<input type="submit" value="Delete" />
-	</form>
-{/if}
 
 {if $permissions.sourceEdit}
 <form action="./index.php?page=process" method="post">
@@ -59,6 +48,17 @@
 	<input type="hidden" name="action" value="sourceEdit" />
 	<input type="submit" value="Update" />
 </form>
+{/if}
+
+<br />
+
+{if $sourceCount == 0 && $permissions.sourceDelete}
+	<form action="./index.php?page=process" method="post">
+		<input type="hidden" name="source_id" value="{$source.id}" />
+		<input type="hidden" name="key" value="{php}echo secureform_add_pk('sourceDelete', 60, $this->get_template_vars('id')){/php}" />
+		<input type="hidden" name="action" value="sourceDelete" />
+		<input type="submit" value="Delete" />
+	</form>
 {/if}
 
 {/if}{* PUBLIC ONLY *}

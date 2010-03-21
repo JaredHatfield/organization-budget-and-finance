@@ -24,8 +24,6 @@
  *}
 {include file="header.tpl" title="Organization Budget and Finance" pagename="Add Receipt"}
 
-{include file="pagelink.tpl" page="budget" parms="lineid=`$lineitem.id`" text=#images_back#}<br /><br />
-
 {if $permissions.receiptAdd}
 <form action="./index.php?page=process" method="post">
 	<span>Name:</span><input type="text" name="receipt_name" /><br />

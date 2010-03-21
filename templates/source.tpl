@@ -42,7 +42,7 @@
 		{/if}
 	</tr>
 {section name=mysec loop=$sources}
-	<tr bgcolor="{cycle values="#eeeeee,#dddddd"}" valign=top>
+	<tr class="{cycle values="rowTypeA,rowTypeB"}" valign=top>
 		<td>
 			{if $permissions.sourceEdit || $permissions.sourceDelete}
 				{include file="pagelink.tpl" page="sourceEdit" parms="sourceid=`$sources[mysec].id`" text=#images_edit#}</td>
