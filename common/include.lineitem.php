@@ -73,7 +73,7 @@ function getLineItemChildren($parent, $publicOnly){
 	if($publicOnly){
 		$query .= "AND l.`public` = 1 ";
 	}
-	$query .= "AND `id` != 1;";
+	$query .= "AND `id` != 1 ORDER BY `name`;";
 	$result = $database->exec($query);
 	$val = array();
 	while($row = mysql_fetch_assoc($result)){
