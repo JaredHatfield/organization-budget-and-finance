@@ -8,7 +8,8 @@ body{
 
 /* The heading background color */
 #headerwrapper{
-	background-color: #888877;
+	background-color: #556644;
+	color: #BDBDBD;
 }
 
 #headerwrapper a{
@@ -19,6 +20,12 @@ body{
 	color: white;
 }
 
+div.toptab{
+	background-color: black;
+	min-width: 350px;
+	display: inline;
+}
+
 /* The color of the links */
 a{
 	color: #556644;
@@ -26,12 +33,12 @@ a{
 
 /* The color of the links on the table */
 tr.rowTypeA a, tr.rowTypeB a {
-	color: #A80000;
+	color: lightyellow;
 }
 
 /* The color of the links on the table */
 tr.rowTypeA a:hover, tr.rowTypeB a:hover{
-	color: #FF0000;
+	color: black;
 }
 
 /* The table header background */
@@ -71,8 +78,12 @@ tr.rowTypeA, tr.rowTypeB, a:hover{
 	margin: 20px;
 }
 
+#topgraphic {
+	text-align: center;
+}
+
 #headerwrapper{
-	padding: 15px;
+	padding: 15px 15px 0px 15px;
 	min-height: 65px;
 }
 
@@ -102,7 +113,12 @@ a img {
 }
 
 h1{
-	display: inline; 
+	display: inline;
+	font-size: 45;
+}
+
+td{
+	padding: 0px 2px 2px 7px;
 }
 
 tr.tablename{
@@ -138,3 +154,77 @@ input.inmedium{
 input.inlarge{
 	width: 300px;
 }
+
+
+/* Format the HTML form */
+label
+{
+	width: 8em;
+	float: left;
+	text-align: right;
+	margin-right: 0.5em;
+	display: block
+}
+
+input
+{
+	color: #556644;
+	background: #ffffcc;
+	border: 1px solid #556644;
+}
+
+input.text {
+	width: 80em;
+}
+
+.submit input
+{
+	margin-left: 10em;
+	color: #000;
+	background: #ffffcc;
+	border: 2px outset #556644;
+}
+
+fieldset
+{
+	border: 1px solid #556644;
+	width: 20em
+}
+
+legend
+{
+	color: #ffffcc;
+	background: #556644;
+	border: 1px solid red1;
+	padding: 2px 6px
+}
+
+
+
+
+
+
+
+/* The tab menu at the top of the page used for navigation */
+#tabmenu {
+	color: #000;
+	top: 48px;
+	padding: ;
+	margin: 15px 0px 0px 0px;
+	left: 15px;
+}
+	
+#tabmenu li {
+	display: inline;
+	overflow: hidden;
+	margin: 15px; 
+	border: 0;
+	list-style-type: none;
+}
+
+#tabmenu a:hover {
+	color: #556644;
+	background: #ffffdd;
+}
+
+

@@ -29,15 +29,18 @@
 
 {if $permissions.receiptEdit}
 <form action="./index.php?page=process" method="post">
-	<span>Name:</span><input type="text" name="receipt_name" value="{$receipt.name}" /><br />
-	<span>Description:</span><input type="text" name="receipt_description" value="{$receipt.description}" /><br />
-	<span>Company:</span>{include file="dropdown.tpl" dd_selection=$company_selections dd_name="receipt_company" dd_selected=$receipt.company}<br />
-	<span>Amount:</span><input type="text" name="receipt_amount" value="{$receipt.amount}" /><br />
-	<span>Date:</span><input type="text" name="receipt_rdate" value="{$receipt.rdate}" /><br />
+	<fieldset>
+	<legend>Edit Receipt</legend>
+	<p><label>Name:</label><input type="text" name="receipt_name" value="{$receipt.name}" /></p>
+	<p><label>Description:</label><input type="text" name="receipt_description" value="{$receipt.description}" /></p>
+	<p><label>Company:</label>{include file="dropdown.tpl" dd_selection=$company_selections dd_name="receipt_company" dd_selected=$receipt.company}</p>
+	<p><label>Amount:</label><input type="text" name="receipt_amount" value="{$receipt.amount}" /></p>
+	<p><label>Date:</label><input type="text" name="receipt_rdate" value="{$receipt.rdate}" /></p>
+	<p>
 	{if $permissions.publicOnly}
 		<input type="hidden" name="receipt_public" value="yes" />
 	{else}
-		<span>Public:</span>
+		<label>Public:</label>
 		{if $receipt.public == 1}
 			<input type="checkbox" name="receipt_public" value="yes" checked="checked" />
 		{else}
@@ -45,10 +48,14 @@
 		{/if}
 		<br />
 	{/if}
-	<input type="hidden" name="receipt_id" value="{$receipt.id}" />
-	<input type="hidden" name="key" value="{php}echo secureform_add_pk('receiptEdit', 60, $this->get_template_vars('id')){/php}" />
-	<input type="hidden" name="action" value="receiptEdit" />
-	<input type="submit" value="Update" />
+	</p>
+	<p class="submit">
+		<input type="hidden" name="receipt_id" value="{$receipt.id}" />
+		<input type="hidden" name="key" value="{php}echo secureform_add_pk('receiptEdit', 60, $this->get_template_vars('id')){/php}" />
+		<input type="hidden" name="action" value="receiptEdit" />
+		<input type="submit" value="Update" />
+	</p>
+	</fieldset>
 </form>
 {/if}
 
@@ -56,10 +63,15 @@
 
 {if $permissions.receiptDelete}
 <form action="./index.php?page=process" method="post">
-	<input type="hidden" name="receipt_id" value="{$receipt.id}" />
-	<input type="hidden" name="key" value="{php}echo secureform_add_pk('receiptDelete', 60, $this->get_template_vars('id')){/php}" />
-	<input type="hidden" name="action" value="receiptDelete" />
-	<input type="submit" value="Delete" />
+	<fieldset>
+	<legend>Delete Recept</legend>
+	<p class="submit">
+		<input type="hidden" name="receipt_id" value="{$receipt.id}" />
+		<input type="hidden" name="key" value="{php}echo secureform_add_pk('receiptDelete', 60, $this->get_template_vars('id')){/php}" />
+		<input type="hidden" name="action" value="receiptDelete" />
+		<input type="submit" value="Delete" />
+	</p>
+	</fieldset>
 </form>
 {/if}
 

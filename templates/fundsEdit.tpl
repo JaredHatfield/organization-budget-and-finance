@@ -29,12 +29,17 @@
 
 {if $permissions.fundsEdit}
 <form action="./index.php?page=process" method="post">
-	<span>Source:</span>{include file="dropdown.tpl" dd_selection=$source_selections dd_name="funds_source" dd_selected=`$funds.source`}<br />
-	<span>Amount:</span><input type="text" name="funds_amount" value="{$funds.amount}" /><br />
-	<input type="hidden" name="funds_id" value="{$funds.id}" />
-	<input type="hidden" name="key" value="{php}echo secureform_add_pk('fundsEdit', 60, $this->get_template_vars('id')){/php}" />
-	<input type="hidden" name="action" value="fundsEdit" />
-	<input type="submit" value="Update" />
+	<fieldset>
+	<legend>Edit Funds</legend>
+	<p><label>Source:</label>{include file="dropdown.tpl" dd_selection=$source_selections dd_name="funds_source" dd_selected=`$funds.source`}</p>
+	<p><label>Amount:</label><input type="text" name="funds_amount" value="{$funds.amount}" /></p>
+	<p class="submit">
+		<input type="hidden" name="funds_id" value="{$funds.id}" />
+		<input type="hidden" name="key" value="{php}echo secureform_add_pk('fundsEdit', 60, $this->get_template_vars('id')){/php}" />
+		<input type="hidden" name="action" value="fundsEdit" />
+		<input type="submit" value="Update" />
+	</p>
+	</fieldset>
 </form>
 {/if}
 
@@ -42,10 +47,15 @@
 
 {if $permissions.fundsDelete}
 <form action="./index.php?page=process" method="post">
-	<input type="hidden" name="funds_id" value="{$funds.id}" />
-	<input type="hidden" name="key" value="{php}echo secureform_add_pk('fundsDelete', 60, $this->get_template_vars('id')){/php}" />
-	<input type="hidden" name="action" value="fundsDelete" />
-	<input type="submit" value="Delete" />
+	<fieldset>
+	<legend>Delete Funds</legend>
+	<p class="submit">
+		<input type="hidden" name="funds_id" value="{$funds.id}" />
+		<input type="hidden" name="key" value="{php}echo secureform_add_pk('fundsDelete', 60, $this->get_template_vars('id')){/php}" />
+		<input type="hidden" name="action" value="fundsDelete" />
+		<input type="submit" value="Delete" />
+	</p>
+	</fieldset>
 </form>
 {/if}
 

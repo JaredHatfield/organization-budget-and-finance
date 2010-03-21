@@ -26,11 +26,16 @@
 
 {if $permissions.companyEdit}
 <form action="./index.php?page=process" method="post">
-	<span>Name:</span><input type="text" name="company_name" value="{$company.name}" /><br />
-	<input type="hidden" name="key" value="{php}echo secureform_add_pk('companyEdit', 60, $this->get_template_vars('id')){/php}" />
-	<input type="hidden" name="company_id" value="{$company.id}" />
-	<input type="hidden" name="action" value="companyEdit" />
-	<input type="submit" value="Update" />
+	<fieldset>
+	<legend>Edit Company</legend>
+	<p><label>Name:</label><input type="text" name="company_name" value="{$company.name}" /></p>
+	<p class="submit">
+		<input type="hidden" name="key" value="{php}echo secureform_add_pk('companyEdit', 60, $this->get_template_vars('id')){/php}" />
+		<input type="hidden" name="company_id" value="{$company.id}" />
+		<input type="hidden" name="action" value="companyEdit" />
+		<input type="submit" value="Update" />
+	</p>
+	</fieldset>
 </form>
 {/if}
 
@@ -38,10 +43,15 @@
 
 {if $companyCount == 0 && $permissions.companyDelete}
 	<form action="./index.php?page=process" method="post">
-		<input type="hidden" name="company_id" value="{$company.id}" />
-		<input type="hidden" name="key" value="{php}echo secureform_add_pk('companyDelete', 60, $this->get_template_vars('id')){/php}" />
-		<input type="hidden" name="action" value="companyDelete" />
-		<input type="submit" value="Delete" />
+		<fieldset>
+		<legend>Delete Company</legend>
+		<p class="submit">
+			<input type="hidden" name="company_id" value="{$company.id}" />
+			<input type="hidden" name="key" value="{php}echo secureform_add_pk('companyDelete', 60, $this->get_template_vars('id')){/php}" />
+			<input type="hidden" name="action" value="companyDelete" />
+			<input type="submit" value="Delete" />
+		</p>
+		</fieldset>
 	</form>
 {/if}
 

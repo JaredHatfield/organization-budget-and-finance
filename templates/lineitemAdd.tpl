@@ -26,17 +26,24 @@
 
 {if $permissions.lineitemAdd}
 <form action="./index.php?page=process" method="post">
-	<span>Name:</span><input type="text" name="lineitem_name" /><br />
-	<span>Description:</span><input type="text" name="lineitem_description" /><br />
+	<fieldset>
+	<legend>Add Line Item</legend>
+	<p><label>Name:</label><input type="text" name="lineitem_name" /></p>
+	<p><label>Description:</label><input type="text" name="lineitem_description" /></p>
+	<p>
 	{if $permissions.publicOnly}
-	<input type="hidden" name="lineitem_public" value="yes" />
+		<input type="hidden" name="lineitem_public" value="yes" />
 	{else}
-	<span>Public:</span><input type="checkbox" name="lineitem_public" value="yes" checked="checked" /><br />
+		<label>Public:</label><input type="checkbox" name="lineitem_public" value="yes" checked="checked" />
 	{/if}
-	<input type="hidden" name="lineitem_parent" value="{$lineitemParent.id}" />
-	<input type="hidden" name="key" value="{php}echo secureform_add('lineitemAdd', 60){/php}" />
-	<input type="hidden" name="action" value="lineitemAdd" />
-	<input type="submit" value="Add" />
+	</p>
+	<p class="submit">
+		<input type="hidden" name="lineitem_parent" value="{$lineitemParent.id}" />
+		<input type="hidden" name="key" value="{php}echo secureform_add('lineitemAdd', 60){/php}" />
+		<input type="hidden" name="action" value="lineitemAdd" />
+		<input type="submit" value="Add" />
+	</p>
+	</fieldset>
 </form>
 {/if}
 

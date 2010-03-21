@@ -29,12 +29,15 @@
 
 {if $permissions.lineitemEdit}
 <form action="./index.php?page=process" method="post">
-	<span>Name:</span><input type="text" name="lineitem_name" value="{$lineitem.name}" /><br />
-	<span>Description:</span><input type="text" name="lineitem_description" value="{$lineitem.description}" /><br />
+	<fieldset>
+	<legend>Edit Line Item</legend>
+	<p><label>Name:</label><input type="text" name="lineitem_name" value="{$lineitem.name}" /></p>
+	<p><label>Description:</label><input type="text" name="lineitem_description" value="{$lineitem.description}" /></p>
+	<p>
 	{if $permissions.publicOnly}
 		<input type="hidden" name="lineitem_public" value="yes" />
 	{else}
-		<span>Public:</span>
+		<label>Public:</label>
 		{if $lineitem.public == 1}
 			<input type="checkbox" name="lineitem_public" value="yes" checked="checked" />
 		{else}
@@ -42,10 +45,14 @@
 		{/if}
 		<br />
 	{/if}
-	<input type="hidden" name="lineitem_id" value="{$lineitem.id}" />
-	<input type="hidden" name="key" value="{php}echo secureform_add_pk('lineitemEdit', 60, $this->get_template_vars('id')){/php}" />
-	<input type="hidden" name="action" value="lineitemEdit" />
-	<input type="submit" value="Update" />
+	</p>
+	<p class="submit">
+		<input type="hidden" name="lineitem_id" value="{$lineitem.id}" />
+		<input type="hidden" name="key" value="{php}echo secureform_add_pk('lineitemEdit', 60, $this->get_template_vars('id')){/php}" />
+		<input type="hidden" name="action" value="lineitemEdit" />
+		<input type="submit" value="Update" />
+	</p>
+	</fieldset>
 </form>
 {/if}
 
@@ -53,10 +60,15 @@
 
 {if $lineitemCount == 0 && $permissions.lineitemDelete}
 	<form action="./index.php?page=process" method="post">
-		<input type="hidden" name="lineitem_id" value="{$lineitem.id}" />
-		<input type="hidden" name="key" value="{php}echo secureform_add_pk('lineitemDelete', 60, $this->get_template_vars('id')){/php}" />
-		<input type="hidden" name="action" value="lineitemDelete" />
-		<input type="submit" value="Delete" />
+		<fieldset>
+		<legend>Delete Line Item</legend>
+		<p class="submit">
+			<input type="hidden" name="lineitem_id" value="{$lineitem.id}" />
+			<input type="hidden" name="key" value="{php}echo secureform_add_pk('lineitemDelete', 60, $this->get_template_vars('id')){/php}" />
+			<input type="hidden" name="action" value="lineitemDelete" />
+			<input type="submit" value="Delete" />
+		</p>
+		</fieldset>
 	</form>
 {/if}
 

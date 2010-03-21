@@ -30,11 +30,22 @@
 </head>
 <body bgcolor="#ffffff">
 <div id="bodywrapper">
+	<div id="topgraphic">
+		<img src="./static/budgetr_graphic.png" />
+	</div>
 	<div id="headerwrapper">
+		
 		<h1><a href="./index.php">Organization Budget and Finance</a></h1>
 		<div id="loginbox">
 			{include file="login.tpl"}
 		</div>
+		<br />
+		<ul id="tabmenu">
+			<li>{include file="pagelink.tpl" page="home" parms="" text="Home"}</li> 
+			<li>{include file="pagelink.tpl" page="budget" parms="" text="Budget"}</li> 
+			<li>{include file="pagelink.tpl" page="company" parms="" text="Companies"}</li> 
+			<li>{include file="pagelink.tpl" page="source" parms="" text="Sources"}</li> 
+		</ul>
 	</div>
 	<div id="mainwrapper">
 	<h2>

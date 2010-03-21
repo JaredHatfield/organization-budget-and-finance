@@ -26,20 +26,27 @@
 
 {if $permissions.receiptAdd}
 <form action="./index.php?page=process" method="post">
-	<span>Name:</span><input type="text" name="receipt_name" /><br />
-	<span>Description:</span><input type="text" name="receipt_description" /><br />
-	<span>Company</span>{include file="dropdown.tpl" dd_selection=$company_selections dd_name="receipt_company" dd_selected="-1"}<br />
-	<span>Amount:</span><input type="text" name="receipt_amount" /><br />
-	<span>Date:</span><input type="text" name="receipt_rdate" /><br />
+	<fieldset>
+	<legend>Add Receipt</legend>
+	<p><label>Name:</label><input type="text" name="receipt_name" /></p>
+	<p><label>Description:</label><input type="text" name="receipt_description" /></p>
+	<p><label>Company</label>{include file="dropdown.tpl" dd_selection=$company_selections dd_name="receipt_company" dd_selected="-1"}</p>
+	<p><label>Amount:</label><input type="text" name="receipt_amount" /></p>
+	<p><label>Date:</label><input type="text" name="receipt_rdate" /></p>
+	<p>
 	{if $permissions.publicOnly}
 	<input type="hidden" name="receipt_public" value="yes" />
 	{else}
-	<span>Public:</span><input type="checkbox" name="receipt_public" value="yes" checked="checked" /><br />
+	<label>Public:</label><input type="checkbox" name="receipt_public" value="yes" checked="checked" />
 	{/if}
-	<input type="hidden" name="receipt_lineitem" value="{$lineitem.id}" />
-	<input type="hidden" name="key" value="{php}echo secureform_add('receiptAdd', 60){/php}" />
-	<input type="hidden" name="action" value="receiptAdd" />
-	<input type="submit" value="Add" />
+	</p>
+	<p class="submit">
+		<input type="hidden" name="receipt_lineitem" value="{$lineitem.id}" />
+		<input type="hidden" name="key" value="{php}echo secureform_add('receiptAdd', 60){/php}" />
+		<input type="hidden" name="action" value="receiptAdd" />
+		<input type="submit" value="Add" />
+	</p>
+	</fieldset>
 </form>
 {/if}
 
