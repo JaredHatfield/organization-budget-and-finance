@@ -37,6 +37,7 @@ $smarty = new Smarty;
 $smarty->compile_check = true;
 //$smarty->debugging = true;
 $smarty->assign("pagename", "");
+$smarty->assign("selectedTab","Home");
 $smarty->register_block('dynamic', 'smarty_block_dynamic', false);
 
 
@@ -139,6 +140,7 @@ else if($_GET['page'] == "budget"){
 	
 	$nav[] = Array("page" => "budget", "parms" => "", "text" => "Budget");
 	$nav = array_merge($nav, getNavigationForLineItem($parent));
+	$smarty->assign("selectedTab","Budget");
 	$smarty->display('budget.tpl', $parent);
 }
 else if($_GET['page'] == "lineitemAdd"){
@@ -159,6 +161,7 @@ else if($_GET['page'] == "lineitemAdd"){
 	$nav[] = Array("page" => "budget", "parms" => "", "text" => "Budget");
 	$nav = array_merge($nav, getNavigationForLineItem($parent));
 	$nav[] = Array("page" => "lineitemAdd", "parms" => "lineid=".$parent, "text" => "Add Line Item");
+	$smarty->assign("selectedTab","Budget");
 	$smarty->display('lineitemAdd.tpl');
 }
 else if($_GET['page'] == "lineitemEdit"){
@@ -186,6 +189,7 @@ else if($_GET['page'] == "lineitemEdit"){
 		$name .= "*";
 	}
 	$nav[] = Array("page" => "lineitemEdit", "parms" => "lineid=".$lineitemid, "text" => $name);
+	$smarty->assign("selectedTab","Budget");
 	$smarty->display('lineitemEdit.tpl');
 }
 else if($_GET['page'] == "receiptAdd"){
@@ -207,6 +211,7 @@ else if($_GET['page'] == "receiptAdd"){
 	$nav[] = Array("page" => "budget", "parms" => "", "text" => "Budget");
 	$nav = array_merge($nav, getNavigationForLineItem($parent));
 	$nav[] = Array("page" => "receiptAdd", "parms" => "lineid=".$parent, "text" => "Add Receipt");
+	$smarty->assign("selectedTab","Budget");
 	$smarty->display('receiptAdd.tpl');
 }
 else if($_GET['page'] == "receiptEdit"){
@@ -235,6 +240,7 @@ else if($_GET['page'] == "receiptEdit"){
 		$name .= "*";
 	}
 	$nav[] = Array("page" => "receiptEdit", "parms" => "receiptid=".$receiptid, "text" => $name);
+	$smarty->assign("selectedTab","Budget");
 	$smarty->display('receiptEdit.tpl');
 }
 else if($_GET['page'] == "fundsAdd"){
@@ -256,6 +262,7 @@ else if($_GET['page'] == "fundsAdd"){
 	$nav[] = Array("page" => "budget", "parms" => "", "text" => "Budget");
 	$nav = array_merge($nav, getNavigationForLineItem($parent));
 	$nav[] = Array("page" => "fundsAdd", "parms" => "lineid=".$parent, "text" => "Add Funds");
+	$smarty->assign("selectedTab","Budget");
 	$smarty->display('fundsAdd.tpl');
 }
 else if($_GET['page'] == "fundsEdit"){
@@ -286,6 +293,7 @@ else if($_GET['page'] == "fundsEdit"){
 		$name .= "*";
 	}
 	$nav[] = Array("page" => "fundsEdit", "parms" => "fundsid=".$fundsid, "text" => $name);
+	$smarty->assign("selectedTab","Budget");
 	$smarty->display('fundsEdit.tpl');
 }
 else if($_GET['page'] == "company"){
@@ -294,6 +302,7 @@ else if($_GET['page'] == "company"){
 	 ******************************************************************************************************/
 	$smarty->assign("companies", getAllCompanies());
 	$nav[] = Array("page" => "company", "parms" => "", "text" => "Companies");
+	$smarty->assign("selectedTab","Company");
 	$smarty->display('company.tpl');
 }
 else if($_GET['page'] == "companyAdd"){
@@ -302,6 +311,7 @@ else if($_GET['page'] == "companyAdd"){
 	 ******************************************************************************************************/
 	$nav[] = Array("page" => "company", "parms" => "", "text" => "Companies");
 	$nav[] = Array("page" => "companyAdd", "parms" => "", "text" => "Add Company");
+	$smarty->assign("selectedTab","Company");
 	$smarty->display('companyAdd.tpl');
 }
 else if($_GET['page'] == "companyEdit"){
@@ -321,6 +331,7 @@ else if($_GET['page'] == "companyEdit"){
 	$smarty->assign("companyCount", getCompanyUseCount($companyid));
 	$nav[] = Array("page" => "company", "parms" => "", "text" => "Companies");
 	$nav[] = Array("page" => "companyEdit", "parms" => "companyid=".$companyid, "text" => "Edit Company (".$companyinfo['name'].")");
+	$smarty->assign("selectedTab","Company");
 	$smarty->display('companyEdit.tpl');
 }
 else if($_GET['page'] == "source"){
@@ -329,6 +340,7 @@ else if($_GET['page'] == "source"){
 	 ******************************************************************************************************/
 	$smarty->assign("sources", getAllSources($permissions['publicOnly']));
 	$nav[] = Array("page" => "source", "parms" => "", "text" => "Sources");
+	$smarty->assign("selectedTab","Source");
 	$smarty->display('source.tpl');
 }
 else if($_GET['page'] == "sourceAdd"){
@@ -337,6 +349,7 @@ else if($_GET['page'] == "sourceAdd"){
 	 ******************************************************************************************************/
 	$nav[] = Array("page" => "source", "parms" => "", "text" => "Sources");
 	$nav[] = Array("page" => "sourceAdd", "parms" => "", "text" => "Add Source");
+	$smarty->assign("selectedTab","Source");
 	$smarty->display('sourceAdd.tpl');
 }
 else if($_GET['page'] == "sourceEdit"){
@@ -356,6 +369,7 @@ else if($_GET['page'] == "sourceEdit"){
 	$smarty->assign("sourceCount", getSourceUseCount($sourceid));
 	$nav[] = Array("page" => "source", "parms" => "", "text" => "Sources");
 	$nav[] = Array("page" => "sourceEdit", "parms" => ("sourceid=".$sourceid), "text" => "Edit Source (".$sourceinfo['name'].")");
+	$smarty->assign("selectedTab","Source");
 	$smarty->display('sourceEdit.tpl');
 }
 else if($_GET['page'] == "register"){
@@ -363,6 +377,7 @@ else if($_GET['page'] == "register"){
 	 * Register page
 	 ******************************************************************************************************/
 	$nav[] = Array("page" => "register", "parms" => "", "text" => "Register New Account");
+	$smarty->assign("selectedTab","Register");
 	$smarty->display('register.tpl');
 }
 else if($_GET['page'] == "myAccount"){
@@ -377,6 +392,7 @@ else if($_GET['page'] == "myAccount"){
 	$smarty->assign("user", getUser($_SESSION['budget_authentication']));
 	$smarty->assign("id", $_SESSION['budget_authentication']);
 	$nav[] = Array("page" => "myAccount", "parms" => "", "text" => "My Account");
+	$smarty->assign("selectedTab","My Account");
 	$smarty->display('myAccount.tpl');
 }
 else if($_GET['page'] == "adminConsole"){
@@ -390,6 +406,7 @@ else if($_GET['page'] == "adminConsole"){
 	$smarty->assign("users", getAllUsers());
 	
 	$nav[] = Array("page" => "adminConsole", "parms" => "", "text" => "Admin Console");
+	$smarty->assign("selectedTab","Admin");
 	$smarty->display('adminConsole.tpl');
 }
 else if($_GET['page'] == "adminAccount"){
@@ -412,6 +429,7 @@ else if($_GET['page'] == "adminAccount"){
 	$smarty->assign("id", $userid);
 	$nav[] = Array("page" => "adminConsole", "parms" => "", "text" => "Admin Console");
 	$nav[] = Array("page" => "adminAccount", "parms" => "", "text" => "Admin Account");
+	$smarty->assign("selectedTab","Admin");
 	$smarty->display('adminAccount.tpl');
 }
 else if($_GET['page'] == "logout"){
