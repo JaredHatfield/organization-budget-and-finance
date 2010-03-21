@@ -29,6 +29,7 @@
 session_start();
 include_once("./configs/config.php");
 require_once($_CONFIG['smarty']);
+require_once("./recaptcha/recaptchalib.php");
 include_once("./common/include.index.php");
 
 
@@ -376,6 +377,14 @@ else if($_GET['page'] == "register"){
 	/*******************************************************************************************************
 	 * Register page
 	 ******************************************************************************************************/
+	$error = "";
+	if(isRecaptchaEnabled()){
+		$smarty->assign("recaptcha", recaptcha_get_html($_CONFIG['recaptcha_public'], $error));
+	}
+	else{
+		$smarty->assign("recaptcha", "");
+	}
+	
 	$nav[] = Array("page" => "register", "parms" => "", "text" => "Register New Account");
 	$smarty->assign("selectedTab","Register");
 	$smarty->display('register.tpl');

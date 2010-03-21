@@ -31,6 +31,7 @@
 	<p><label>Username:</label><input class="insmall" type="text" name="register_username" /></p>
 	<p><label>Password:</label><input class="insmall" type="password" name="register_password" /></p>
 	<p><label>Confirm Password:</label><input class="insmall" type="password" name="register_password2" /></p>
+	<p>{$recaptcha}</p>
 	<p class="submit">
 		<input type="hidden" name="key" value="{php}echo secureform_add('register', 60){/php}" />
 		<input type="hidden" name="action" value="register" />

@@ -53,6 +53,20 @@ function getPageId($field){
 	return $id;
 }
 
+/// Determine if recaptcha is enabled
+function isRecaptchaEnabled(){
+	global $_CONFIG;
+	if(isset($_CONFIG['recaptcha_public']) &&
+		strlen($_CONFIG['recaptcha_public']) > 0 &&
+		isset($_CONFIG['recaptcha_private']) &&
+		strlen($_CONFIG['recaptcha_private'])){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
 function smarty_block_dynamic($param, $content, &$smarty) {
 	return $content;
 }
