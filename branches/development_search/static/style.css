@@ -1,0 +1,235 @@
+
+/* Set all of the colors */
+
+/* The background color of the page */
+body{
+	background-color: #ffffdd;
+}
+
+/* The heading background color */
+#headerwrapper{
+	background-color: #556644;
+	color: #BDBDBD;
+}
+
+#headerwrapper a{
+	color: #ffffdd;
+}
+
+#headerwrapper a:hover{
+	color: white;
+}
+
+div.toptab{
+	background-color: black;
+	min-width: 350px;
+	display: inline;
+}
+
+/* The color of the links */
+a{
+	color: #556644;
+}
+
+/* The color of the links on the table */
+tr.rowTypeA a, tr.rowTypeB a {
+	color: lightyellow;
+}
+
+/* The color of the links on the table */
+tr.rowTypeA a:hover, tr.rowTypeB a:hover{
+	color: black;
+}
+
+/* The table header background */
+tr.tablename, tr.tableheaderrow{
+	background-color: #556644;
+}
+
+/* The heading text color */
+h2, h3, h4 {
+	color: #556644;
+}
+
+/* The table header text */
+tr.tablename, tr.tableheaderrow{
+	color: #ffffcc;
+}
+
+/* Row Type A Background */
+tr.rowTypeA{
+	background-color: #88aa66;
+}
+
+/* Row Type B Background */
+tr.rowTypeB{
+	background-color: #aabb77;
+}
+
+/* The text color */
+tr.rowTypeA, tr.rowTypeB, a:hover{
+	color: black;
+}
+
+
+
+/* Everything else... */
+#bodywrapper{
+	margin: 20px;
+}
+
+#topgraphic {
+	text-align: center;
+}
+
+#headerwrapper{
+	padding: 15px 15px 0px 15px;
+	min-height: 65px;
+}
+
+#headerwrapper a{
+	text-decoration:none;
+}
+
+#mainwrapper{
+	min-height: 400px;
+}
+
+#footerwrapper{
+	text-align: center;
+	font-size:10px
+}
+
+a {
+	text-decoration:none;
+}
+
+a img {
+	border: none;
+}
+
+h1{
+	display: inline;
+	font-size: 45;
+}
+
+td{
+	padding: 0px 2px 2px 7px;
+}
+
+tr.tablename{
+	text-align: center;
+	font-weight: bold;
+	font-size: 20;
+}
+
+tr.tableheaderrow{
+	font-weight: bold;
+}
+
+td.colsmall{
+	width: 100px;
+}
+
+td.colmedium{
+	width: 200px;
+}
+
+td.collarge{
+	width: 300px;
+}
+
+input.insmall{
+	width: 100px;
+}
+
+input.inmedium{
+	width: 200px;
+}
+
+input.inlarge{
+	width: 300px;
+}
+
+
+/* Format the HTML form */
+label
+{
+	width: 8em;
+	float: left;
+	text-align: right;
+	margin-right: 0.5em;
+	display: block
+}
+
+input, select
+{
+	color: #556644;
+	background: #ffffcc;
+	border: 1px solid #556644;
+}
+
+input.text {
+	width: 80em;
+}
+
+.submit input
+{
+	margin-left: 10em;
+	color: #000;
+	background: #ffffcc;
+	border: 2px outset #556644;
+}
+
+fieldset
+{
+	border: 1px solid #556644;
+	width: 20em
+}
+
+legend
+{
+	color: #ffffcc;
+	background: #556644;
+	padding: 2px 6px
+}
+
+
+
+
+
+
+
+/* The tab menu at the top of the page used for navigation */
+#tabmenu {
+	top: 48px;
+	padding: ;
+	margin: 15px 0px 0px 0px;
+	left: 15px;
+}
+	
+#tabmenu li {
+	display: inline;
+	overflow: hidden;
+	margin: 5px; 
+	border: 0;
+	list-style-type: none;
+}
+
+#tabmenu li a{
+	padding: 10px 10px 1px 10px;
+}
+
+#tabmenu a:hover {
+	color: #556644;
+	background: #ffffdd;
+}
+
+#selectedtab a{
+	color: #556644;
+	background: #ffffdd;
+}
+
+#selectedtab a:hover {
+}
+
