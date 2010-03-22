@@ -162,7 +162,7 @@ label
 	display: block
 }
 
-input
+input, select
 {
 	color: #556644;
 	background: #ffffcc;
