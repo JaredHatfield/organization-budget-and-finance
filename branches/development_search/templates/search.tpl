@@ -22,3 +22,8 @@
  * @package organization-budget-and-finance
  * @version 1.0
  *}
+{include file="header.tpl" title="Organization Budget and Finance" pagename="Search"}
+
+<h2>{$searchString}</h2>
+
+{include file="footer.tpl"}

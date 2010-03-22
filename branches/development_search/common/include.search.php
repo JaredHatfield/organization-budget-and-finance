@@ -25,5 +25,14 @@
  * @version 1.0
  */
 
+/// Get the raw search results for receipts
+function searchReceipts($searchString){
+	// TODO: Implement me!
+}
+
+/// Get the raw search results for lineitems
+function searchLineItems($searchString){
+	// TODO: Implement me!
+}
 
 ?>

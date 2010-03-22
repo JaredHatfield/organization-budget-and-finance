@@ -442,6 +442,16 @@ else if($_GET['page'] == "adminAccount"){
 	$smarty->assign("selectedTab","Admin");
 	$smarty->display('adminAccount.tpl');
 }
+else if($_GET['page'] == "search"){
+	/*******************************************************************************************************
+	 * Search page
+	 ******************************************************************************************************/
+	$searchString = mysql_real_escape_string($_GET['search']);
+	$smarty->assign("searchString", $searchString);
+	$nav[] = Array("page" => "search", "parms" => "", "text" => "Search");
+	$smarty->assign("selectedTab", "Search");
+	$smarty->display('search.tpl');
+}
 else if($_GET['page'] == "logout"){
 	$_SESSION['budget_authentication'] = 0;
 	secureform_logout();

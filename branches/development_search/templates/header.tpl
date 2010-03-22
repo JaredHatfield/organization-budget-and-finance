@@ -35,7 +35,13 @@
 	</div>
 	<div id="headerwrapper">
 		<h1><a href="./index.php">Organization Budget and Finance</a></h1>
-		<br />
+		<div id="searchbox">
+			<form action="./index.php" method="get">
+			<input type="hidden" name="page" value="search"  />
+			<input type="text" name="search" />
+			<input class="submit" type="submit" value="Search" />
+		</form>
+		</div>
 		<ul id="tabmenu">
 			<li id="{if $selectedTab eq "Home"}selectedtab{/if}">
 				{include file="pagelink.tpl" page="home" parms="" text="Home"}
