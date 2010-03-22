@@ -25,7 +25,6 @@
 {include file="header.tpl" title="Organization Budget and Finance" pagename="Admin Account"}
 
 {if $permissions.admin}
-	<div style="max-width: 500px;">
 	<h2>User: {$user.username}</h2>
 	<form action="./index.php?page=process" method="post">
 		<fieldset>
@@ -80,7 +79,6 @@
 	</form>
 	{/if}
 	
-	</div>
 {/if}
 
 {include file="footer.tpl"}
