@@ -209,6 +209,11 @@ else if($_GET['page'] == "receiptAdd"){
 	
 	$smarty->assign("lineitem", getLineItem($parent));
 	$smarty->assign("company_selections", getCompanySelections());
+	$smarty->assign("month_selections", getMonthSelections());
+	$smarty->assign("day_selections", getDaySelections());
+	$smarty->assign("current_day", date("j"));
+	$smarty->assign("current_month", date("n"));
+	$smarty->assign("current_year", date("Y"));
 	$nav[] = Array("page" => "budget", "parms" => "", "text" => "Budget");
 	$nav = array_merge($nav, getNavigationForLineItem($parent));
 	$nav[] = Array("page" => "receiptAdd", "parms" => "lineid=".$parent, "text" => "Add Receipt");
@@ -234,6 +239,11 @@ else if($_GET['page'] == "receiptEdit"){
 	$smarty->assign("receipt",$receiptinfo);
 	$smarty->assign("lineitem", getLineItem($receiptinfo['lineitem']));
 	$smarty->assign("company_selections", getCompanySelections());
+	$smarty->assign("month_selections", getMonthSelections());
+	$smarty->assign("day_selections", getDaySelections());
+	$smarty->assign("current_day", date("j", strtotime($receiptinfo['rdate'])));
+	$smarty->assign("current_month", date("n", strtotime($receiptinfo['rdate'])));
+	$smarty->assign("current_year", date("Y", strtotime($receiptinfo['rdate'])));
 	$nav[] = Array("page" => "budget", "parms" => "", "text" => "Budget");
 	$nav = array_merge($nav, getNavigationForLineItem($receiptinfo['lineitem']));
 	$name = "Edit Receipt (" . $receiptinfo['name'] . ")";

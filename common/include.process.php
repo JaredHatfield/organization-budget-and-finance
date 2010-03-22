@@ -86,7 +86,11 @@ function process(){
 		$description = mysql_real_escape_string($_POST['receipt_description']);
 		$company = mysql_real_escape_string($_POST['receipt_company']);
 		$amount = mysql_real_escape_string($_POST['receipt_amount']);
-		$rdate = mysql_real_escape_string($_POST['receipt_rdate']);
+		$month = intval(mysql_real_escape_string($_POST['receipt_month']));
+		$day = intval(mysql_real_escape_string($_POST['receipt_day']));
+		$year = intval(mysql_real_escape_string($_POST['receipt_year']));
+		$rdate = date("Y-m-d", strtotime($year . "-" . $month . "-" . $day));
+		
 		$public  = 0;
 		if(isset($_POST['receipt_public'])){
 			$public = 1;
@@ -106,7 +110,11 @@ function process(){
 		$description = mysql_real_escape_string($_POST['receipt_description']);
 		$company = mysql_real_escape_string($_POST['receipt_company']);
 		$amount = mysql_real_escape_string($_POST['receipt_amount']);
-		$rdate = mysql_real_escape_string($_POST['receipt_rdate']);
+		$month = intval(mysql_real_escape_string($_POST['receipt_month']));
+		$day = intval(mysql_real_escape_string($_POST['receipt_day']));
+		$year = intval(mysql_real_escape_string($_POST['receipt_year']));
+		$rdate = date("Y-m-d", strtotime($year . "-" . $month . "-" . $day));
+		
 		$public  = 0;
 		if(isset($_POST['receipt_public'])){
 			$public = 1;
