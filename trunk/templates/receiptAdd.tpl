@@ -32,7 +32,12 @@
 	<p><label>Description:</label><input type="text" name="receipt_description" /></p>
 	<p><label>Company</label>{include file="dropdown.tpl" dd_selection=$company_selections dd_name="receipt_company" dd_selected="-1"}</p>
 	<p><label>Amount:</label><input type="text" name="receipt_amount" /></p>
-	<p><label>Date:</label><input type="text" name="receipt_rdate" /></p>
+	<p>
+		<label>Date:</label>
+		{include file="dropdown.tpl" dd_selection=$month_selections dd_name="receipt_month" dd_selected="$current_month"} /
+		{include file="dropdown.tpl" dd_selection=$day_selections dd_name="receipt_day" dd_selected="$current_day"} /
+		<input type="text" name="receipt_year" value="{$current_year}" maxlength=4 size="4" />
+	</p>
 	<p>
 	{if $permissions.publicOnly}
 	<input type="hidden" name="receipt_public" value="yes" />
