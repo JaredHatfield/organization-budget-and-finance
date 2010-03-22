@@ -28,7 +28,7 @@
 <form action="./index.php?page=process" method="post">
 	<fieldset>
 	<legend>Add Company</legend>
-	<p><label>Name:</label><input type="text" name="company_name" /><br /></p>
+	<p><label>Name:</label><input type="text" name="company_name" /></p>
 	<p class="submit">
 		<input type="hidden" name="key" value="{php}echo secureform_add('companyAdd', 60){/php}" />
 		<input type="hidden" name="action" value="companyAdd" />
