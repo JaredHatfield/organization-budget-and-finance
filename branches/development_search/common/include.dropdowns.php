@@ -32,6 +32,32 @@ function getBooleanSelections(){
 	return $options;
 }
 
+/// Get a list of the months
+function getMonthSelections(){
+	$months[] = Array("value" => 1, "name" => "January");
+	$months[] = Array("value" => 2, "name" => "February");
+	$months[] = Array("value" => 3, "name" => "March");
+	$months[] = Array("value" => 4, "name" => "April");
+	$months[] = Array("value" => 5, "name" => "May");
+	$months[] = Array("value" => 6, "name" => "June");
+	$months[] = Array("value" => 7, "name" => "July");
+	$months[] = Array("value" => 8, "name" => "August");
+	$months[] = Array("value" => 9, "name" => "September");
+	$months[] = Array("value" => 10, "name" => "October");
+	$months[] = Array("value" => 11, "name" => "November");
+	$months[] = Array("value" => 12, "name" => "December");
+	return $months;
+}
+
+/// Get a list of the days
+function getDaySelections(){
+	$days = Array();
+	for($i = 1; $i <= 31; $i++){
+		$days[] = Array("value" => $i, "name" => $i);
+	}
+	return $days;
+}
+
 /// Gets the list of valid groups a user can belong to
 function getGroups(){
 	$group[] = Array("value" => "Anonymous", "name" => "Anonymous"); // Not logged in

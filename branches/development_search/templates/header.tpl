@@ -28,7 +28,7 @@
 	<title>{$title} - {$pagename}</title>
 	<link rel="stylesheet" type="text/css" href="./static/style.css" />
 </head>
-<body bgcolor="#ffffff">
+<body>
 <div id="bodywrapper">
 	<div id="topgraphic">
 		<img src="./static/budgetr_graphic.png" />

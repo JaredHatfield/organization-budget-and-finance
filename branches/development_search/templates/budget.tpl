@@ -67,7 +67,7 @@
 			<span>{$receipts[mysec].description}</span>
 		</td>
 		<td class="colsmall">${$receipts[mysec].amount}</td>
-		<td class="colsmall">{$receipts[mysec].rdate}</td>
+		<td class="colsmall">{$receipts[mysec].rdate|date_format}</td>
 		{if !$permissions.publicOnly}
 		<td class="colsmall">{if $receipts[mysec].public eq 1}Yes{/if}</td>
 		{/if}
