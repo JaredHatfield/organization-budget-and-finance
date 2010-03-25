@@ -29,15 +29,15 @@
 function searchReceipts($searchString, $publicOnly){
 	global $database;
 	$query  = "SELECT `id`, `name`, `description`, `company`, `amount`, `lineitem`, `rdate`, `public` FROM `receipt` ";
-	$query .= "WHERE (`name` LIKE '%" . $searchString . "%' OR `description` LIKE '%" . $searchString . "%') ";
-	if($publicOnly){
-		$query .= "AND `public` = 1 ";
-	}
-	$query .= "ORDER BY `rdate` DESC;";
+	$query .= "WHERE (`name` LIKE '%" . $searchString . "%' OR `description` LIKE '%" . $searchString . "%') ORDER BY `rdate` DESC;";
 	$result = $database->exec($query);
 	$val = array();
 	while($row = mysql_fetch_assoc($result)){
-		$val[] = $row;
+		// If only public records are being accessed, only return those records
+		if(!($publicOnly && isReceiptPrivate($row['id']))){
+			$row['nav'] = getNavigationForLineItem($row['lineitem']);
+			$val[] = $row;
+		}
 	}
 	
 	return $val;
@@ -47,15 +47,15 @@ function searchReceipts($searchString, $publicOnly){
 function searchLineItems($searchString, $publicOnly){
 	global $database;
 	$query  = "SELECT `id`, `name`, `description`, `parent`, `public` FROM lineitem ";
-	$query .= "WHERE (`name` LIKE '%" . $searchString . "%' OR `description` LIKE '%" . $searchString . "%')";
-	if($publicOnly){
-		$query .= "AND `public` = 1 ";
-	}
-	$query .= "ORDER BY `name`;";
+	$query .= "WHERE (`name` LIKE '%" . $searchString . "%' OR `description` LIKE '%" . $searchString . "%') AND `id` != 1 ORDER BY `name`;";
 	$result = $database->exec($query);
 	$val = array();
-	while($row = mysql_fetch_assoc($result)){
-		$val[] = $row;
+	while($row = mysql_fetch_assoc($result)){ 
+		// If only public records are being accessed, only return those records
+		if(!($publicOnly && isLineItemPrivate($row['id']))){
+			$row['nav'] = getNavigationForLineItem($row['parent']);
+			$val[] = $row;
+		}
 	}
 	
 	return $val;

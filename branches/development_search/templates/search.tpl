@@ -29,16 +29,35 @@
 <h4>Located {$resultReceipts|@count} receipts</h4>
 <table>
 	<tr class="tablename">
-		<td colspan=2>Receipt Search Results</td>
+		<td colspan={if $permissions.publicOnly}5{else}6{/if}>Receipt Search Results</td>
 	</tr>
 	<tr class="tableheaderrow">
+		<td>Parents</td>
 		<td class="colmedium">Name</td>
 		<td class="colmedium">Description</td>
+		<td class="colsmall">Amount</td>
+		<td class="colsmall">Date</td>
+		{if !$permissions.publicOnly}
+		<td class="colsmall">Public</td>
+		{/if}
 	</tr>
 {section name=mysec loop=$resultReceipts}
 	<tr class="{cycle values="rowTypeA,rowTypeB"}" valign=top>
-		<td class="colmedium">{$resultReceipts[mysec].name}</td>
+		<td>
+			{foreach from=$resultReceipts[mysec].nav item=entry key=name}
+				> {include file="pagelink.tpl" page="`$entry.page`" parms="`$entry.parms`" text="`$entry.text`"}
+			{/foreach}
+			>
+		</td>
+		<td class="colmedium">
+			{include file="pagelink.tpl" page="budget" parms="lineid=`$resultReceipts[mysec].lineitem`" text="`$resultReceipts[mysec].name`"}
+		</td>
 		<td class="colmedium">{$resultReceipts[mysec].description}</td>
+		<td class="colsmall">${$resultReceipts[mysec].amount}</td>
+		<td class="colsmall">{$resultReceipts[mysec].rdate|date_format}</td>
+		{if !$permissions.publicOnly}
+		<td class="colsmall">{if $resultReceipts[mysec].public eq 1}Yes{/if}</td>
+		{/if}
 	</tr>
 {/section}
 </table>
@@ -46,16 +65,31 @@
 <h4>Located {$resultsLineItem|@count} line items</h4>
 <table>
 	<tr class="tablename">
-		<td colspan=2>Line Item Search Results</td>
+		<td colspan={if $permissions.publicOnly}3{else}4{/if}>Line Item Search Results</td>
 	</tr>
 	<tr class="tableheaderrow">
+		<td>Parents</td>
 		<td class="colmedium">Name</td>
 		<td class="colmedium">Description</td>
+		{if !$permissions.publicOnly}
+		<td class="colsmall">Public</td>
+		{/if}
 	</tr>
 {section name=mysec loop=$resultsLineItem}
 	<tr class="{cycle values="rowTypeA,rowTypeB"}" valign=top>
-		<td class="colmedium">{$resultsLineItem[mysec].name}</td>
+		 <td>
+			{foreach from=$resultsLineItem[mysec].nav item=entry key=name}
+				> {include file="pagelink.tpl" page="`$entry.page`" parms="`$entry.parms`" text="`$entry.text`"}
+			{/foreach}
+			>
+		</td>
+		<td class="colmedium">
+			{include file="pagelink.tpl" page="budget" parms="lineid=`$resultsLineItem[mysec].id`" text="`$resultsLineItem[mysec].name`"}
+		</td>
 		<td class="colmedium">{$resultsLineItem[mysec].description}</td>
+		{if !$permissions.publicOnly}
+		<td class="colsmall">{if $resultsLineItem[mysec].public eq 1}Yes{/if}</td>
+		{/if}
 	</tr>
 {/section}
 </table>
