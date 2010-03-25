@@ -26,13 +26,39 @@
  */
 
 /// Get the raw search results for receipts
-function searchReceipts($searchString){
-	// TODO: Implement me!
+function searchReceipts($searchString, $publicOnly){
+	global $database;
+	$query  = "SELECT `id`, `name`, `description`, `company`, `amount`, `lineitem`, `rdate`, `public` FROM `receipt` ";
+	$query .= "WHERE (`name` LIKE '%" . $searchString . "%' OR `description` LIKE '%" . $searchString . "%') ";
+	if($publicOnly){
+		$query .= "AND `public` = 1 ";
+	}
+	$query .= "ORDER BY `rdate` DESC;";
+	$result = $database->exec($query);
+	$val = array();
+	while($row = mysql_fetch_assoc($result)){
+		$val[] = $row;
+	}
+	
+	return $val;
 }
 
 /// Get the raw search results for lineitems
-function searchLineItems($searchString){
-	// TODO: Implement me!
+function searchLineItems($searchString, $publicOnly){
+	global $database;
+	$query  = "SELECT `id`, `name`, `description`, `parent`, `public` FROM lineitem ";
+	$query .= "WHERE (`name` LIKE '%" . $searchString . "%' OR `description` LIKE '%" . $searchString . "%')";
+	if($publicOnly){
+		$query .= "AND `public` = 1 ";
+	}
+	$query .= "ORDER BY `name`;";
+	$result = $database->exec($query);
+	$val = array();
+	while($row = mysql_fetch_assoc($result)){
+		$val[] = $row;
+	}
+	
+	return $val;
 }
 
 ?>

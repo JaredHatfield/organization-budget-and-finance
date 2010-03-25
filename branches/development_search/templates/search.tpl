@@ -24,6 +24,40 @@
  *}
 {include file="header.tpl" title="Organization Budget and Finance" pagename="Search"}
 
-<h2>{$searchString}</h2>
+<h2>Search: {$searchString}</h2>
+
+<h4>Located {$resultReceipts|@count} receipts</h4>
+<table>
+	<tr class="tablename">
+		<td colspan=2>Receipt Search Results</td>
+	</tr>
+	<tr class="tableheaderrow">
+		<td class="colmedium">Name</td>
+		<td class="colmedium">Description</td>
+	</tr>
+{section name=mysec loop=$resultReceipts}
+	<tr class="{cycle values="rowTypeA,rowTypeB"}" valign=top>
+		<td class="colmedium">{$resultReceipts[mysec].name}</td>
+		<td class="colmedium">{$resultReceipts[mysec].description}</td>
+	</tr>
+{/section}
+</table>
+
+<h4>Located {$resultsLineItem|@count} line items</h4>
+<table>
+	<tr class="tablename">
+		<td colspan=2>Line Item Search Results</td>
+	</tr>
+	<tr class="tableheaderrow">
+		<td class="colmedium">Name</td>
+		<td class="colmedium">Description</td>
+	</tr>
+{section name=mysec loop=$resultsLineItem}
+	<tr class="{cycle values="rowTypeA,rowTypeB"}" valign=top>
+		<td class="colmedium">{$resultsLineItem[mysec].name}</td>
+		<td class="colmedium">{$resultsLineItem[mysec].description}</td>
+	</tr>
+{/section}
+</table>
 
 {include file="footer.tpl"}

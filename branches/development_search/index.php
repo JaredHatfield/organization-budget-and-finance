@@ -457,6 +457,9 @@ else if($_GET['page'] == "search"){
 	 * Search page
 	 ******************************************************************************************************/
 	$searchString = mysql_real_escape_string($_GET['search']);
+	$smarty->assign("resultsLineItem", searchLineItems($searchString, $permissions['publicOnly']));
+	$smarty->assign("resultReceipts", searchReceipts($searchString, $permissions['publicOnly']));
+	
 	$smarty->assign("searchString", $searchString);
 	$nav[] = Array("page" => "search", "parms" => "", "text" => "Search");
 	$smarty->assign("selectedTab", "Search");
