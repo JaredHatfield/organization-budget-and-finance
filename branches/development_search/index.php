@@ -465,6 +465,31 @@ else if($_GET['page'] == "search"){
 	$smarty->assign("selectedTab", "Search");
 	$smarty->display('search.tpl');
 }
+else if($_GET['page'] == "dump"){
+	/*******************************************************************************************************
+	 * Dump XML Data
+	 ******************************************************************************************************/
+	if(!$permissions['dump']){
+		pageForbidden();
+	}
+	
+	// We cache the public only dump for a day because it is very, very expensive to generate
+	if($permissions['publicOnly']){
+		$smarty->caching = 1;
+		$smarty->cache_lifetime = (60 * 60 * 24);
+	}
+	
+	if(!$smarty->is_cached('dump.tpl', $permissions['publicOnly'])) {
+		$smarty->assign("company", dumpCompany());
+		$smarty->assign("funds", dumpFunds($permissions['publicOnly']));
+		$smarty->assign("lineitem", dumpLineItems($permissions['publicOnly']));
+		$smarty->assign("receipt", dumpReceipt($permissions['publicOnly']));
+		$smarty->assign("sources", dumpSources($permissions['publicOnly']));
+	}
+	
+	header ("content-type: text/xml");
+	$smarty->display('dump.tpl', $permissions['publicOnly']);
+}
 else if($_GET['page'] == "logout"){
 	$_SESSION['budget_authentication'] = 0;
 	secureform_logout();

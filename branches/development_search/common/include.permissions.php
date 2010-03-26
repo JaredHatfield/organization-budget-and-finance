@@ -48,6 +48,7 @@ function getUserPermissions($group){
 			$permissions['sourceDelete'] = true;
 			$permissions['register'] = false;
 			$permissions['admin'] = true;
+			$permissions['dump'] = true;
 			return $permissions;
 		case "Manager":
 			$permissions['cacheBudget'] = false;
@@ -69,6 +70,7 @@ function getUserPermissions($group){
 			$permissions['sourceDelete'] = true;
 			$permissions['register'] = false;
 			$permissions['admin'] = false;
+			$permissions['dump'] = true;
 			return $permissions;
 		case "Contributor":
 			$permissions['cacheBudget'] = false;
@@ -90,6 +92,7 @@ function getUserPermissions($group){
 			$permissions['sourceDelete'] = false;
 			$permissions['register'] = false;
 			$permissions['admin'] = false;
+			$permissions['dump'] = true;
 			return $permissions;
 		case "Registered":
 			$permissions['cacheBudget'] = false;
@@ -111,6 +114,7 @@ function getUserPermissions($group){
 			$permissions['sourceDelete'] = false;
 			$permissions['register'] = false;
 			$permissions['admin'] = false;
+			$permissions['dump'] = true;
 			return $permissions;
 		case "Authenticated":
 			$permissions['cacheBudget'] = true;
@@ -132,6 +136,7 @@ function getUserPermissions($group){
 			$permissions['sourceDelete'] = false;
 			$permissions['register'] = false;
 			$permissions['admin'] = false;
+			$permissions['dump'] = true;
 			return $permissions;
 		default: // Anonymous
 			$permissions['cacheBudget'] = true;
@@ -153,6 +158,7 @@ function getUserPermissions($group){
 			$permissions['sourceDelete'] = false;
 			$permissions['register'] = true;
 			$permissions['admin'] = false;
+			$permissions['dump'] = true;
 			return $permissions;
 	}
 }

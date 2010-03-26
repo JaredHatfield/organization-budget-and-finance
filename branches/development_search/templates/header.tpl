@@ -26,7 +26,8 @@
 <html>
 <head>
 	<title>{$title} - {$pagename}</title>
-	<link rel="stylesheet" type="text/css" href="./static/style.css" />
+	<link rel="stylesheet" type="text/css" href="./static/style.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="./static/print.css" media="print" />
 </head>
 <body>
 <div id="bodywrapper">

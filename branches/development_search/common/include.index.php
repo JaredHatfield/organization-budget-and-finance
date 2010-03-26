@@ -36,6 +36,7 @@ include_once("./common/include.process.php");
 include_once("./common/include.user.php");
 include_once("./common/include.admin.php");
 include_once("./common/include.search.php");
+include_once("./common/include.export.php");
 include_once("./common/include.form.protect.php");
 include_once("./common/include.permissions.php");
 

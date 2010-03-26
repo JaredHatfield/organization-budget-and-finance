@@ -29,6 +29,7 @@
 <h4>{$lineitem.description}</h4>
 
 <table>
+	<thead>
 	<tr class="tablename">
 		{if $permissions.publicOnly}
 		<td colspan=5>Receipts</td>
@@ -52,6 +53,8 @@
 		<td class="colsmall">Public</td>
 		{/if}
 	</tr>
+	</thead>
+	<tbody>
 {section name=mysec loop=$receipts}
 	<tr class="{cycle values="rowTypeA,rowTypeB"}" valign=top>
 		<td>
@@ -73,11 +76,13 @@
 		{/if}
 	</tr>
 {/section}
+	</tbody>
 </table>
 
 <br />
 
 <table>
+	<thead>
 	<tr class="tablename">
 		{if $permissions.publicOnly}
 		<td colspan=4>Funds</td>
@@ -100,6 +105,8 @@
 		<td class="colsmall">Public</td>
 		{/if}
 	</tr>
+	</thead>
+	<tbody>
 {section name=mysec loop=$funds}
 	<tr class="{cycle values="rowTypeA,rowTypeB"}">
 		<td>
@@ -117,12 +124,14 @@
 		{/if}
 	</tr>
 {/section}
+	</tbody>
 </table>
 
 {/if}
 
 <h3>Line Items</h3>
 <table>
+	<thead>
 	<tr class="tableheaderrow">
 		<td>
 			{if $permissions.lineitemAdd}
@@ -140,6 +149,8 @@
 		<td class="colsmall">Public</td>
 		{/if}
 	</tr>
+	</thead>
+	<tbody>
 {section name=mysec loop=$children}
 	<tr class="{cycle values="rowTypeA,rowTypeB"}">
 		<td>{strip}
@@ -167,6 +178,7 @@
 		{/if}
 	</tr>
 {/section}
+	</tbody>
 </table>
 
 
