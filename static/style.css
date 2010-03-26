@@ -16,6 +16,10 @@ body{
 	color: #ffffdd;
 }
 
+#searchbox {
+	float: right;
+}
+
 #headerwrapper a:hover{
 	color: white;
 }
