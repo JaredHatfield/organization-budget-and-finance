@@ -26,4 +26,9 @@
 
 {include file="login.tpl"}
 
+<h2>Tools</h2>
+<ul>
+	{if $permissions.dump}<li>{include file="pagelink.tpl" page="dump" parms="" text="Export Database"} to XML.</li>{/if}
+</ul>
+
 {include file="footer.tpl"}
