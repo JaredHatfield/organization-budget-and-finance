@@ -37,6 +37,9 @@ function getUserPermissions($group){
 			$permissions['fundsAdd'] = true;
 			$permissions['fundsEdit'] = true;
 			$permissions['fundsDelete'] = true;
+			$permissions['documentationAdd'] = true;
+			$permissions['documentationEdit'] = true;
+			$permissions['documentationDelete'] = true;
 			$permissions['lineitemAdd'] = true;
 			$permissions['lineitemEdit'] = true;
 			$permissions['lineitemDelete'] = true;
@@ -58,6 +61,9 @@ function getUserPermissions($group){
 			$permissions['companyDelete'] = true;
 			$permissions['fundsAdd'] = true;
 			$permissions['fundsEdit'] = true;
+			$permissions['documentationAdd'] = true;
+			$permissions['documentationEdit'] = true;
+			$permissions['documentationDelete'] = true;
 			$permissions['fundsDelete'] = true;
 			$permissions['lineitemAdd'] = true;
 			$permissions['lineitemEdit'] = true;
@@ -80,6 +86,9 @@ function getUserPermissions($group){
 			$permissions['companyDelete'] = false;
 			$permissions['fundsAdd'] = false;
 			$permissions['fundsEdit'] = false;
+			$permissions['documentationAdd'] = false;
+			$permissions['documentationEdit'] = false;
+			$permissions['documentationDelete'] = false;
 			$permissions['fundsDelete'] = false;
 			$permissions['lineitemAdd'] = false;
 			$permissions['lineitemEdit'] = false;
@@ -103,6 +112,9 @@ function getUserPermissions($group){
 			$permissions['fundsAdd'] = false;
 			$permissions['fundsEdit'] = false;
 			$permissions['fundsDelete'] = false;
+			$permissions['documentationAdd'] = false;
+			$permissions['documentationEdit'] = false;
+			$permissions['documentationDelete'] = false;
 			$permissions['lineitemAdd'] = false;
 			$permissions['lineitemEdit'] = false;
 			$permissions['lineitemDelete'] = false;
@@ -125,6 +137,9 @@ function getUserPermissions($group){
 			$permissions['fundsAdd'] = false;
 			$permissions['fundsEdit'] = false;
 			$permissions['fundsDelete'] = false;
+			$permissions['documentationAdd'] = false;
+			$permissions['documentationEdit'] = false;
+			$permissions['documentationDelete'] = false;
 			$permissions['lineitemAdd'] = false;
 			$permissions['lineitemEdit'] = false;
 			$permissions['lineitemDelete'] = false;
@@ -147,6 +162,9 @@ function getUserPermissions($group){
 			$permissions['fundsAdd'] = false;
 			$permissions['fundsEdit'] = false;
 			$permissions['fundsDelete'] = false;
+			$permissions['documentationAdd'] = false;
+			$permissions['documentationEdit'] = false;
+			$permissions['documentationDelete'] = false;
 			$permissions['lineitemAdd'] = false;
 			$permissions['lineitemEdit'] = false;
 			$permissions['lineitemDelete'] = false;

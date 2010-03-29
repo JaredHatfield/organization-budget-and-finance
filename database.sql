@@ -31,7 +31,24 @@ CREATE TABLE `company` (
   `name` varchar(200) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `Index_distinct` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
+--
+-- Definition of table `documentation`
+--
+DROP TABLE IF EXISTS `documentation`;
+CREATE TABLE `documentation` (
+  `id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  `lineitem` INTEGER UNSIGNED NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `link` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `FK_documentation_lineitem` FOREIGN KEY `FK_documentation_lineitem` (`lineitem`)
+    REFERENCES `lineitem` (`id`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
 --
@@ -65,7 +82,7 @@ CREATE TABLE `funds` (
   KEY `FK_funds_source` (`source`),
   CONSTRAINT `FK_funds_lineitem` FOREIGN KEY (`lineitem`) REFERENCES `lineitem` (`id`),
   CONSTRAINT `FK_funds_source` FOREIGN KEY (`source`) REFERENCES `source` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
 --
@@ -82,7 +99,7 @@ CREATE TABLE `lineitem` (
   PRIMARY KEY (`id`),
   KEY `FK_lineitem_parent` (`parent`),
   CONSTRAINT `FK_lineitem_parent` FOREIGN KEY (`parent`) REFERENCES `lineitem` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `lineitem`
@@ -113,7 +130,7 @@ CREATE TABLE `receipt` (
   KEY `FK_receipt_company` (`company`),
   CONSTRAINT `FK_receipt_company` FOREIGN KEY (`company`) REFERENCES `company` (`id`),
   CONSTRAINT `FK_receipt_lineitem` FOREIGN KEY (`lineitem`) REFERENCES `lineitem` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
 --
@@ -127,7 +144,7 @@ CREATE TABLE `source` (
   `public` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `Index_distinct` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
 --

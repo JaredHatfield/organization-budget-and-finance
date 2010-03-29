@@ -131,6 +131,7 @@ else if($_GET['page'] == "budget"){
 	if(!$smarty->is_cached('budget.tpl', $parent)) {
 		$smarty->assign("lineitem", getLineItem($parent));
 		$smarty->assign("receipts", getReceiptForLineItem($parent, $permissions['publicOnly']));
+		$smarty->assign("documentation", getDocumentationForLineItem($parent));
 		$smarty->assign("funds", getFundsForLineItem($parent, $permissions['publicOnly']));
 		$smarty->assign("sources",getSourcesForLineItems($parent, $permissions['publicOnly']));
 		$smarty->assign("children", getCompleteLineItemChildren($parent, $permissions['publicOnly']));
@@ -307,6 +308,75 @@ else if($_GET['page'] == "fundsEdit"){
 	$smarty->assign("selectedTab","Budget");
 	$smarty->display('fundsEdit.tpl');
 }
+else if($_GET['page'] == "documentation"){
+	/*******************************************************************************************************
+	 * Documentation page
+	 ******************************************************************************************************/
+	$docid = getPageId('documentationid');
+	
+	// Make sure the page exists and the user as permission to see it
+	if(!isDocumentation($docid)){
+		pageNotFound();
+	}
+	$docinfo = getDocumentation($docid);
+	if($permissions['publicOnly'] && isLineItemPrivate($docinfo['lineitem'])){
+		pageForbidden();
+	}
+	
+	$smarty->assign("documentation", $docinfo);
+	$nav[] = Array("page" => "budget", "parms" => "", "text" => "Budget");
+	$nav = array_merge($nav, getNavigationForLineItem($docinfo['lineitem']));
+	$name = "Documentation (" . $docinfo['name'] . ")";
+	$nav[] = Array("page" => "documentation", "parms" => "documenationid=".$docid, "text" => $name);
+	$smarty->assign("selectedTab","Budget");
+	$smarty->display('documentation.tpl');
+}
+else if($_GET['page'] == "documentationAdd"){
+	/*******************************************************************************************************
+	 * Add documentation page
+	 ******************************************************************************************************/
+	$parent = getPageId('lineid');
+	
+	// Make sure the page exists and the user as permission to see it
+	if(!isLineItem($parent)){
+		pageNotFound();
+	}
+	else if($permissions['publicOnly'] && isLineItemPrivate($parent)){
+		pageForbidden();
+	}
+	
+	$smarty->assign("lineitem", $parent);
+	$nav[] = Array("page" => "budget", "parms" => "", "text" => "Budget");
+	$nav = array_merge($nav, getNavigationForLineItem($parent));
+	$name = "Add Documentation";
+	$nav[] = Array("page" => "documentationAdd", "parms" => "lineid=".$parent, "text" => $name);
+	$smarty->assign("selectedTab","Budget");
+	$smarty->display('documentationAdd.tpl');
+}
+else if($_GET['page'] == "documentationEdit"){
+	/*******************************************************************************************************
+	 * Edit documentation page
+	 ******************************************************************************************************/
+	$docid = getPageId('documentationid');
+	
+	// Make sure the page exists and the user as permission to see it
+	if(!isDocumentation($docid)){
+		pageNotFound();
+	}
+	$docinfo = getDocumentation($docid);
+	if($permissions['publicOnly'] && isLineItemPrivate($docinfo['lineitem'])){
+		pageForbidden();
+	}
+	
+	$smarty->assign("documentation", $docinfo);
+	$smarty->assign("id", $docid);
+	$nav[] = Array("page" => "budget", "parms" => "", "text" => "Budget");
+	$nav = array_merge($nav, getNavigationForLineItem($docinfo['lineitem']));
+	$name = "Edit Documentation (" . $docinfo['name'] . ")";
+	$nav[] = Array("page" => "documentationEdit", "parms" => "documentationid=".$docid, "text" => $name);
+	$smarty->assign("selectedTab","Budget");
+	$smarty->display('documentationEdit.tpl');
+}
 else if($_GET['page'] == "company"){
 	/*******************************************************************************************************
 	 * company page
@@ -481,6 +551,7 @@ else if($_GET['page'] == "dump"){
 	
 	if(!$smarty->is_cached('dump.tpl', $permissions['publicOnly'])) {
 		$smarty->assign("company", dumpCompany());
+		$smarty->assign("documentation", dumpDocumentation($permissions['publicOnly']));
 		$smarty->assign("funds", dumpFunds($permissions['publicOnly']));
 		$smarty->assign("lineitem", dumpLineItems($permissions['publicOnly']));
 		$smarty->assign("receipt", dumpReceipt($permissions['publicOnly']));

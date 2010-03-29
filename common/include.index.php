@@ -28,6 +28,7 @@
 include_once("./common/class.database.php");
 include_once("./common/include.lineitem.php");
 include_once("./common/include.receipt.php");
+include_once("./common/include.documentation.php");
 include_once("./common/include.funds.php");
 include_once("./common/include.company.php");
 include_once("./common/include.source.php");
