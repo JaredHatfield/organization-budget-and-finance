@@ -32,6 +32,15 @@
 		</record>
 {/section}
 	</company>
+	<documentation>
+{section name=mysec loop=$documentation}
+		<record>
+{foreach from=$documentation[mysec] item=entry key=name}
+			<{$name}>{$entry}</{$name}>
+{/foreach}
+		</record>
+{/section}
+	</documentation>
 	<funds>
 {section name=mysec loop=$funds}
 		<record>

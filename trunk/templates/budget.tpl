@@ -31,6 +31,42 @@
 <table>
 	<thead>
 	<tr class="tablename">
+		<td colspan=2>Documentation</td>
+	</tr>
+	<tr class="tableheaderrow">
+		<td>
+			{if $permissions.documentationAdd}
+				{include file="pagelink.tpl" page="documentationAdd" parms="lineid=`$lineitem.id`" text=#images_add#}
+			{else}
+				{#images_blank#}
+			{/if}
+		</td>
+		<td class="colmedium">Name</td>
+	</tr>
+	</thead>
+	<tbody>
+{section name=mysec loop=$documentation}
+	<tr class="{cycle values="rowTypeA,rowTypeB"}">
+		<td>
+			{if $permissions.documentationEdit || $permissions.documentationDelete}
+				{include file="pagelink.tpl" page="documentationEdit" parms="documentationid=`$documentation[mysec].id`" text=#images_edit#}
+			{else}
+				{#images_blank#}
+			{/if}
+		</td>
+		<td class="colmedium">
+			{include file="pagelink.tpl" page="documentation" parms="documentationid=`$documentation[mysec].id`" text=`$documentation[mysec].name`}
+		</td>
+	</tr>
+{/section}
+	</tbody>
+</table>
+
+<br />
+
+<table>
+	<thead>
+	<tr class="tablename">
 		{if $permissions.publicOnly}
 		<td colspan=5>Receipts</td>
 		{else}
@@ -126,6 +162,7 @@
 {/section}
 	</tbody>
 </table>
+
 
 {/if}
 

@@ -138,6 +138,42 @@ function process(){
 		deleteReceipt($id);
 		return "./index.php?page=budget&lineid=" . $receipt['lineitem'];
 	}
+	else if($_POST['action'] == "documentationEdit"){
+		$id = mysql_real_escape_string($_POST['documentation_id']);
+		$name = mysql_real_escape_string($_POST['documentation_name']);
+		$link = mysql_real_escape_string($_POST['documentation_link']);
+		
+		if(!secureform_test_pk($form_key, "documentationEdit", $id)){
+			return "./index.php?page=error";
+		}
+		
+		updateDocumentation($id, $name, $link);
+		$docinfo = getDocumentation($id);
+		return "./index.php?page=budget&lineid=" . $docinfo['lineitem'];
+	}
+	else if($_POST['action'] == "documentationAdd"){
+		$lineitem = mysql_real_escape_string($_POST['documentation_lineitem']);
+		$name = mysql_real_escape_string($_POST['documentation_name']);
+		$link = mysql_real_escape_string($_POST['documentation_link']);
+		
+		if(!secureform_test($form_key, "documentationAdd")){
+			return "./index.php?page=error";
+		}
+		
+		insertDocumentation($lineitem, $name, $link);
+		return "./index.php?page=budget&lineid=" . $lineitem;
+	}
+	else if($_POST['action'] == "documentationDelete"){
+		$id = mysql_real_escape_string($_POST['documentation_id']);
+		
+		if(!secureform_test_pk($form_key, "documentationDelete", $id)){
+			return "./index.php?page=error";
+		}
+		
+		$docinfo = getDocumentation($id);
+		deleteDocumentation($id);
+		return "./index.php?page=budget&lineid=" . $docinfo['lineitem'];
+	}
 	else if($_POST['action'] == "fundsEdit"){
 		$id = mysql_real_escape_string($_POST['funds_id']);
 		$source = mysql_real_escape_string($_POST['funds_source']);

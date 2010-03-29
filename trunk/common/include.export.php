@@ -38,6 +38,22 @@ function dumpCompany(){
 	return $val;
 }
 
+/// Returns an array of all of the documentation
+function dumpDocumentation($publicOnly){
+	global $database;
+	$query = "SELECT `id`, `lineitem`, `name`, `link` FROM documentation d;";
+	$result = $database->exec($query);
+	$val = array();
+	while($row = mysql_fetch_assoc($result)){ 
+		// If only public records are being accessed, only return those records
+		if(!($publicOnly && isLineItemPrivate($row['lineitem']))){
+			$val[] = $row;
+		}
+	}
+	
+	return $val;
+}
+
 /// Returns an array of all of the funds
 function dumpFunds($publicOnly){
 	global $database;
