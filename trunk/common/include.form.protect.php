@@ -22,7 +22,7 @@
  * @copyright 2010 Speed School Student Council
  * @author Jared Hatfield
  * @package organization-budget-and-finance
- * @version 1.0
+ * @version 1.0.0
  */
 
 ///Given the form's name and time to live, add it as a valid key in the database
