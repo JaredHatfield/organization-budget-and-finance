@@ -22,7 +22,7 @@
  * @copyright 2010 Speed School Student Council
  * @author Jared Hatfield
  * @package organization-budget-and-finance
- * @version 1.0
+ * @version 1.0.0
  */
 
 /// Authenticate a user and return their user id; zero if authentication fails
