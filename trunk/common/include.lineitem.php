@@ -28,9 +28,8 @@
 
 /// Returns a fully supplemented list of lineitems for a specified parent
 function getCompleteLineItemChildren($parent, $publicOnly){
-	
-	$items = getLineItemChildren($parent, $publicOnly);
 	$sources = getSourcesForLineItems($parent, $publicOnly);
+	$items = getLineItemChildren($parent, $sources, $publicOnly);
 	
 	$receipts = 0;
 	for($j = 0; $j < sizeof($sources); $j++){
@@ -41,7 +40,8 @@ function getCompleteLineItemChildren($parent, $publicOnly){
 		$items[$i]['receipts'] = getReceiptTotalForLineItemAndChildren($items[$i]['id'], $publicOnly);
 		$receipts += $items[$i]['receipts'];
 		for($j = 0; $j < sizeof($sources); $j++){
-			$items[$i]['funds'][$j] = getFundsFor($items[$i]['id'], $sources[$j]['id'], $publicOnly);
+			$rowname = "f" . $sources[$j]['id'] . "amount";
+			$items[$i]['funds'][$j] = $items[$i][$rowname];
 			$sources[$j]['sum'] += $items[$i]['funds'][$j];
 		}
 		
@@ -67,13 +67,25 @@ function getCompleteLineItemChildren($parent, $publicOnly){
 }
 
 /// Returns the lineitem information for the children of the specified lineitem
-function getLineItemChildren($parent, $publicOnly){
+function getLineItemChildren($parent, $sources, $publicOnly){
 	global $database;
-	$query = "SELECT `id`, `name`, `description`, `public` FROM lineitem l WHERE `parent` = " . intval($parent) . " ";
+	$query  = "SELECT l.`id`, l.`name`, l.`description`, l.`public` ";
+	foreach($sources as $source){
+		$query .= ", IFNULL(f" . $source['id'] . ".amount, 0) f" . $source['id'] . "amount ";
+	}
+	
+	$query .= "FROM lineitem l ";
+	foreach($sources as $source){
+		$query .= "LEFT JOIN (SELECT * FROM funds WHERE source = " . $source['id'] . " ";
+		$query .= ") f" . $source['id'] . " ON f" . $source['id'] . ".lineitem = l.id ";
+	}
+	
+	$query .= "WHERE l.`parent` = " . intval($parent) . " ";
 	if($publicOnly){
 		$query .= "AND l.`public` = 1 ";
 	}
-	$query .= "AND `id` != 1 ORDER BY `name`;";
+	
+	$query .= "AND l.`id` != 1 ORDER BY l.`name`;";
 	$result = $database->exec($query);
 	$val = array();
 	while($row = mysql_fetch_assoc($result)){
