@@ -23,7 +23,7 @@
  * @author Jared Hatfield
  * @author Cristina Heisler
  * @package organization-budget-and-finance
- * @version 1.0.0
+ * @version 1.0.1
  */
 
 session_start();
