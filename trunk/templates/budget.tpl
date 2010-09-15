@@ -166,6 +166,7 @@
 
 {/if}
 
+{if $treedepth < 3}
 <h3>Line Items</h3>
 <table>
 	<thead>
@@ -217,6 +218,6 @@
 {/section}
 	</tbody>
 </table>
-
+{/if}
 
 {include file="footer.tpl"}
