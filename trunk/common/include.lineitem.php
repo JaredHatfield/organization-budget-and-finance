@@ -83,23 +83,6 @@ function getLineItemChildren($parent, $publicOnly){
 	return $val;
 }
 
-/// Returns the ids for the children of the specified parent
-function getLineItemChildrenIds($parent, $publicOnly){
-	global $database;
-	$query = "SELECT `id` FROM lineitem l WHERE `parent` = " . intval($parent) . " ";
-	if($publicOnly){
-		$query .= "AND l.`public` = 1 ";
-	}
-	$query .= "AND `id` != 1;";
-	$result = $database->exec($query);
-	$val = array();
-	while($row = mysql_fetch_assoc($result)){
-		$val[] = $row['id'];
-	}
-	
-	return $val;
-}
-
 /// Returns the information about a line item
 function getLineItem($id){
 	global $database;
