@@ -22,7 +22,7 @@
  * @copyright 2010 Speed School Student Council
  * @author Jared Hatfield
  * @package organization-budget-and-finance
- * @version 1.0.0
+ * @version 1.0.1
  */
 
 /// Gets all of the funding sources for a specific lineitem
