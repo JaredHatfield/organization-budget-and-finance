@@ -167,7 +167,7 @@ else if($_GET['page'] == "lineitemAdd"){
 	$nav = array_merge($nav, $lnav);
 	
 	// We only allow the tree to grow to a depth of three.
-	if($lnav >= 3){
+	if(sizeof($lnav) >= 3){
 		pageForbidden();
 	}
 	
