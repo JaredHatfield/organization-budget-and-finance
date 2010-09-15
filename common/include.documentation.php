@@ -31,8 +31,10 @@ function getDocumentationForLineItem($lineitem){
 	$query = "SELECT `id`, `lineitem`, `name`, `link` FROM documentation d WHERE `lineitem` = " . $lineitem . ";";
 	$result = $database->exec($query);
 	$val = array();
-	while($row = mysql_fetch_assoc($result)){
-		$val[] = $row;
+	if($result){
+		while($row = mysql_fetch_assoc($result)){
+			$val[] = $row;
+		}
 	}
 	
 	return $val;
