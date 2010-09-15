@@ -141,7 +141,9 @@ else if($_GET['page'] == "budget"){
 	}
 	
 	$nav[] = Array("page" => "budget", "parms" => "", "text" => "Budget");
-	$nav = array_merge($nav, getNavigationForLineItem($parent));
+	$lnav = getNavigationForLineItem($parent);
+	$nav = array_merge($nav, $lnav);
+	$smarty->assign("treedepth", sizeof($lnav));
 	$smarty->assign("selectedTab","Budget");
 	$smarty->display('budget.tpl', $parent);
 }
@@ -161,7 +163,15 @@ else if($_GET['page'] == "lineitemAdd"){
 	
 	$smarty->assign("lineitemParent", getLineItem($parent));
 	$nav[] = Array("page" => "budget", "parms" => "", "text" => "Budget");
-	$nav = array_merge($nav, getNavigationForLineItem($parent));
+	$lnav = getNavigationForLineItem($parent);
+	$nav = array_merge($nav, $lnav);
+	
+	// We only allow the tree to grow to a depth of three.
+	if($lnav >= 3){
+		pageForbidden();
+	}
+	
+	$smarty->assign("treedepth", sizeof($lnav));
 	$nav[] = Array("page" => "lineitemAdd", "parms" => "lineid=".$parent, "text" => "Add Line Item");
 	$smarty->assign("selectedTab","Budget");
 	$smarty->display('lineitemAdd.tpl');
