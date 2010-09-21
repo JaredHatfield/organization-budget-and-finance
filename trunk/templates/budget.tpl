@@ -190,31 +190,33 @@
 	</thead>
 	<tbody>
 {section name=mysec loop=$children}
-	<tr class="{cycle values="rowTypeA,rowTypeB"}">
-		<td>{strip}
-			{if $children[mysec].id > 0 && ($permissions.lineitemEdit || $permissions.lineitemDelete)}
-				{include file="pagelink.tpl" page="lineitemEdit" parms="lineid=`$children[mysec].id`" text=#images_edit#}
-			{else}
-				{#images_blank#}
+	{if $lineitem.id > 1 || $children[mysec].id > 0}
+		<tr class="{cycle values="rowTypeA,rowTypeB"}">
+			<td>{strip}
+				{if $children[mysec].id > 0 && ($permissions.lineitemEdit || $permissions.lineitemDelete)}
+					{include file="pagelink.tpl" page="lineitemEdit" parms="lineid=`$children[mysec].id`" text=#images_edit#}
+				{else}
+					{#images_blank#}
+				{/if}
+			{/strip}</td>
+			<td class="colmedium">{strip}
+				{if $children[mysec].id > 0}
+					{include file="pagelink.tpl" page="budget" parms="lineid=`$children[mysec].id`" text="`$children[mysec].name`"}
+				{else}
+					{$children[mysec].name}
+				{/if}
+			{/strip}</td>
+			<td class="colmedium">{$children[mysec].description}</td>
+			<td class="colsmall">${$children[mysec].receipts}</td>
+			{foreach from=$children[mysec].funds item=entry key=name}{strip}
+			<td class="colsmall">${$entry}</td>
+			{/strip}
+			{/foreach}<td class="colsmall">${$children[mysec].difference}</td>
+			{if !$permissions.publicOnly}
+			<td class="colsmall">{if $children[mysec].public eq 1}Yes{/if}</td>
 			{/if}
-		{/strip}</td>
-		<td class="colmedium">{strip}
-			{if $children[mysec].id > 0}
-				{include file="pagelink.tpl" page="budget" parms="lineid=`$children[mysec].id`" text="`$children[mysec].name`"}
-			{else}
-				{$children[mysec].name}
-			{/if}
-		{/strip}</td>
-		<td class="colmedium">{$children[mysec].description}</td>
-		<td class="colsmall">${$children[mysec].receipts}</td>
-		{foreach from=$children[mysec].funds item=entry key=name}{strip}
-		<td class="colsmall">${$entry}</td>
-		{/strip}
-		{/foreach}<td class="colsmall">${$children[mysec].difference}</td>
-		{if !$permissions.publicOnly}
-		<td class="colsmall">{if $children[mysec].public eq 1}Yes{/if}</td>
-		{/if}
-	</tr>
+		</tr>
+	{/if}
 {/section}
 	</tbody>
 </table>
