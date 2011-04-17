@@ -22,7 +22,7 @@
  * @copyright 2010 Speed School Student Council
  * @author Jared Hatfield
  * @package organization-budget-and-finance
- * @version 1.0.0
+ * @version 1.0.1
  */
 
 /// Returns all of the information for the receipts for a specified lineitem
@@ -43,29 +43,39 @@ function getReceiptForLineItem($lineitem, $publicOnly){
 	return $val;
 }
 
-/// Returns the total amount of receipts for a specified lineitem
-function getReceiptTotalForLineItem($lineitem, $publicOnly){
+
+/// Returns the total amount of receipts for a specified lineitems and its children
+function getReceiptTotalForLineItemAndChildren($lineitem, $publicOnly){
 	global $database;
-	$query = "SELECT IFNULL(SUM(`amount`),0) total FROM receipt r WHERE `lineitem` = " . intval($lineitem) . " ";
+	$query  = "SELECT IFNULL(SUM(amount),0) total FROM receipt r WHERE r.`lineitem` IN ( ";
+	$query .= "SELECT n.`id` FROM `lineitem` l LEFT JOIN `lineitem` m ON l.id = m.parent LEFT JOIN `lineitem` n ON m.id = n.parent ";
+	$query .= "WHERE l.`id` = " . $lineitem . " ";
 	if($publicOnly){
-		$query .= "AND r.`public` = 1 ";
+		$query .= "AND l.`public` = 1 AND m.`public` = 1 AND n.`public` = 1 ";
 	}
-	$query .= ";";
+	
+	$query .= "UNION SELECT m.`id` FROM `lineitem` l LEFT JOIN `lineitem` m ON l.id = m.parent ";
+	$query .= "WHERE l.`id` = " . $lineitem . " ";
+	if($publicOnly){
+		$query .= " AND l.`public` = 1 AND m.`public` = 1 ";
+	}
+	
+	$query .= "UNION SELECT l.`id` FROM `lineitem` l ";
+	$query .= "WHERE l.`id` = " . $lineitem . " ";
+	if($publicOnly){
+		$query .= " AND l.`public` = 1 ";
+	}
+	
+	$query .= ")";
+	if($publicOnly){
+		$query .= " AND r.`public` = 1;";
+	}
+	
 	$result = $database->exec($query);
 	$row = mysql_fetch_assoc($result);
 	return $row['total'];
 }
 
-/// Returns the total amount of receipts for a specified lineitems and its children
-function getReceiptTotalForLineItemAndChildren($lineitem, $publicOnly){
-	$total = getReceiptTotalForLineItem($lineitem, $publicOnly);
-	$children = getLineItemChildrenIds($lineitem, $publicOnly);
-	for($i = 0; $i < sizeof($children); $i++){
-		$total += getReceiptTotalForLineItemAndChildren($children[$i], $publicOnly);
-	}
-	
-	return $total;
-}
 
 /// Gets the information for a specific receipt
 function getReceipt($id){
