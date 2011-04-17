@@ -22,7 +22,7 @@
  * @copyright 2010 Speed School Student Council
  * @author Jared Hatfield
  * @package organization-budget-and-finance
- * @version 1.0.0
+ * @version 1.0.1
  */
 
 /// Gets all of the funding sources for a specific lineitem
@@ -42,20 +42,6 @@ function getFundsForLineItem($lineitem, $publicOnly){
 	}
 	
 	return $val;
-}
-
-/// Gets the money allocated to a specific line item form a specific source; 0 if nothing is allocated
-function getFundsFor($lineitem, $source, $publicOnly){
-	global $database;
-	$query = "SELECT IFNULL(SUM(`amount`),0) amount FROM funds f JOIN source s ON f.source = s.id WHERE `lineitem` = " . intval($lineitem) . " ";
-	$query .= "AND f.`source` = " . intval($source) . " ";
-	if($publicOnly){
-		$query .= "AND s.`public` = 1 ";
-	}
-	$query .= ";";
-	$result = $database->exec($query);
-	$row = mysql_fetch_assoc($result);
-	return $row['amount'];
 }
 
 /// Gets all of the sources that are used by lineitems under a parent
