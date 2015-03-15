@@ -1,0 +1,10 @@
+This tool is not designed to replace an accounting system.  The goal of this tool is to create an online system for allocating and tracking expenses for specific events.  This tool was designed to be used by a student organization at the University of Louisville Speed School of Engineering to track the allocation of money to specific events.  Multiple funding sources can be assigned to each line item to allocate funds and multiple receipts can be associated with each line item to indicate those funds have been spent.  There is no direct relationship that relates the receipts to the funding sources.  Once funds are allocated to a line item they are effectively treated as one lump sum.
+
+The reason for using this tool is to produce a transparent record of expenses.  Records can be flagged as public allowing anonymous users to look at the information.  The way the information is organized is primarily by line items.  A line item can have any number of sub line items down to a depth of three.  A sub-budgets can then allocate funds and associate receipts in a more granular fashion.
+
+![http://lh5.ggpht.com/_l4Rv5VGKzLQ/S6ZHDendQSI/AAAAAAAAAY8/vtzVTmiV-RA/s400/BudgetAndFinanceHome.png](http://lh5.ggpht.com/_l4Rv5VGKzLQ/S6ZHDendQSI/AAAAAAAAAY8/vtzVTmiV-RA/s400/BudgetAndFinanceHome.png)
+
+This tool is still under development and if you are interested in using it you should contact the developer first.
+
+| &lt;wiki:gadget url="http://www.ohloh.net/p/481728/widgets/project\_languages.xml" height="220" width="375" border="0"/&gt; | &lt;wiki:gadget url="http://www.ohloh.net/p/481728/widgets/project\_basic\_stats.xml" height="250" width="350" border="0"/&gt; |
+|:----------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------|
